@@ -7,11 +7,11 @@ redirect_from:
   - /about.html
 ---
 
-:wave: Hi! I am Xinghao Chen (陈星昊), a M.S. student at [University of Washington](https://www.washington.edu/) majored in [Electrical and Computer Engineering](https://www.ece.uw.edu/), I got my Bachelor Degree (Automation) from [Henan University](https://www.henu.edu.cn/).
+:wave: Hi! I am Xinghao Chen (陈星昊), a M.S. student at [University of Washington](https://www.washington.edu/) pursuing [Electrical and Computer Engineering](https://www.ece.uw.edu/),  I received my Bachelor's Degree (Automation) from [Henan University](https://www.henu.edu.cn/).
 
-:microscope: My current research interest lies at AI image generation. I am also open to any other research opportunities in AI/ML. I took Computer Vision and Large Language Models courses in UW. I plan to pursue Ph.D degree in the future.
+:microscope: My research interests focus on AI image generation, though I'm open to exploring other areas in AI/ML. At UW, I've taken courses in Computer Vision and Large Language Models. I plan to pursue a Ph.D. in the future.
 
-:mag: I am actively seeking research opportunities or internships. Contact me anytime!
+:mag: I am actively seeking research opportunities and internships. Feel free to contact me!
 
 News
 ======
@@ -54,10 +54,9 @@ None for now.
 
 Honors & Awards
 ======
-* Excellent Graduate of Henan University
-* Three Good Students of Henan University
+* Dean's list of Henan University
 
 Contact
 ======
-Email: xhc42@outlook.com
+Email: xhc42@outlook.com  
 Phone: +1 206-535-9185
