@@ -11,7 +11,7 @@ redirect_from:
 
 :microscope: My current research interest lies at AI image generation. I am also open to any other research opportunities in AI/ML. I took Computer Vision and Large Language Models courses in UW. I plan to pursue Ph.D degree in the future.
 
-:mag: I am activatly seeking research opportunities or internships. Contact me anytime!
+:mag: I am actively seeking research opportunities or internships. Contact me anytime!
 
 News
 ======
@@ -24,7 +24,7 @@ News
 
 Education
 ======
-[09.2024 - 03.2026] University of Washington  M.S. Electrical and Computer Engineering (Expected)  
+[09.2024 - 03.2026] ![UW](/images/uwlogo.png)University of Washington  M.S. Electrical and Computer Engineering (Expected)  
 [09.2020 - 07.2024] Henan University          B.E. Automation  
 
 Publications
