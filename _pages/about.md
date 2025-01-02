@@ -24,19 +24,12 @@ News
 
 Education
 ======
-![UWlogo](/images/uwlogo.png){:width="100px"}University of Washington  
-[09.2024 - 03.2026]  
-M.S. Electrical and Computer Engineering (Expected)  
-![UWlogo](/images/henulogo.png){:width="100px"}Henan University  
-[09.2020 - 07.2024]  
-B.E. Automation  
-
 <div style="display: flex; align-items: center; margin-bottom: 20px;">
     <img src="/images/uwlogo.png" width="100px" style="margin-right: 20px;">
     <div>
         <p style="margin: 0;">University of Washington</p>
-        <p style="margin: 0;">[09.2024 - 03.2026]</p>
-        <p style="margin: 0;">M.S. Electrical and Computer Engineering (Expected)</p>
+        <p style="margin: 0;">09.2024 - 03.2026(Expected)</p>
+        <p style="margin: 0;">M.S. in Electrical and Computer Engineering</p>
     </div>
 </div>
 
@@ -44,10 +37,12 @@ B.E. Automation
     <img src="/images/henulogo.png" width="100px" style="margin-right: 20px;">
     <div>
         <p style="margin: 0;">Henan University</p>
-        <p style="margin: 0;">[09.2020 - 07.2024]</p>
-        <p style="margin: 0;">B.E. Automation</p>
+        <p style="margin: 0;">09.2020 - 07.2024</p>
+        <p style="margin: 0;">B.E. in Automation</p>
     </div>
 </div>
+
+<div style="margin-bottom: 20px;"></div>
 
 Publications
 ======
