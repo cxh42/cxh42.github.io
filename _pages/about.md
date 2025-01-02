@@ -28,7 +28,7 @@ Education
     <img src="/images/uwlogo.png" width="100px" style="margin-right: 20px;">
     <div>
         <p style="margin: 0;">University of Washington</p>
-        <p style="margin: 0;">09.2024 - 03.2026(Expected)</p>
+        <p style="margin: 0;">09.2024 - 03.2026 (Expected)</p>
         <p style="margin: 0;">M.S. in Electrical and Computer Engineering</p>
     </div>
 </div>
@@ -50,9 +50,14 @@ None for now.
 
 Workshops
 ======
-* ControlNet + LoRA Line-Art Colorization Workflow
+None for now.
 
 Honors & Awards
 ======
 * Excellent Graduate of Henan University
 * Three Good Students of Henan University
+
+Contact
+======
+Email: xhc42@outlook.com
+Phone: +1 206-535-9185
