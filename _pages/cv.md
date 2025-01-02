@@ -8,4 +8,4 @@ redirect_from:
 ---
 
 
-[Pdf version CV](https://drive.google.com/file/d/1hOBzqfxiiulWNHuyUoKytmRmNuYuizv_/view?usp=sharing)
+[Pdf version CV](https://drive.google.com/file/d/1hC1GLLTaoimznquA1ZPFzH_nnGVqYbWr/view?usp=sharing)
