@@ -24,7 +24,9 @@ News
 
 Education
 ======
-[09.2024 - 03.2026] ![UW](/images/uwlogo.png)University of Washington  M.S. Electrical and Computer Engineering (Expected)  
+![UWlogo](/images/uwlogo.png){:width="300px"}University of Washington  
+[09.2024 - 03.2026]  
+M.S. Electrical and Computer Engineering (Expected)  
 [09.2020 - 07.2024] Henan University          B.E. Automation  
 
 Publications
