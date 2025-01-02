@@ -7,9 +7,9 @@ redirect_from:
   - /about.html
 ---
 
-I am Xinghao Chen (陈星昊), a M.S. student at [University of Washington](https://www.washington.edu/) majored [Electrical and Computer Engineering](https://www.ece.uw.edu/), I got my Bachelor Degree (Automation) from [Henan University](https://iao.henu.edu.cn/yw/Home.htm).
+I am Xinghao Chen (陈星昊), a M.S. student at [University of Washington](https://www.washington.edu/) majored in [Electrical and Computer Engineering](https://www.ece.uw.edu/), I got my Bachelor Degree (Automation) from [Henan University](https://www.henu.edu.cn/).
 
-My current research lies at AI image generation. I took Computer Vision and Large Language Models courses in UW. I am planning to pursue Ph.D degree in the future.
+My current research interest lies at AI image generation. I took Computer Vision and Large Language Models courses in UW. I am planning to pursue Ph.D degree in the future.
 
 I am activatly seeking research opportunities and internships!
 
