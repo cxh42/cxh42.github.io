@@ -33,7 +33,7 @@ Education
     </div>
 </div>
 
-<div style="display: flex; align-items: center;">
+<div style="display: flex; align-items: center; margin-bottom: 20px;">
     <img src="/images/henulogo.png" width="100px" style="margin-right: 20px;">
     <div>
         <p style="margin: 0;">Henan University</p>
@@ -42,7 +42,7 @@ Education
     </div>
 </div>
 
-<div style="display: flex; align-items: center;">
+<div style="display: flex; align-items: center; margin-bottom: 20px;">
     <img src="/images/Hengshui_High_School.jpg" width="100px" style="margin-right: 20px;">
     <div>
         <p style="margin: 0;">Hengshui High School (Tangshan Campus)</p>
@@ -50,8 +50,6 @@ Education
         <p style="margin: 0;">High School</p>
     </div>
 </div>
-
-<div style="margin-bottom: 20px;"></div>
 
 Honors & Awards
 ======
