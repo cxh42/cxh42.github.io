@@ -29,7 +29,7 @@ Education
     <div>
         <p style="margin: 0;">University of Washington</p>
         <p style="margin: 0;">09.2024 - 03.2026 (Expected)</p>
-        <p style="margin: 0;">M.S. in Electrical and Computer Engineering</p>
+        <p style="margin: 0;">M.S. Electrical and Computer Engineering</p>
     </div>
 </div>
 
@@ -38,19 +38,11 @@ Education
     <div>
         <p style="margin: 0;">Henan University</p>
         <p style="margin: 0;">09.2020 - 07.2024</p>
-        <p style="margin: 0;">B.E. in Automation</p>
+        <p style="margin: 0;">B.E. Automation</p>
     </div>
 </div>
 
 <div style="margin-bottom: 20px;"></div>
-
-Publications
-======
-None for now.
-
-Workshops
-======
-None for now.
 
 Honors & Awards
 ======
@@ -58,5 +50,4 @@ Honors & Awards
 
 Contact
 ======
-Email: xhc42@outlook.com  
-Phone: +1 206-535-9185
+Email: [xhc42@outlook.com](xhc42@outlook.com)
