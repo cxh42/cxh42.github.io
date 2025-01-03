@@ -42,6 +42,15 @@ Education
     </div>
 </div>
 
+<div style="display: flex; align-items: center;">
+    <img src="/images/Hengshui_High_School.jpg" width="100px" style="margin-right: 20px;">
+    <div>
+        <p style="margin: 0;">Hengshui High School (Tangshan Campus)</p>
+        <p style="margin: 0;">09.2017 - 07.2020</p>
+        <p style="margin: 0;">High School</p>
+    </div>
+</div>
+
 <div style="margin-bottom: 20px;"></div>
 
 Honors & Awards
