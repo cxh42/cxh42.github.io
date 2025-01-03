@@ -50,4 +50,4 @@ Honors & Awards
 
 Contact
 ======
-Email: [xhc42@outlook.com](xhc42@outlook.com)
+Email: xhc42@outlook.com
