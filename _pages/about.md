@@ -9,7 +9,7 @@ redirect_from:
 
 :wave: Hi! I am Xinghao Chen (陈星昊), a M.S. student at [University of Washington](https://www.washington.edu/) pursuing [Electrical and Computer Engineering](https://www.ece.uw.edu/),  I received my Bachelor's Degree (Automation) from [Henan University](https://www.henu.edu.cn/).
 
-:microscope: My research interests focus on AI image generation, though I'm open to exploring other areas in AI/ML. At UW, I've taken courses in Computer Vision and Large Language Models. I plan to pursue a Ph.D. in the future.
+:microscope: My research interests focus on AI image generation, though I'm very open to exploring other areas in AI/ML. At UW, I've taken courses in Computer Vision and Large Language Models. I plan to pursue a Ph.D. in the future.
 
 :mag: I am actively seeking research opportunities and internships. Feel free to contact me!
 
@@ -19,7 +19,7 @@ News
 * [12.2024] I take course of Large Language Models.
 * [12.2024] I get 3.95/4.0 GPA for my first quarter in UW.
 * [09.2024] I join in Sensors, Energy, and Automation Laboratory for research and study.
-* [09.2024] I take course of Computer Vision and will learn from basics to deep learning applications.
+* [09.2024] I take course of Computer Vision taught by [Dr. Stan Birchfield](https://research.nvidia.com/person/stan-birchfield) and will learn from basics to deep learning applications.
 * [09.2024] I join in University of Washington as a M.S. student in ECE.
 
 Education
