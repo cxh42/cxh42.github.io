@@ -18,7 +18,7 @@ redirect_from:
 News
 ======
 * [12.2024] I join in Machine Learning for Community-Driven Coastal Erosion Monitoring and Management capstone project advised by [Dr. Roxanne Carini](https://www.apl.washington.edu/people/profile.php?last_name=Carini&first_name=Roxanne) and [Dr. Morteza Derakhti](https://www.ce.washington.edu/facultyfinder/morteza-derakhti). I will work on this project for next two quarters.
-* [12.2024] I take course of Large Language Models.
+* [12.2024] I take course of Large Language Models taught by [Karthik Mohan](https://www.linkedin.com/in/karthik-mohan-72a4b323/).
 * [12.2024] I get 3.95/4.0 GPA for my first quarter in UW.
 * [09.2024] I join in Sensors, Energy, and Automation Laboratory for research and study.
 * [09.2024] I take course of Computer Vision taught by [Dr. Stan Birchfield](https://research.nvidia.com/person/stan-birchfield) and will learn from basics to deep learning applications.
