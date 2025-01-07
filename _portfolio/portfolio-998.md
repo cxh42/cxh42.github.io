@@ -32,7 +32,7 @@ from tqdm import tqdm
 
 from transformers import AutoImageProcessor, AutoModelForImageClassification
 
-# Focal Loss 实现
+# Focal Loss implementation
 class FocalLoss(nn.Module):
     def __init__(self, alpha=0.25, gamma=2):
         super(FocalLoss, self).__init__()
@@ -45,7 +45,7 @@ class FocalLoss(nn.Module):
         F_loss = self.alpha * (1-pt)**self.gamma * BCE_loss
         return torch.mean(F_loss)
 
-# 自定义数据集
+# Custom dataset
 class CustomImageDataset(Dataset):
     def __init__(self, csv_file, img_dir, transform=None):
         self.annotations = csv_file
@@ -65,7 +65,7 @@ class CustomImageDataset(Dataset):
             
         return image, label
 
-# 增强的数据变换
+# Data augmentation transformations
 def get_transform(img_size=(512, 512)):
     return transforms.Compose([
         transforms.Resize(img_size),
@@ -75,10 +75,9 @@ def get_transform(img_size=(512, 512)):
         transforms.ColorJitter(brightness=0.2, contrast=0.2),
         transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),
         transforms.ToTensor(),
-])
+    ])
 
-
-# 创建数据加载器
+# Create data loaders
 def create_dataloaders(csv_file, img_dir, img_size=(512, 512), batch_size=32, n_fold=0):
     transform = get_transform(img_size)
     dataset = CustomImageDataset(csv_file=csv_file, img_dir=img_dir, transform=transform)
@@ -97,11 +96,11 @@ def create_dataloaders(csv_file, img_dir, img_size=(512, 512), batch_size=32, n_
     
     return train_loader, val_loader
 
-# 单轮训练
+# Single epoch training
 def train_one_epoch(model, train_loader, criterion, optimizer, device):
     model.train()
     running_loss = 0.0
-    for images, labels in tqdm(train_loader, desc="训练中"):
+    for images, labels in tqdm(train_loader, desc="Training"):
         images, labels = images.to(device), labels.to(device).float().unsqueeze(1)
 
         optimizer.zero_grad()
@@ -114,7 +113,7 @@ def train_one_epoch(model, train_loader, criterion, optimizer, device):
 
     return running_loss / len(train_loader.dataset)
 
-# 验证
+# Validation
 def validate(model, val_loader, criterion, device):
     model.eval()
     running_loss = 0.0
@@ -122,7 +121,7 @@ def validate(model, val_loader, criterion, device):
     all_outputs = []
     
     with torch.no_grad():
-        for images, labels in tqdm(val_loader, desc="验证中"):
+        for images, labels in tqdm(val_loader, desc="Validation"):
             images, labels = images.to(device), labels.to(device).float().unsqueeze(1)
             outputs = model(images).logits[:, :1]
             loss = criterion(outputs, labels)
@@ -138,7 +137,7 @@ def validate(model, val_loader, criterion, device):
     
     return epoch_loss, all_labels, all_outputs
 
-# 早停
+# Early stopping
 class EarlyStopping:
     def __init__(self, patience, verbose=False, delta=0):
         self.patience = patience
@@ -156,7 +155,7 @@ class EarlyStopping:
             self.save_checkpoint(val_loss, model, path)
         elif score < self.best_score + self.delta:
             self.counter += 1
-            print(f'早停计数: {self.counter} / {self.patience}')
+            print(f'Early stopping count: {self.counter} / {self.patience}')
             if self.counter >= self.patience:
                 self.early_stop = True
         else:
@@ -166,11 +165,11 @@ class EarlyStopping:
 
     def save_checkpoint(self, val_loss, model, path):
         if self.verbose:
-            print(f'验证损失下降 ({self.val_loss_min:.6f} --> {val_loss:.6f}). 保存模型...')
-        torch.save(model.state_dict(), os.path.join(path, 'checkpoint.pth'))
+            print(f'Validation loss decreased ({self.val_loss_min:.6f} --> {val_loss:.6f}). Saving model...')
+        torch.save(model.state_dict(), os.path.join(path, 'checkpoint1.pth'))
         self.val_loss_min = val_loss
 
-# 主训练函数
+# Main training function
 def train_model(csv_file, img_dir, model, model_name, img_size=(512, 512), 
                 num_epochs=100, batch_size=2, lr=1e-5, n_fold=0, 
                 device='cuda', patience=10):
@@ -181,21 +180,21 @@ def train_model(csv_file, img_dir, model, model_name, img_size=(512, 512),
 
     model = model.to(device)
     
-    # 计算类别权重
+    # Compute class weights
     class_counts = csv_file['label'].value_counts()
     total_samples = len(csv_file)
     class_weights = total_samples / (2 * class_counts)
     pos_weight = torch.tensor(class_weights[1]).to(device)
 
-    # 损失函数选择
+    # Loss function
     criterion = FocalLoss()
     
-    # 优化器
+    # Optimizer
     optimizer = optim.AdamW(model.parameters(), 
                              lr=lr, 
-                             weight_decay=1e-5)  # L2正则化
+                             weight_decay=1e-5)  # L2 regularization
     
-    # 学习率调度器
+    # Learning rate scheduler
     scheduler = ReduceLROnPlateau(optimizer, 
                                    mode='min', 
                                    factor=0.5, 
@@ -211,7 +210,7 @@ def train_model(csv_file, img_dir, model, model_name, img_size=(512, 512),
     os.makedirs(path, exist_ok=True)
     
     for epoch in range(num_epochs):
-        print(f'轮次 {epoch+1}/{num_epochs}')
+        print(f'Epoch {epoch+1}/{num_epochs}')
         
         train_loss = train_one_epoch(model, train_loader, criterion, optimizer, device)
         val_loss, val_labels, val_outputs = validate(model, val_loader, criterion, device)
@@ -219,29 +218,29 @@ def train_model(csv_file, img_dir, model, model_name, img_size=(512, 512),
         train_losses.append(train_loss)
         val_losses.append(val_loss)
         
-        # 性能指标
+        # Performance metrics
         val_preds = (val_outputs > 0.5).astype(int)
         accuracy = accuracy_score(val_labels, val_preds)
         f1 = f1_score(val_labels, val_preds)
         roc_auc = roc_auc_score(val_labels, val_outputs)
         
-        print(f'训练损失: {train_loss:.4f}, 验证损失: {val_loss:.4f}')
-        print(f'准确率: {accuracy:.4f}, F1分数: {f1:.4f}, ROC AUC: {roc_auc:.4f}')
+        print(f'Training Loss: {train_loss:.4f}, Validation Loss: {val_loss:.4f}')
+        print(f'Accuracy: {accuracy:.4f}, F1 Score: {f1:.4f}, ROC AUC: {roc_auc:.4f}')
         
-        # 学习率调度
+        # Learning rate adjustment
         scheduler.step(val_loss)
         
-        # 早停
+        # Early stopping
         early_stopping(val_loss, model, path)
         if early_stopping.early_stop:
-            print("触发早停")
+            print("Early stopping triggered")
             break
     
-    # 绘制损失曲线
+    # Plot loss curve
     plt.figure(figsize=(10, 5))
     plt.plot(train_losses, label='train loss')
     plt.plot(val_losses, label='val loss')
-    plt.title('model train loss')
+    plt.title('Model training loss')
     plt.xlabel('epoch')
     plt.ylabel('loss')
     plt.legend()
@@ -250,24 +249,24 @@ def train_model(csv_file, img_dir, model, model_name, img_size=(512, 512),
 
     return model
 
-# 主执行入口
+# Main execution
 if __name__ == '__main__':
-    # 加载预训练模型
+    # Load pretrained model
     processor = AutoImageProcessor.from_pretrained("microsoft/beit-large-patch16-512")
     model = AutoModelForImageClassification.from_pretrained("microsoft/beit-large-patch16-512")
 
-    # 加载标签
+    # Load labels
     labels = pd.read_csv("train.csv")
     labels["label"] = labels["label"].map({"editada": 0, "real": 1})
     img_dir = "Train"
 
-    # 训练参数
+    # Training parameters
     batch_size = 2
     lr = 1e-5
     img_size = (512, 512)
     n_fold = 0
 
-    # 执行训练
+    # Start training
     trained_model = train_model(
         labels, 
         img_dir, 
@@ -281,6 +280,6 @@ if __name__ == '__main__':
         patience=10
     )
 
-# 清理显存
+# Clear GPU memory
 torch.cuda.empty_cache()
 ```
