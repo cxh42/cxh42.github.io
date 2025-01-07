@@ -59,4 +59,5 @@ Honors & Awards
 
 Contact
 ======
-Email: xhc42@outlook.com
+Email: xhc42@outlook.com / cxh42@uw.edu  
+Phone: 206-535-9185
