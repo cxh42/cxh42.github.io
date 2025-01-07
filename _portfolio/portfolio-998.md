@@ -1,6 +1,6 @@
 ---
 title: "CIDAUT AI Fake Scene Classification 2024"
-excerpt: "Classify if an autonomous driving scene is real or fake.<br/><img src='/images/inbox_2779868_f6a1889d486931be4fc03c08cd0c000e_37.jpg'>"
+excerpt: "Classify if an autonomous driving scene is real or fake. [Website](https://www.kaggle.com/competitions/cidaut-ai-fake-scene-classification-2024/overview)<br/><img src='/images/inbox_2779868_f6a1889d486931be4fc03c08cd0c000e_37.jpg'>"
 collection: portfolio
 ---
 <img src='/images/inbox_2779868_f6a1889d486931be4fc03c08cd0c000e_37.jpg'>
@@ -68,10 +68,14 @@ class CustomImageDataset(Dataset):
 # 增强的数据变换
 def get_transform(img_size=(512, 512)):
     return transforms.Compose([
-        transforms.Resize(img_size),                        # 调整尺寸
-        #transforms.RandomHorizontalFlip(),                  # 随机水平翻转
-        transforms.ToTensor(),                              # 转换为Tensor
-    ])
+        transforms.Resize(img_size),
+        transforms.RandomHorizontalFlip(),
+        transforms.RandomVerticalFlip(),
+        transforms.RandomRotation(15),
+        transforms.ColorJitter(brightness=0.2, contrast=0.2),
+        transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),
+        transforms.ToTensor(),
+])
 
 
 # 创建数据加载器
