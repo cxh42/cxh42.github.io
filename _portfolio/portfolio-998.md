@@ -9,7 +9,7 @@ Description:
 
 Your task is to develop a neural network or apply a suitable algorithm to classify whether an image of a driving scenario is real or fake. The images are provided in RGB format and compressed as JPEG files. Each image is labeled with 1 for real and 0 for fake, indicating a binary classification problem. You are free to create your own train-validation split for model training and evaluation. However, for the test images, the labels are not available; refer to the sample_submission.csv file in the Data section for submission formatting. The code must be written in Python, and you can utilize frameworks such as TensorFlow, Keras, or PyTorch. Additionally, you are allowed to leverage public GitHub repositories, pre-trained models, and other publicly available datasets to enhance your solution.
 
-My Code of training:
+Training model:
 ```python
 import torch
 import torch.nn as nn
