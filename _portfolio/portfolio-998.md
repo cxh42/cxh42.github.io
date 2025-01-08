@@ -9,7 +9,7 @@ Description:
 
 Your task is to develop a neural network or apply a suitable algorithm to classify whether an image of a driving scenario is real or fake. The images are provided in RGB format and compressed as JPEG files. Each image is labeled with 1 for real and 0 for fake, indicating a binary classification problem. You are free to create your own train-validation split for model training and evaluation. However, for the test images, the labels are not available; refer to the sample_submission.csv file in the Data section for submission formatting. The code must be written in Python, and you can utilize frameworks such as TensorFlow, Keras, or PyTorch. Additionally, you are allowed to leverage public GitHub repositories, pre-trained models, and other publicly available datasets to enhance your solution.
 
-My Code:
+My Code of training:
 ```python
 import torch
 import torch.nn as nn
@@ -282,4 +282,68 @@ if __name__ == '__main__':
 
 # Clear GPU memory
 torch.cuda.empty_cache()
+```
+
+Make predictions:
+```python
+import torch
+import pandas as pd
+import os
+from PIL import Image
+from transformers import AutoImageProcessor, AutoModelForImageClassification
+
+def create_submission(model_path, test_dir, output_csv='submission.csv'):
+    # Check if the device supports GPU
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Device in use: {device}")
+
+    # Load the image processor and model
+    processor = AutoImageProcessor.from_pretrained("microsoft/beit-large-patch16-512")
+    model = AutoModelForImageClassification.from_pretrained("microsoft/beit-large-patch16-512")
+    
+    # Load the trained weights
+    model.load_state_dict(torch.load(os.path.join(model_path, 'checkpoint1.pth')))
+    model = model.to(device)  # Move model to GPU
+    model.eval()  # Set model to evaluation mode
+
+    # Prepare a list to store prediction results
+    predictions = []
+
+    # Iterate over images in the test directory
+    for filename in sorted(os.listdir(test_dir)):
+        if filename.endswith(('.jpg', '.png', '.jpeg')):
+            # Full image path
+            image_path = os.path.join(test_dir, filename)
+            
+            # Open and convert the image
+            image = Image.open(image_path).convert("RGB")
+            
+            # Preprocess the image
+            inputs = processor(image, return_tensors="pt").to(device)  # Transfer data to GPU
+            
+            # Make predictions
+            with torch.no_grad():
+                outputs = model(**inputs)
+                probabilities = torch.sigmoid(outputs.logits).cpu().numpy()[0][0]  # Transfer output back to CPU for further processing
+            
+            # Convert probabilities to class (1 for real, 0 for fake)
+            predicted_class = 1 if probabilities > 0.5 else 0
+            
+            # Add to prediction results
+            predictions.append({'image': filename, 'label': predicted_class})
+
+    # Create a DataFrame
+    submission_df = pd.DataFrame(predictions)
+    
+    # Save as CSV
+    submission_df.to_csv(output_csv, index=False)
+    
+    print(f"Submission CSV saved to {output_csv}")
+    print("Preview of prediction results:")
+    print(submission_df)
+
+# Example usage
+model_path = 'microsoft/beit-large-patch16-5120'  # Folder containing model weights
+test_dir = 'Test'  # Folder containing test images
+create_submission(model_path, test_dir)
 ```
