@@ -1,17 +1,17 @@
 ---
 title: "NLP Challenge: Authentic Sentence Detection and Synthetic Corruption Generation"
-excerpt: "My experience with a challenging NLP task that involved distinguishing English sentences from their corrupted versions and generating new corruptions. <br/><img src='/images/DALL·E 2025-01-14 12.01.06 - A visually engaging illustration representing an NLP (Natural Language Processing) challenge. The image features a futuristic AI interface with a spli.webp'>"
+excerpt: "My experience with a challenging NLP task that involved distinguishing English sentences from their corrupted versions and generating new corruptions. <br/><img src='/images/lstm-2.svg'>"
 collection: portfolio
 ---
 
 Description:
-======
+------
 In the dynamic field of Natural Language Processing (NLP), challenges often push the boundaries of what we can achieve with language models. Recently, I undertook a research challenge that involved two intriguing tasks: building a classifier to distinguish between an English sentence and its corrupted version, and generating new corruptions that are challenging for the classifier to identify. This project not only honed my skills in NLP but also provided valuable insights into model robustness and data manipulation.
 
 The challenge was divided into two parts. The first task required developing a classifier capable of identifying which of two sentences was the authentic English version. The second task involved creating new, synthetic corruptions of the original sentences that would be difficult for the classifier to distinguish from the authentic ones. This exercise was designed to test the limits of NLP models and to explore the creation of challenging datasets.
 
 Task 1: Building the Classifier
-======
+------
 For the first task, I opted for an LSTM (Long Short-Term Memory) model due to its effectiveness in handling sequential data. The process began with data preprocessing, where I cleaned and prepared the dataset for training. This involved converting text to lowercase, removing punctuation, and creating a vocabulary to map words to integers for input into the neural network.
 
 The LSTM model was designed with an embedding layer, followed by LSTM layers, and a fully connected layer with a sigmoid activation function for binary classification. The model was trained using a binary cross-entropy loss function, and I employed Adam optimization for training.
@@ -19,15 +19,17 @@ The LSTM model was designed with an embedding layer, followed by LSTM layers, an
 During training, I encountered challenges such as overfitting and ensuring adequate generalization. To address these, I implemented techniques like dropout regularization and early stopping. The model achieved a validation accuracy close to the expected benchmark, demonstrating its effectiveness in distinguishing between authentic and corrupted sentences.
 
 Task 2: Generating New Corruptions
-======
+------
 The second task was more creative, involving the generation of new corruptions that would challenge the classifier. I devised several strategies, including typographical errors, punctuation mistakes, and word duplications, among others. To ensure uniqueness, I implemented checks to prevent direct copying from the training data.
 
 One of the key aspects of this task was ensuring that the new corruptions were plausible enough to fool the classifier. This required a delicate balance between making the corruption evident enough to be considered incorrect but not so obvious that it was easily identifiable.
 
 Reflections and Learnings
-======
+------
 This challenge provided a deep dive into the intricacies of NLP model robustness and data manipulation. I learned the importance of careful data preprocessing and the impact of model architecture choices on performance. Additionally, the exercise highlighted the creativity required in generating synthetic data that can effectively test model capabilities.
 
+Source code
+------
 Task 1:
 ```python
 import numpy as np
