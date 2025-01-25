@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-:wave: Hi! I am Xinghao Chen (陈星昊), a M.S. student at [University of Washington](https://www.washington.edu/) pursuing [Electrical and Computer Engineering](https://www.ece.uw.edu/),  I received my Bachelor's Degree (Automation) from [Henan University](https://www.henu.edu.cn/).
+:wave: I am Xinghao Chen (陈星昊), a M.S. student at [University of Washington](https://www.washington.edu/) pursuing [Electrical and Computer Engineering](https://www.ece.uw.edu/),  I received my Bachelor's Degree (Automation) from [Henan University](https://www.henu.edu.cn/).
 
 :microscope: My research interests focus on Diffusion Models, though I'm very open to exploring other areas in AI/ML. At UW, I've taken courses in Computer Vision and Large Language Models. I plan to pursue a Ph.D. in the future.
 
