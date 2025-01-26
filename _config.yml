@@ -23,7 +23,7 @@ author:
   # Biographic information
   avatar           : "myselfie.jpg"
   name             : "Xinghao Chen 陈星昊"
-  pronouns         : # example: "she/her"  
+  pronouns         : "he/him"  
   bio              : "M.S ECE student in UW-Seattle"
   location         : "Seattle"
   employer         : "University of Washington"
@@ -46,7 +46,8 @@ author:
   dribbble         : # Username
   github           : "cxh42"
   kaggle           : "xhc142"  
-  stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
+  stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")
+  huggingfece      : "AveMujica"    
 
   # Social media
   bluesky          : # Username
