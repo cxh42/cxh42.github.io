@@ -1,6 +1,8 @@
 ---
 title: "ControlNet + LoRA Line-Art Colorization Workflow"
-excerpt: "This is a course project. [Slide](https://docs.google.com/presentation/d/1--OoNGXd8Wfc12vTyD4rxgOoaCXto4GL/edit?usp=sharing&ouid=110097611116200166954&rtpof=true&sd=true) | [Paper](https://drive.google.com/file/d/1jjJ6YeQM4jzgP4o8op2zyBr9xubnGool/view?usp=sharing)<br/><img src='/images/workflow.png'>"
+excerpt: "This is a course project. [Slide](https://docs.google.com/presentation/d/1--OoNGXd8Wfc12vTyD4rxgOoaCXto4GL/edit?usp=sharing&ouid=110097611116200166954&rtpof=true&sd=true)&[Paper](https://drive.google.com/file/d/1jjJ6YeQM4jzgP4o8op2zyBr9xubnGool/view?usp=sharing)
+
+<br/><img src='/images/workflow.png'>"
 collection: portfolio
 ---
 <img src='/images/workflow.png'>
