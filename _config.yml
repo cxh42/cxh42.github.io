@@ -8,10 +8,10 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Xinghao Chen"
+title                    : "Xinghao Chen's Web Page"
 title_separator          : "-"
 name                     : &name "Xinghao Chen"
-description              : &description "personal description"
+description              : &description "This is the personal website of Xinghao Chen."
 url                      : https://cxh42.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "cxh42/cxh42.github.io"
