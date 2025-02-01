@@ -10,6 +10,14 @@ Project Overview
 =====
 Auto Bang Dream is an innovative application that automates gameplay in the rhythm game Bang Dream using computer vision and machine learning techniques. The project combines YOLO (You Only Look Once) object detection with precise input simulation to create a responsive and accurate auto-player system.
 
+<video src="{{cxh42.github.io}}/assets/videos/good.mp4" width="1280" height="720" controls>
+    您的浏览器不支持视频播放。
+</video>
+
+<video src="{{cxh42.github.io}}/assets/videos/bad.mp4" width="1280" height="720" controls>
+    您的浏览器不支持视频播放。
+</video>
+
 
 Technical Implementation
 =====
