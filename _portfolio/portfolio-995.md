@@ -1,6 +1,6 @@
 ---
 title: "Auto Bang Dream"
-excerpt: "YOLO11-based target detection for automatic Music game playing" <br/><img src='/images/bang.png'>"
+excerpt: "YOLO11-based target detection for automatic Music game playing<br/><img src='/images/bang.png'>"
 collection: portfolio
 ---
 
@@ -8,6 +8,78 @@ Project Overview
 =====
 Auto Bang Dream is an innovative application that automates gameplay in the rhythm game Bang Dream using computer vision and machine learning techniques. The project combines YOLO (You Only Look Once) object detection with precise input simulation to create a responsive and accurate auto-player system.
 
+<video src="{{cxh42.github.io}}/assets/videos/good.mp4" width="640" height="360" controls>
+    您的浏览器不支持视频播放。
+</video>
+
+<video src="{{cxh42.github.io}}/assets/videos/bad.mp4" width="640" height="360" controls>
+    您的浏览器不支持视频播放。
+</video>
+
+
+Technical Implementation
+=====
+Object Detection Model
+-----
+Utilized YOLOv11-nano architecture for real-time note detection
+Created a custom dataset by capturing and annotating game footage using Roboflow
+Trained the model to recognize multiple note types:
+* Standard notes (Purple, Blue, Pink, Red)
+* Hold notes (Green/Yellow)
+* Different lane positions (7 lanes)
+
+Core Features
+-----
+* Real-time Screen Capture
+   * Implements Windows API for efficient screen capture
+   * Processes game window specifically using win32gui
+   * Maintains high capture framerate for accurate detection
+* Note Detection System
+
+   * Detects multiple note types simultaneously
+   * Processes notes based on their vertical position relative to judgment lines
+   * Implements separate detection logic for standard notes and hold notes
+* Input Simulation
+   * Uses pydirectinput for reliable game input simulation
+   * Implements multi-threaded key press management
+   * Handles both short presses and long-hold notes
+* Lane Management
+   * Divides screen width into 7 distinct lanes
+   * Maps each lane to corresponding keyboard inputs
+   * Implements intelligent collision detection for overlapping notes
+
+Technical Highlights
+-----
+* Precision Timing: Implements dual judgment lines for enhanced accuracy. Primary judgment line for standard notes. Secondary line for hold note release timing
+* Multi-threading: Utilizes threaded key press handlers for responsive input
+* Debug Visualization: Includes real-time visual feedback showing:
+   * Note detection boundaries
+   * Judgment lines
+   * Current key states
+   * Detection confidence scores
+
+Architecture
+=====
+The system follows a modular design with distinct components:
+* Screen Capture Module
+* YOLO Detection Pipeline
+* Note Processing Logic
+* Input Simulation System
+* Debug Visualization Interface
+
+Performance Optimization
+-----
+* Minimized capture-to-input latency
+* Optimized screen capture frequency
+* Implemented efficient memory management
+* Added configurable tolerance settings for different note types*
+
+Future Developments
+-----
+* Support for additional rhythm game titles
+* Enhanced accuracy through model fine-tuning
+* Advanced pattern recognition for complex note sequences
+* Performance optimization for lower-end systems
 
 Source code
 ------
