@@ -1,8 +1,6 @@
 ---
 title: "Auto Bang Dream"
-excerpt: "YOLO11-based target detection for automatic Music game playing."
-
-<br/><img src='/images/bang.jpg'>"
+excerpt: "YOLO11-based target detection for automatic Music game playing." <br/><img src='/images/bang.jpg'>"
 collection: portfolio
 ---
 
@@ -10,11 +8,11 @@ Project Overview
 =====
 Auto Bang Dream is an innovative application that automates gameplay in the rhythm game Bang Dream using computer vision and machine learning techniques. The project combines YOLO (You Only Look Once) object detection with precise input simulation to create a responsive and accurate auto-player system.
 
-<video src="{{cxh42.github.io}}/assets/videos/good.mp4" width="1280" height="720" controls>
+<video src="{{cxh42.github.io}}/assets/videos/good.mp4" width="640" height="360" controls>
     您的浏览器不支持视频播放。
 </video>
 
-<video src="{{cxh42.github.io}}/assets/videos/bad.mp4" width="1280" height="720" controls>
+<video src="{{cxh42.github.io}}/assets/videos/bad.mp4" width="640" height="360" controls>
     您的浏览器不支持视频播放。
 </video>
 
@@ -82,14 +80,6 @@ Future Developments
 * Enhanced accuracy through model fine-tuning
 * Advanced pattern recognition for complex note sequences
 * Performance optimization for lower-end systems
-
-
-
-
-
-
-
-
 
 Source code
 ------
