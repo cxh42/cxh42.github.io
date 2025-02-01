@@ -1,8 +1,10 @@
 ---
 title: "Semantic Search Demo"
-excerpt: "This demo is used to validate text categorization.[Demo Page](https://huggingface.co/spaces/AveMujica/Semantic_Search_Demo)<br/><img src='/images/demo.png'>"
+excerpt: "This demo is used to validate text categorization. [Demo Page](https://huggingface.co/spaces/AveMujica/Semantic_Search_Demo)<br/><img src='/images/demo.png'>"
 collection: portfolio
 ---
+
+<br/><img src='/images/demo.png'>
 
 Source code
 ------
