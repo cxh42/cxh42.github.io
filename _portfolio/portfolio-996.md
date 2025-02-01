@@ -1,5 +1,5 @@
 ---
-title: "Semantic_Search_Demo"
+title: "Semantic Search Demo"
 excerpt: "This demo is used to validate text categorization.[Demo Page](https://huggingface.co/spaces/AveMujica/Semantic_Search_Demo)"
 collection: portfolio
 ---

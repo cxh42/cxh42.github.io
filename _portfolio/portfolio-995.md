@@ -1,6 +1,6 @@
 ---
 title: "Auto Bang Dream"
-excerpt: "YOLO11-based target detection for automatic Music game playing." <br/><img src='/images/bang.jpg'>"
+excerpt: "YOLO11-based target detection for automatic Music game playing" <br/><img src='/images/bang.png'>"
 collection: portfolio
 ---
 
@@ -19,17 +19,67 @@ Auto Bang Dream is an innovative application that automates gameplay in the rhyt
 
 Technical Implementation
 =====
-The technical implementation of Auto Bang Dream centers around a YOLOv11-nano architecture, chosen specifically for its real-time detection capabilities. The foundation of this system was built upon a custom dataset, meticulously created by capturing and annotating game footage through Roboflow. This model was trained to recognize a diverse range of note types, including standard notes in various colors (Purple, Blue, Pink, Red) and hold notes (Green/Yellow), across seven distinct lane positions.
+Object Detection Model
+-----
+Utilized YOLOv11-nano architecture for real-time note detection
+Created a custom dataset by capturing and annotating game footage using Roboflow
+Trained the model to recognize multiple note types:
+* Standard notes (Purple, Blue, Pink, Red)
+* Hold notes (Green/Yellow)
+* Different lane positions (7 lanes)
 
-The system's core functionality is built upon several sophisticated features. The real-time screen capture system leverages the Windows API for efficient frame acquisition, utilizing win32gui for precise game window processing while maintaining the high capture framerate necessary for accurate detection. The note detection system operates continuously, processing multiple note types simultaneously and evaluating their positions relative to judgment lines, with specialized logic implemented to handle both standard and hold notes differently.
+Core Features
+-----
+* Real-time Screen Capture
+   * Implements Windows API for efficient screen capture
+   * Processes game window specifically using win32gui
+   * Maintains high capture framerate for accurate detection
+* Note Detection System
 
-Input simulation in the system is handled through pydirectinput, providing reliable game input simulation. The implementation includes a multi-threaded key press management system that efficiently handles both short presses and long-hold notes. The lane management system precisely divides the screen width into seven distinct lanes, with each lane mapped to corresponding keyboard inputs and featuring intelligent collision detection for handling overlapping notes.
+   * Detects multiple note types simultaneously
+   * Processes notes based on their vertical position relative to judgment lines
+   * Implements separate detection logic for standard notes and hold notes
+* Input Simulation
+   * Uses pydirectinput for reliable game input simulation
+   * Implements multi-threaded key press management
+   * Handles both short presses and long-hold notes
+* Lane Management
+   * Divides screen width into 7 distinct lanes
+   * Maps each lane to corresponding keyboard inputs
+   * Implements intelligent collision detection for overlapping notes
 
-Several technical highlights distinguish this implementation. The system employs a dual judgment line system for enhanced accuracy, with a primary line handling standard notes and a secondary line specifically for hold note release timing. The multi-threaded architecture ensures responsive input handling, while the debug visualization system provides comprehensive real-time feedback, displaying note detection boundaries, judgment lines, current key states, and detection confidence scores.
+Technical Highlights
+-----
+* Precision Timing: Implements dual judgment lines for enhanced accuracy. Primary judgment line for standard notes. Secondary line for hold note release timing
+* Multi-threading: Utilizes threaded key press handlers for responsive input
+* Debug Visualization: Includes real-time visual feedback showing:
+   * Note detection boundaries
+   * Judgment lines
+   * Current key states
+   * Detection confidence scores
 
-The architecture follows a modular design pattern, compartmentalizing functionality into distinct components: a screen capture module, YOLO detection pipeline, note processing logic, input simulation system, and debug visualization interface. This modular approach enhances maintainability and allows for independent optimization of each component.
+Architecture
+=====
+The system follows a modular design with distinct components:
+* Screen Capture Module
+* YOLO Detection Pipeline
+* Note Processing Logic
+* Input Simulation System
+* Debug Visualization Interface
 
-Performance optimization has been a key focus, with several measures implemented to enhance system efficiency. These include minimizing capture-to-input latency, optimizing screen capture frequency, implementing efficient memory management, and incorporating configurable tolerance settings for different note types. Looking forward, the project's future development roadmap includes expanding support for additional rhythm game titles, enhancing accuracy through model fine-tuning, implementing advanced pattern recognition for complex note sequences, and optimizing performance for lower-end systems.
+Performance Optimization
+-----
+* Minimized capture-to-input latency
+* Optimized screen capture frequency
+* Implemented efficient memory management
+* Added configurable tolerance settings for different note types*
+
+Future Developments
+-----
+* Support for additional rhythm game titles
+* Enhanced accuracy through model fine-tuning
+* Advanced pattern recognition for complex note sequences
+* Performance optimization for lower-end systems
 
 Source code
 ------
