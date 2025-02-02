@@ -24,7 +24,7 @@ AutoBang v1 YOLO11 Bang Dream Note Detection
 AutoBang v1 YOLO11 Bang Dream Auto Player
 -----
 <iframe width="640" height="360" src="https://www.youtube.com/embed/RF30UTMcYHI?si=vALWwN186AqRtnoM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+Due to the complex visuals, extremely strict real-time requirements, and intricate note-triggering logic of the rhythm game BanG Dream!, the current implementation has not demonstrated satisfactory practical usability. As a result, I have decided to put this project on hold for now and revisit it in the future when better solutions become available.
 
 Technical Implementation
 =====
