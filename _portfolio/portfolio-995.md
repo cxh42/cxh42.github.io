@@ -12,7 +12,7 @@ Auto Bang Dream is an innovative application that automates gameplay in the rhyt
 
 AutoBang v2 Dataset————300 high quality manually labeled music game screenshots: https://app.roboflow.com/ds/k4ULdEl9yr?key=muxSteJ6OZ
 
-AutoBang2 YOLO11 Bang Dream Note Detection
+AutoBang v2 YOLO11 Bang Dream Note Detection
 -----
 <iframe width="640" height="360" src="https://www.youtube.com/embed/ttC2UBdkAFY?si=OK5pz-ofh4taVCoh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 AutoBang v2 used Android Debug Bridge (adb) to simulate human touch behaviors.
