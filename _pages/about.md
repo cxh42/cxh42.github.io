@@ -19,6 +19,7 @@ Short Bio
 
 News
 -----
+* [01.2025] I join in [TACO Group](https://taco-group.github.io/) in Texas A&M University lead by [Dr. Zhengzhong Tu](https://vztu.github.io/) as a remote research assistant. Start research about Driving Scenario Video Generation.
 * [12.2024] I join in Machine Learning for Community-Driven Coastal Erosion Monitoring and Management capstone project advised by [Dr. Roxanne Carini](https://www.apl.washington.edu/people/profile.php?last_name=Carini&first_name=Roxanne) and [Dr. Morteza Derakhti](https://www.ce.washington.edu/facultyfinder/morteza-derakhti). I will work on this project for next two quarters.
 * [12.2024] I take course of Large Language Models taught by [Dr. Karthik Mohan](https://www.linkedin.com/in/karthik-mohan-72a4b323/).
 * [12.2024] I get 3.95/4.0 GPA for my first quarter in UW.
