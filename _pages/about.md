@@ -9,22 +9,23 @@ redirect_from:
 
 Short Bio
 -----
-:wave: I am Xinghao Chen (陈星昊), a M.S. student at [University of Washington](https://www.washington.edu/) pursuing [Electrical and Computer Engineering](https://www.ece.uw.edu/),  I received my Bachelor's Degree (Automation) from [Henan University](https://www.henu.edu.cn/).
+I am currently a first-year M.S. student in [Electrical and Computer Engineering](https://www.ece.uw.edu/) at the [University of Washington](https://www.washington.edu/).
 
-:microscope: My research interests focus on Diffusion Models, though I'm very open to exploring other areas in AI/ML. At UW, I've taken courses in Computer Vision and Large Language Models. I plan to pursue a Ph.D. in the future.
+My research interest focuses on Computer Vision and Generative AI, I have worked on topics like Image and Video Diffusion Models, Large Language Models, Semantic Segmentation, etc.
 
-:bulb: I am highly motivated but currently lack research experience, any advice and help would be greatly appreciated.
+Prior to starting my M.S., I completed my undergraduate degrees in Automation at the [Henan University](https://www.henu.edu.cn/).
 
-:mag: I am actively seeking research opportunities and internships. Feel free to contact me!
+I am preparing for PhD application and any advice would be greatly appreciated.
+
+I am seeking research assistant and summer internship opportunities. Feel free to contact me via [email](xhc42@outlook.com)!
 
 News
 -----
-* [01.2025] I join in [TACO Group](https://taco-group.github.io/) in Texas A&M University lead by [Dr. Zhengzhong Tu](https://vztu.github.io/) as a remote research assistant. Start research about Driving Scenario Video Generation.
-* [12.2024] I join in Machine Learning for Community-Driven Coastal Erosion Monitoring and Management capstone project advised by [Dr. Roxanne Carini](https://www.apl.washington.edu/people/profile.php?last_name=Carini&first_name=Roxanne) and [Dr. Morteza Derakhti](https://www.ce.washington.edu/facultyfinder/morteza-derakhti). I will work on this project for next two quarters.
+* [01.2025] I join in [TACO Group](https://taco-group.github.io/) in Texas A&M University lead by [Dr. Zhengzhong Tu](https://vztu.github.io/) as a remote research assistant. Contributing to a Driving Scenario Video Generation research project.
+* [12.2024] I join in Machine Learning for Community-Driven Coastal Erosion Monitoring and Management capstone project advised by [Dr. Roxanne Carini](https://www.apl.washington.edu/people/profile.php?last_name=Carini&first_name=Roxanne), [Dr. Morteza Derakhti](https://www.ce.washington.edu/facultyfinder/morteza-derakhti) and [Dr. Arindam Das](https://www.ece.uw.edu/people/arindam-das/) I will work on this project for next two quarters.
 * [12.2024] I take course of Large Language Models taught by [Dr. Karthik Mohan](https://www.linkedin.com/in/karthik-mohan-72a4b323/).
 * [12.2024] I get 3.95/4.0 GPA for my first quarter in UW.
-* [09.2024] I join in Sensors, Energy, and Automation Laboratory for research and study.
-* [09.2024] I take course of Computer Vision taught by [Dr. Stan Birchfield](https://research.nvidia.com/person/stan-birchfield) and will learn from basics to deep learning applications.
+* [09.2024] I take course of Computer Vision taught by [Dr. Stan Birchfield](https://research.nvidia.com/person/stan-birchfield).
 * [09.2024] I join in University of Washington as a M.S. student in ECE.
 
 Education
@@ -58,9 +59,9 @@ Education
 
 Honors & Awards
 -----
-* Dean's list of Henan University
+* Academic Scholarship of Henan University
 
 Contact
 -----
-Email: xhc42@outlook.com / cxh42@uw.edu  
-Mobile: 206-535-9185
+Email:  xhc42@outlook.com
+Mobile: 2065359185 (US)
