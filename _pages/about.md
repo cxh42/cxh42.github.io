@@ -21,6 +21,7 @@ I am seeking research assistant and summer internship opportunities. Feel free t
 
 News
 -----
+* [04.2025] I am taking Developing Immersive Experiences for AR/VR course.
 * [03.2025] I get 4.0/4.0 GPA for my second quarter in UW.
 * [01.2025] I join in [TACO Group](https://taco-group.github.io/) in Texas A&M University lead by [Dr. Zhengzhong Tu](https://vztu.github.io/) as a remote research assistant. Contributing to a driving scenario video generation research project.
 * [12.2024] I join in Machine Learning for Community-Driven Coastal Erosion Monitoring and Management capstone project advised by [Dr. Roxanne Carini](https://www.apl.washington.edu/people/profile.php?last_name=Carini&first_name=Roxanne), [Dr. Morteza Derakhti](https://www.ce.washington.edu/facultyfinder/morteza-derakhti) and [Dr. Arindam Das](https://www.ece.uw.edu/people/arindam-das/) I will work on this project for next two quarters.
