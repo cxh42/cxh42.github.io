@@ -21,7 +21,7 @@ repository               : "cxh42/cxh42.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "1742687675541.png"
+  avatar           : "me.jpeg"
   name             : "Xinghao Chen (陈星昊)"
   pronouns         : "he/him"  
   bio              : "M.S. Electrical & Computer Engineering"
