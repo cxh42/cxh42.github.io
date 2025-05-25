@@ -7,7 +7,6 @@ redirect_from:
   - /resume
 ---
 
-
-[Pdf version CV](http://cxh42.github.io/files/CV.pdf)
-
-[中文简历](http://cxh42.github.io/files/CNCV322.pdf)
+Updated March-22-2025
+[English CV](http://cxh42.github.io/files/CV.pdf)
+[Chinese CV](http://cxh42.github.io/files/CNCV322.pdf)

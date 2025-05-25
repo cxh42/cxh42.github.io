@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Xinghao Chen's Web Page"
+title                    : "Xinghao Chen's Webpage"
 title_separator          : "-"
 name                     : &name "Xinghao Chen"
 description              : &description "This is Xinghao Chen's personal web page, where I share my research, publications, and other professional information."
