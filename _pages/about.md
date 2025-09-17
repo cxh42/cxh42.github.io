@@ -1,4 +1,4 @@
-﻿---
+---
 permalink: /
 title: "About me"
 author_profile: true
@@ -13,7 +13,6 @@ My research interests focus on computer vision and generative AI, and I have wor
 
 <span style="color: #cc3333;"><strong>I am actively looking for PhD positions (Spring & Fall 2026)! If you are interested in working together or have potential PhD opportunities, please feel free to contact me.</strong></span>
 
-
 News
 =====
 * [04.2025] Started the Developing Immersive Experiences for AR/VR course, where I am building interactive 3DGS experiences for VR headsets.
@@ -25,6 +24,15 @@ News
 
 Ongoing Research
 =====
+### RL-guided image restoration agent
+Developing a reinforcement learning controller that orchestrates denoising, deblurring, deraining, low-light enhancement, super-resolution, colorization, and face refinement modules to recover images suffering coupled degradations. The policy fuses NR-IQA scores (NIQE, BRISQUE, MUSIQ, ImageReward), visual embeddings, and action history, and is trained with PPO to learn minimal toolchains that trade quality gains against inference cost.
+
+Evaluation spans synthetic CleanBench-style mixes and real captures to benchmark robustness against LLM/VLM schedulers such as AgenticIR and JarvisIR, with emphasis on reducing hallucinations and over-processing.
+
+### Open-source NuRec-style scene reconstruction
+Re-creating NVIDIA's recent Omniverse NuRec + 3DGUT workflow with an open toolchain so multi-sensor logs (RGB, LiDAR, IMU) can be converted into photorealistic 3D Gaussian scenes for Isaac Sim and CARLA. The roadmap covers Gaussian-based reconstruction, USD export, and lightweight viewers that mirror NuRec features like Physically Accurate Dataset streaming and Sensor RTX-quality ray tracing.
+
+The study leans on NVIDIA's August 2025 developer demo and Newsroom briefing-where NuRec shipped with CARLA integrations, Foretellix toolchain support, and Voxel51 FiftyOne dataset hooks-to map required components before swapping in open kernels (e.g., gsplat, Nerfstudio, differentiable rendering).
 
 Education
 =====
