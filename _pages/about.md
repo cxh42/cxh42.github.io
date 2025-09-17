@@ -7,26 +7,23 @@ redirect_from:
   - /about.html
 ---
 
-I am Xingahao Chen, a Master student at [University of Washington](https://www.washington.edu/). 
+I am Xingahao Chen, a master's student at the [University of Washington](https://www.washington.edu/). 
 
-My research interest focuses on Computer Vision and Generative AI, I have worked on topics like 3DGS, Diffusion models, LLM agents, Image Segmentation, Reinforcement Learninh, etc.
+My research interests focus on computer vision and generative AI, and I have worked on projects involving 3D Gaussian splatting (3DGS), diffusion models, LLM agents, image segmentation, and reinforcement learning.
 
 <span style="color: #cc3333;"><strong>I am actively looking for PhD positions (Spring & Fall 2026)! If you are interested in working together or have potential PhD opportunities, please feel free to contact me.</strong></span>
 
 
 News
 =====
-* [04.2025] I am taking Developing Immersive Experiences for AR/VR course. Working on interactive 3DGS in VR headsets.
-* [01.2025] I join in [TACO Group](https://taco-group.github.io/) in Texas A&M University supervised by [Dr. Zhengzhong Tu](https://vztu.github.io/) as a remote research assistant.
-* [12.2024] I start work on "Machine Learning for Community-Driven Coastal Erosion Monitoring and Management" project at UW Applied Physics Lab advised by [Dr. Roxanne Carini](https://www.apl.washington.edu/people/profile.php?last_name=Carini&first_name=Roxanne), [Dr. Morteza Derakhti](https://www.ce.washington.edu/facultyfinder/morteza-derakhti) and [Dr. Arindam Das](https://www.ece.uw.edu/people/arindam-das/).
-* [12.2024] I take course of Large Language Models taught by [Dr. Karthik Mohan](https://www.linkedin.com/in/karthik-mohan-72a4b323/). [Course web page](https://bytesizeml.github.io/llm2025/).
-* [09.2024] I take course of Computer Vision taught by [Dr. Stan Birchfield](https://research.nvidia.com/person/stan-birchfield).
-* [09.2024] I join in University of Washington as a M.S. student in ECE.
+* [04.2025] Started the Developing Immersive Experiences for AR/VR course, where I am building interactive 3DGS experiences for VR headsets.
+* [01.2025] Joined the [TACO Group](https://taco-group.github.io/) at Texas A&M University as a remote research assistant under [Dr. Zhengzhong Tu](https://vztu.github.io/).
+* [12.2024] Started working on the "Machine Learning for Community-Driven Coastal Erosion Monitoring and Management" project at the UW Applied Physics Laboratory with advisers [Dr. Roxanne Carini](https://www.apl.washington.edu/people/profile.php?last_name=Carini&first_name=Roxanne), [Dr. Morteza Derakhti](https://www.ce.washington.edu/facultyfinder/morteza-derakhti) and [Dr. Arindam Das](https://www.ece.uw.edu/people/arindam-das/).
+* [12.2024] Enrolled in the Large Language Models course taught by [Dr. Karthik Mohan](https://www.linkedin.com/in/karthik-mohan-72a4b323/). [Course web page](https://bytesizeml.github.io/llm2025/).
+* [09.2024] Enrolled in the Computer Vision course taught by [Dr. Stan Birchfield](https://research.nvidia.com/person/stan-birchfield).
+* [09.2024] Began the M.S. program in Electrical and Computer Engineering at the University of Washington.
 
 Ongoing Research
-=====
-
-Publications
 =====
 
 Education
