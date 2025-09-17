@@ -1,5 +1,5 @@
 ﻿---
-title: "MultiGrid Multi-Agent PPO Toolkit"
+title: "MultiGrid Multi-Agent PPO"
 excerpt: "Lightweight multi-agent PPO experiments on Gym MultiGrid with shaped rewards, sliding-window checkpoints, and automated trajectory visualizations<br/><img src='/images/multigrid-ppo-demo.gif'>"
 collection: portfolio
 ---
@@ -15,14 +15,13 @@ This research sandbox explores cooperative reinforcement learning policies for t
 - Packaged reproducible configs (`config/default.yaml`) and environment wrappers under `envs/gym_multigrid` so experiments can be rerun without external dependencies.
 
 ## Highlights
-- **SimplePPOAgent architecture** - ConvNet image encoder plus direction embeddings feeding shared MLP layers for both policy logits and value estimates.
 - **Reward shaping engine** - Distance-based shaping with movement rewards and stationary penalties tracked per agent for finer credit assignment.
 - **Training logistics** - Deterministic seeding, GAE advantage estimation, generalized clipping, and checkpoint rotation every 1k episodes for long horizons.
 - **Visualization pipeline** - Frame generator stitches together global maps, per-agent observations, reward curves, and textual action callouts before passing to FFmpeg.
-- **Manual control & debugging tools** - Scripts for human-in-the-loop play (`manual_control_multigrid.py`) and earlier PPO baselines (v0-v7) kept for regression testing.
+
 
 ## Technical Stack
-`Python`, `PyTorch`, `gym-multigrid`, `NumPy`, `Matplotlib`, `Seaborn`
+`Python`, `PyTorch`, `NumPy`, `Matplotlib`, `Seaborn`
 
 ## Learn More
 - GitHub repository: [cxh42/multigrid_RL](https://github.com/cxh42/multigrid_RL)

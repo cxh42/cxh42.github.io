@@ -10,7 +10,6 @@ CostalSeg is a University of Washington capstone project that builds an end-to-e
 ## My Contributions
 - Led model training and evaluation for the Metal Marcy and Silhouette Jaenette beaches, including data preparation scripts and packaged pretrained checkpoints.
 - Implemented the Gradio-based browser app (`app.py`) that wraps inference, overlay rendering, and batch processing for field researchers.
-- Added QA tooling: a ViT-H-14 cosine-similarity filter for photographic outliers and a SuperGlue-based homography alignment step for multi-image submissions.
 - Authored documentation for model retraining, outlier detection, and deployment to Hugging Face Spaces.
 
 ## Highlights
@@ -22,10 +21,8 @@ CostalSeg is a University of Washington capstone project that builds an end-to-e
 - **Hosted demos** - Three Hugging Face Spaces (MetalMarcy, SilhouetteJaenette, CostalSegment) expose the workflow to project partners without local setup.
 
 ## Technical Stack
-`Python`, `PyTorch`, `segmentation_models_pytorch`, `TorchVision ViT-H-14`, `Gradio`, `Hugging Face transformers`, `OpenCV`, `NumPy`
+`Python`, `PyTorch`, `segmentation_models_pytorch`, `Gradio`, `Hugging Face transformers`, `OpenCV`, `NumPy`
 
 ## Learn More
 - GitHub repository: [cxh42/CostalSeg](https://github.com/cxh42/CostalSeg)
-- Hugging Face demo (alignment + QA): [AveMujica/CostalSegment](https://huggingface.co/spaces/AveMujica/CostalSegment)
-- Hugging Face demo (Metal Marcy): [AveMujica/MetalMarcy](https://huggingface.co/spaces/AveMujica/MetalMarcy)
-- Hugging Face demo (Silhouette Jaenette): [AveMujica/SilhouetteJaenette](https://huggingface.co/spaces/AveMujica/SilhouetteJaenette)
+- Hugging Face demo: [AveMujica/CostalSegment](https://huggingface.co/spaces/AveMujica/CostalSegment)
