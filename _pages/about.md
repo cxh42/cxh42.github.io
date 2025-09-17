@@ -25,7 +25,6 @@ News
 
 Ongoing Research
 =====
-
 <div class="ongoing-research-wrapper">
   <div class="paper-box ongoing-research-card">
     <div class="paper-box-image">
