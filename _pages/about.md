@@ -23,7 +23,7 @@ News
 * [09.2024] Enrolled in the Computer Vision course taught by [Dr. Stan Birchfield](https://research.nvidia.com/person/stan-birchfield).
 * [09.2024] Began the M.S. program in Electrical and Computer Engineering at the University of Washington.
 
-Ongoing Research
+Ongoing research projects
 =====
 
 Education
