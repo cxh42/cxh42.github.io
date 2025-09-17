@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MultiGrid Multi-Agent PPO"
 excerpt: "Lightweight multi-agent PPO experiments on Gym MultiGrid with shaped rewards, sliding-window checkpoints, and automated trajectory visualizations<br/><img src='/images/multigrid-ppo-demo.gif'>"
 collection: portfolio

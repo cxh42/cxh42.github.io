@@ -1,4 +1,4 @@
-﻿---
+---
 title: "CostalSeg Coastal Erosion Platform"
 excerpt: "UW capstone system for coastal erosion monitoring with DeepLabV3+ segmentation, ViT-H-14 quality control, and SuperGlue alignment<br/><img src='/images/costalseg-overlay.webp'>"
 collection: portfolio
