@@ -399,3 +399,12 @@
   font-size: $type-size-6;
   text-transform: uppercase;
 }
+.page--portfolio {
+  .page__content {
+    img {
+      display: block;
+      margin: 1.5rem auto;
+      max-width: min(100%, 640px);
+    }
+  }
+}

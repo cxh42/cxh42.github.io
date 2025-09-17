@@ -243,3 +243,12 @@
     }
   }
 }
+.archive__item--portfolio {
+  .archive__item-excerpt {
+    img {
+      display: block;
+      margin: 0.75rem auto;
+      max-width: min(100%, 360px);
+    }
+  }
+}

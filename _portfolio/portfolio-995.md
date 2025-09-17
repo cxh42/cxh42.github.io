@@ -1,5 +1,5 @@
 ---
-title: "Auto Bang Dream"
+title: "Auto Bang"
 excerpt: "YOLO11-based target detection for automatic Music game playing<br/><img src='/images/bang.png'>"
 collection: portfolio
 ---
