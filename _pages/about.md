@@ -35,7 +35,7 @@ Education
     <img src="/images/uwlogo.png" width="100px" style="margin-right: 20px;">
     <div>
         <p style="margin: 0;">University of Washington</p>
-        <p style="margin: 0;">September 2024 ~ March 2026 (Expected)</p>
+        <p style="margin: 0;">September 2024 ~ January 2026 (Expected)</p>
         <p style="margin: 0;">M.S. Electrical & Computer Engineering</p>
     </div>
 </div>
