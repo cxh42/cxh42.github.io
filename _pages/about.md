@@ -56,7 +56,9 @@ Education
 
 Contact
 =====
-**Email:** xhc42@outlook.com
+**Personal email:** [xhc42@outlook.com](xhc42@outlook.com)
+
+**Edu email:** [cxh42@uw.edu](cxh42@uw.edu)
 
 **WeChat:** ICXH42
 
