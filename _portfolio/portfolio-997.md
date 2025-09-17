@@ -1,6 +1,6 @@
 ---
 title: "NLP Challenge: Authentic Sentence Detection and Synthetic Corruption Generation"
-excerpt: "My experience with a challenging NLP task that involved distinguishing English sentences from their corrupted versions and generating new corruptions. <br/><img src='/images/lstm-2.svg'>"
+excerpt: "My experience with a challenging NLP task that involved distinguishing English sentences from their corrupted versions and generating new corruptions.
 collection: portfolio
 ---
 
