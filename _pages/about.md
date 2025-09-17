@@ -16,8 +16,8 @@ My research interest focuses on Computer Vision and Generative AI, I have worked
 
 News
 =====
-* [04.2025] I am taking Developing Immersive Experiences for AR/VR course. Working on ineractive 3DGS in VR headsets.
-* [01.2025] I join in [TACO Group](https://taco-group.github.io/) in Texas A&M University lead by [Dr. Zhengzhong Tu](https://vztu.github.io/) as a remote research assistant.
+* [04.2025] I am taking Developing Immersive Experiences for AR/VR course. Working on interactive 3DGS in VR headsets.
+* [01.2025] I join in [TACO Group](https://taco-group.github.io/) in Texas A&M University supervised by [Dr. Zhengzhong Tu](https://vztu.github.io/) as a remote research assistant.
 * [12.2024] I start work on "Machine Learning for Community-Driven Coastal Erosion Monitoring and Management" project at UW Applied Physics Lab advised by [Dr. Roxanne Carini](https://www.apl.washington.edu/people/profile.php?last_name=Carini&first_name=Roxanne), [Dr. Morteza Derakhti](https://www.ce.washington.edu/facultyfinder/morteza-derakhti) and [Dr. Arindam Das](https://www.ece.uw.edu/people/arindam-das/).
 * [12.2024] I take course of Large Language Models taught by [Dr. Karthik Mohan](https://www.linkedin.com/in/karthik-mohan-72a4b323/). [Course web page](https://bytesizeml.github.io/llm2025/).
 * [09.2024] I take course of Computer Vision taught by [Dr. Stan Birchfield](https://research.nvidia.com/person/stan-birchfield).
@@ -51,5 +51,6 @@ Education
 
 Contact
 =====
-[xhc42@outlook.com](xhc42@outlook.com) 
-[cxh42@uw.edu](cxh42@uw.edu)
+**Email:** [xhc42@outlook.com](xhc42@outlook.com)
+
+**WeChat:** ICXH42
