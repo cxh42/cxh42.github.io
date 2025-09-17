@@ -11,7 +11,7 @@ I am Xingahao Chen, a Master student at [University of Washington](https://www.w
 
 My research interest focuses on Computer Vision and Generative AI, I have worked on topics like 3DGS, Diffusion models, LLM agents, Image Segmentation, Reinforcement Learninh, etc.
 
-<span style="color: darkred;"><strong>I am actively looking for PhD positions (Spring & Fall 2026)! If you are interested in working together or have potential PhD opportunities, please feel free to contact me.</strong></span>
+<span style="color: #cc3333;"><strong>I am actively looking for PhD positions (Spring & Fall 2026)! If you are interested in working together or have potential PhD opportunities, please feel free to contact me.</strong></span>
 
 
 News
@@ -54,3 +54,4 @@ Contact
 **Email:** xhc42@outlook.com
 
 **WeChat:** ICXH42
+
