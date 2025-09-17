@@ -1,11 +1,11 @@
 ---
 title: "CostalSeg Coastal Erosion Platform"
-excerpt: "UW capstone system for coastal erosion monitoring with DeepLabV3+ segmentation, ViT-H-14 quality control, and SuperGlue alignment<br/><img src='/images/costalseg-overlay.webp'>"
+excerpt: "UW applied project for local coastal erosion monitoring with DeepLabV3+ image segmentation, ViT-H-14 quality control, and SuperGlue alignment<br/><img src='/images/costalseg-overlay.webp'>"
 collection: portfolio
 ---
 
 ## Overview
-CostalSeg is a University of Washington capstone project that builds an end-to-end workflow for community-driven coastal erosion monitoring. The toolkit ingests user photos, filters low-quality submissions, aligns multi-angle imagery, and produces seven-class shoreline segmentations powered by a DeepLabV3+ model with an EfficientNet-B6 backbone. The production checkpoints reach a 0.93 IoU on the program's labeled datasets and integrate directly with the Applied Physics Laboratory's MyCoast submission flow.
+CostalSeg is an applied project of University of Washington that builds an end-to-end workflow for community-driven coastal erosion monitoring. The toolkit ingests user photos, filters low-quality submissions, aligns multi-angle imagery, and produces seven-class segmentations powered by a DeepLabV3+ model with an EfficientNet-B6 backbone. The production checkpoints reach a 0.93 IoU on the program's labeled datasets and integrate directly with the Applied Physics Laboratory's MyCoast submission flow.
 
 ## My Contributions
 - Led model training and evaluation for the Metal Marcy and Silhouette Jaenette beaches, including data preparation scripts and packaged pretrained checkpoints.
