@@ -1,4 +1,4 @@
----
+﻿---
 permalink: /
 title: "About me"
 author_profile: true
@@ -24,11 +24,10 @@ News
 
 Ongoing Research
 =====
-### RL-guided image restoration agent
-Developing a reinforcement learning controller that orchestrates denoising, deblurring, deraining, low-light enhancement, super-resolution, colorization, and face refinement modules to recover images suffering coupled degradations. The policy fuses NR-IQA scores (NIQE, BRISQUE, MUSIQ, ImageReward), visual embeddings, and action history, and is trained with PPO to learn minimal toolchains that trade quality gains against inference cost.
+### RL-guided image restoration agent (multi-metric NR-IQA rewards)
+We are building a reinforcement learning agent that sequences specialist restoration tools under mixed, coupled degradations. Unlike JarvisIRs MRRHF ranking stage, we use Best-of-K GRPO/PPO: for each image the policy samples multiple plans, executes them end to end, and learns from group-relative advantages computed from a multi-metric NR-IQA reward (NIQE, BRISQUE, MUSIQ, ImageReward). The objective directly maximizes expected quality - cost, with an explicit stop action, small step/time penalties, and priors that discourage over-sharpening or over-smoothing.
 
-Evaluation spans synthetic CleanBench-style mixes and real captures to benchmark robustness against LLM/VLM schedulers such as AgenticIR and JarvisIR, with emphasis on reducing hallucinations and over-processing.
-
+The agent conditions on visual embeddings, NR-IQA signals, and recent actions, and acts over a toolbox (denoise, deblur, derain/snow, dehaze/low-light, super-resolution, colorization, face restoration). Training can warm-start from CleanBench-Synthetic imitation, then optimize on CleanBench-Real and broader non-driving data; we randomize metric weightings to avoid gaming and can target CVaR-style worst-case improvements. We are also exploring 4K-Agent ideas (Q-MoE routing, rollback) to further boost robustness and efficiency.
 ### Open-source NuRec-style scene reconstruction
 Re-creating NVIDIA's recent Omniverse NuRec + 3DGUT workflow with an open toolchain so multi-sensor logs (RGB, LiDAR, IMU) can be converted into photorealistic 3D Gaussian scenes for Isaac Sim and CARLA. The roadmap covers Gaussian-based reconstruction, USD export, and lightweight viewers that mirror NuRec features like Physically Accurate Dataset streaming and Sensor RTX-quality ray tracing.
 
@@ -61,5 +60,4 @@ Contact
 **Edu email:** [cxh42@uw.edu](cxh42@uw.edu)
 
 **WeChat:** ICXH42
-
 
