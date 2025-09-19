@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I am Xingahao Chen, a master's student at the [University of Washington](https://www.washington.edu/). 
+I am Xinghao Chen, a master's student at the [University of Washington](https://www.washington.edu/). 
 
 My research interests focus on computer vision and generative AI, and I have worked on projects involving 3D Gaussian splatting (3DGS), diffusion models, LLM agents, image segmentation, and reinforcement learning.
 
