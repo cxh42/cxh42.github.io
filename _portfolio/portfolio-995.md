@@ -1,6 +1,6 @@
 ---
 title: "Auto Bang"
-excerpt: "YOLO11-based target detection for automatic Music game playing<br/><img src='/images/auto-bang-cover.gif'>"
+excerpt: "High speed target detection and playing simulation in Android simulator for automatic music game playing<br/><img src='/images/auto-bang-cover.gif'>"
 collection: portfolio
 ---
 

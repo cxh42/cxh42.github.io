@@ -1,6 +1,6 @@
 ---
 title: "CIDAUT AI Fake Scene Classification 2024"
-excerpt: "Classify if an autonomous driving scene is real or fake. [Website](https://www.kaggle.com/competitions/cidaut-ai-fake-scene-classification-2024/overview)<br/><img src='/images/inbox_2779868_f6a1889d486931be4fc03c08cd0c000e_37.jpg'>"
+excerpt: "Classify if an autonomous driving scene picture is real or fake. [Website](https://www.kaggle.com/competitions/cidaut-ai-fake-scene-classification-2024/overview)<br/><img src='/images/inbox_2779868_f6a1889d486931be4fc03c08cd0c000e_37.jpg'>"
 collection: portfolio
 ---
 
