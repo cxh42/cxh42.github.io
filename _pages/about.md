@@ -22,16 +22,6 @@ News
 * [09.2024] Enrolled in the Computer Vision course taught by [Dr. Stan Birchfield](https://research.nvidia.com/person/stan-birchfield).
 * [09.2024] Began the M.S. program in Electrical and Computer Engineering at the University of Washington.
 
-Ongoing Research
-=====
-### RL-guided image restoration agent (multi-metric NR-IQA rewards)
-We are building a reinforcement learning agent that sequences specialist restoration tools under mixed, coupled degradations. Unlike JarvisIR's MRRHF ranking stage, we use Best-of-K GRPO/PPO: for each image the policy samples multiple plans, executes them end to end, and learns from group-relative advantages computed from a multi-metric NR-IQA reward (NIQE, BRISQUE, MUSIQ, ImageReward). The objective directly maximizes expected quality - cost, with an explicit stop action, small step/time penalties, and priors that discourage over-sharpening or over-smoothing.
-
-The agent conditions on visual embeddings, NR-IQA signals, and recent actions, and acts over a toolbox (denoise, deblur, derain/snow, dehaze/low-light, super-resolution, colorization, face restoration). Training can warm-start from CleanBench-Synthetic imitation, then optimize on CleanBench-Real and broader non-driving data; we randomize metric weightings to avoid gaming and can target CVaR-style worst-case improvements. We are also exploring 4K-Agent ideas (Q-MoE routing, rollback) to further boost robustness and efficiency.
-### Open-source NuRec-style scene reconstruction
-Re-creating NVIDIA's recent Omniverse NuRec + 3DGUT workflow with an open toolchain so multi-sensor logs (RGB, LiDAR, IMU) can be converted into photorealistic 3D Gaussian scenes for Isaac Sim and CARLA. The roadmap covers Gaussian-based reconstruction, USD export, and lightweight viewers that mirror NuRec features like Physically Accurate Dataset streaming and Sensor RTX-quality ray tracing.
-
-The study leans on NVIDIA's August 2025 developer demo and Newsroom briefing-where NuRec shipped with CARLA integrations, Foretellix toolchain support, and Voxel51 FiftyOne dataset hooks-to map required components before swapping in open kernels (e.g., gsplat, Nerfstudio, differentiable rendering).
 
 Education
 =====
