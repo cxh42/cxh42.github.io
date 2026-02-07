@@ -26,9 +26,9 @@ author:
   avatar           : "bio-photo.jpg"
   name             : "Xinghao Chen"
   pronouns         : # example: "she/her"  
-  bio              : "M.S. Student"  # A short bio or tagline
-  location         : "Seattle, WA, US"  # City, State/Province, Country
-  employer         : "University of Washington"
+  bio              : "Research Assistant"  # A short bio or tagline
+  location         : "College Station, TX, US"  # City, State/Province, Country
+  employer         : "Texas A&M University"
   uri              : # URL
   email            : "xhc42@outlook.com" 
 
