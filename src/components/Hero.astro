@@ -10,7 +10,6 @@ const abLabel = tex(String.raw`\bar{\alpha}_t=`);
 
 <section class="hero" id="top" data-hero>
   <canvas class="portrait" data-portrait aria-hidden="true"></canvas>
-  <canvas class="hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
 
   <div class="hero-inner">
     <h1 class="hero-name" data-hero-name>
@@ -50,14 +49,6 @@ const abLabel = tex(String.raw`\bar{\alpha}_t=`);
     min-height: max(100svh, 560px);
     display: flex;
     isolation: isolate;
-  }
-  .hero-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
   }
   /* The particle portrait stays with the reader while it disperses, then lets go. */
   .portrait {
@@ -169,32 +160,10 @@ const abLabel = tex(String.raw`\bar{\alpha}_t=`);
   }
   .num.live { color: var(--accent); }
 
-  /* The name is drawn by the sampler first; the DOM text takes over at t = 0. */
-  :global(html.js:not(.still)) .w {
-    color: transparent;
-    animation: hero-safety 1ms linear 3.2s forwards;
-  }
-  :global(html.hero-live) .w { animation: none; }
-  :global(html.hero-done) .w { color: var(--ink); animation: none; }
-  :global(html.no-gl) .w { color: var(--ink); animation: none; }
-  @keyframes hero-safety { to { color: var(--ink); } }
-
-  :global(html.js:not(.still)) .cjk,
-  :global(html.js:not(.still)) .hero-foot {
-    opacity: 0;
-    animation: hero-safety-fade 1ms linear 3.2s forwards;
-  }
-  :global(html.hero-live) .cjk,
-  :global(html.hero-live) .hero-foot { animation: none; }
-  :global(html.hero-settle) .cjk,
-  :global(html.hero-settle) .hero-foot,
-  :global(html.no-gl) .cjk,
-  :global(html.no-gl) .hero-foot {
-    opacity: 1;
-    transition: opacity 625ms steps(15);
-  }
-  :global(html.hero-settle) .hero-foot { transition-delay: 125ms; }
-  @keyframes hero-safety-fade { to { opacity: 1; } }
+  /* 陈星昊 appears once the portrait has settled; everything else is present from the first paint. */
+  .cjk { opacity: 0; transition: opacity 625ms steps(15); }
+  :global(html.hero-done) .cjk,
+  :global(html.still) .cjk { opacity: 1; }
 
   @media (max-width: 760px) {
     .hero-name {

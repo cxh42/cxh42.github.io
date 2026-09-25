@@ -64,7 +64,10 @@ export function initGlobe() {
   } catch {
     prog = null;
   }
-  if (!gl || !prog) return;
+  if (!gl || !prog) {
+    root.classList.add('no-gl');
+    return;
+  }
   root.classList.add('globe-gl');
   const still = isStill();
   const { program, u } = prog;
