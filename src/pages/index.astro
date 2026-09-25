@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Rail from '../components/Rail.astro';
+import Hero from '../components/Hero.astro';
+import Research from '../components/Research.astro';
+import Publications from '../components/Publications.astro';
+import Education from '../components/Education.astro';
+import News from '../components/News.astro';
+import Visitors from '../components/Visitors.astro';
+import Contact from '../components/Contact.astro';
+import { person } from '../data/site';
+
+const title = `${person.name} (${person.cjk})`;
+const description =
+  'Xinghao Chen is a generative AI researcher focused on video generation. First author of ViTeX-Bench (NeurIPS 2026) and incoming Ph.D. student in Computer Science at Texas A&M University.';
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <Rail />
+  <main>
+    <Hero />
+    <Research />
+    <Publications />
+    <Education />
+    <News />
+    <Visitors />
+    <Contact />
+  </main>
+</Base>
+
+<script>
+  import '../scripts/main';
+</script>

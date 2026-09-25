@@ -1,0 +1,206 @@
+---
+import { getImage } from 'astro:assets';
+import katex from 'katex';
+import { education } from '../data/site';
+import tamu from '../assets/campus/tamu.jpg';
+import uw from '../assets/campus/uw.jpg';
+import henu from '../assets/campus/henu.jpg';
+
+const photos = { tamu, uw, henu } as const;
+const alts = {
+  tamu: 'The dome of the Academic Building at Texas A&M University, framed by oak branches.',
+  uw: 'Suzzallo Library and Red Square at the University of Washington.',
+  henu: 'The Grand Auditorium of Henan University.',
+} as const;
+// Where the photo's subject sits, so a cover crop never loses it.
+const focus = { tamu: '60% 36%', uw: '44% 55%', henu: '50% 48%' } as const;
+// Portrait screens crop hard from the sides: keep the dome, the library and the hall in frame.
+const focusNarrow = { tamu: '63% 40%', uw: '26% 55%', henu: '50% 48%' } as const;
+
+const entries = await Promise.all(
+  education.map(async (e) => {
+    const src = photos[e.id];
+    const [lg, sm, avifLg, avifSm] = await Promise.all([
+      getImage({ src, width: 2200, format: 'webp', quality: 78 }),
+      getImage({ src, width: 1100, format: 'webp', quality: 74 }),
+      getImage({ src, width: 2200, format: 'avif', quality: 60 }),
+      getImage({ src, width: 1100, format: 'avif', quality: 56 }),
+    ]);
+    return { ...e, lg: lg.src, sm: sm.src, avifLg: avifLg.src, avifSm: avifSm.src, alt: alts[e.id], focus: focus[e.id], focusNarrow: focusNarrow[e.id] };
+  }),
+);
+const tLabel = katex.renderToString('t=', { throwOnError: false });
+---
+
+<section class="edu" id="education" aria-labelledby="education-title" data-edu>
+  <div class="edu-stage" data-edu-stage>
+    <canvas class="edu-canvas" data-edu-canvas aria-hidden="true"></canvas>
+    <div class="edu-frame wrap">
+      <h2 class="section-title edu-title" id="education-title">Education</h2>
+
+      <ol class="edu-list">
+        {entries.map((e, i) => (
+          <li class="edu-item" data-edu-item={i} data-src-lg={e.lg} data-src-sm={e.sm} data-incoming={e.incoming ? '1' : undefined} data-focus={e.focus} data-focus-narrow={e.focusNarrow}>
+            <picture class="edu-photo">
+              <source type="image/avif" srcset={`${e.avifSm} 1100w, ${e.avifLg} 2200w`} sizes="100vw" />
+              <source type="image/webp" srcset={`${e.sm} 1100w, ${e.lg} 2200w`} sizes="100vw" />
+              <img src={e.lg} alt={e.alt} loading="lazy" decoding="async" style={`object-position:${e.focus}`} />
+            </picture>
+            <div class="edu-text">
+              <h3 class="edu-degree">{e.degree}</h3>
+              <p class="edu-school">{e.school}</p>
+              <p class="edu-dates">
+                {e.incoming && <span class="edu-flag">Incoming</span>}
+                <span>{e.dates}</span>
+                {e.detail && <span class="edu-detail">{e.detail}</span>}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <div class="edu-index" aria-hidden="true">
+        <span class="edu-ticks">
+          {entries.map((_, i) => <span class="edu-tick" data-edu-tick={i} />)}
+        </span>
+        <span class="edu-t"><span set:html={tLabel} /><span class="num" data-edu-t>0</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .edu {
+    --edu-ink: var(--on-screen);
+    background: var(--screen);
+    color: var(--edu-ink);
+    position: relative;
+  }
+  .edu-stage { position: relative; }
+  .edu-canvas { display: none; }
+  .edu-title { color: var(--edu-ink); }
+
+  /* Static layout: every school is its own dark plate. Also the reduced-motion and no-WebGL page. */
+  .edu-frame {
+    position: relative;
+    padding-block: clamp(88px, 13vh, 168px) 0;
+  }
+  .edu-list { list-style: none; margin: 40px 0 0; padding: 0; }
+  .edu-item {
+    position: relative;
+    min-height: min(78svh, 760px);
+    display: flex;
+    align-items: flex-end;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 48px var(--gutter);
+    overflow: hidden;
+  }
+  .edu-photo,
+  .edu-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .edu-photo img {
+    object-fit: cover;
+    filter: grayscale(0.35) brightness(0.52) contrast(1.05);
+  }
+  .edu-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(6 7 8 / 0.82), rgb(6 7 8 / 0) 58%);
+  }
+  .edu-text { position: relative; z-index: 1; max-width: 46rem; }
+  .edu-dates {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    align-items: baseline;
+    font-size: var(--step--1);
+    letter-spacing: 0.02em;
+    color: var(--on-screen-2);
+  }
+  .edu-flag { color: var(--edu-ink); font-weight: 500; }
+  .edu-degree {
+    margin-top: 0;
+    font-size: clamp(2.1rem, 1.3rem + 3.4vw, 4.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 300;
+  }
+  .edu-school {
+    margin-top: 12px;
+    font-size: var(--step-2);
+    letter-spacing: -0.012em;
+    font-weight: 400;
+  }
+  .edu-index { display: none; }
+
+  /* Live layout: one sticky screen; the sampler hands each campus to the next. */
+  :global(html.edu-gl) .edu { height: 340svh; }
+  :global(html.edu-gl) .edu-stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+  }
+  :global(html.edu-gl) .edu-canvas {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  :global(html.edu-gl) .edu-frame {
+    height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    padding-block: calc(var(--header-h) + clamp(24px, 6vh, 64px)) clamp(28px, 6vh, 64px);
+  }
+  :global(html.edu-gl) .edu-frame > * { grid-column: 1 / -1; }
+  :global(html.edu-gl) .edu-list { margin: 0; display: grid; align-items: end; }
+  :global(html.edu-gl) .edu-item {
+    grid-area: 1 / 1;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 500ms steps(12), filter 500ms steps(12);
+  }
+  :global(html.edu-gl) .edu-item.is-on { opacity: 1; filter: none; }
+  :global(html.edu-gl) .edu-item::after,
+  :global(html.edu-gl) .edu-photo { display: none; }
+  :global(html.edu-gl) .edu-index {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 28px;
+    padding-top: 14px;
+    border-top: 1px solid rgb(231 230 225 / 0.18);
+    color: var(--on-screen-2);
+    font-size: 0.95rem;
+  }
+  .edu-ticks { display: flex; gap: 10px; align-items: center; }
+  .edu-tick {
+    width: 28px;
+    height: 1px;
+    background: rgb(231 230 225 / 0.28);
+    transition: background-color 300ms var(--ease-out);
+  }
+  .edu-tick.is-on { background: var(--edu-ink); height: 2px; }
+  .edu-t { display: inline-flex; align-items: baseline; gap: 0.25em; }
+  .num {
+    font-family: KaTeX_Main, 'Times New Roman', serif;
+    font-size: 1.08em;
+    min-width: 2.9ch;
+    color: var(--on-screen-2);
+    transition: color 200ms steps(5);
+  }
+  .num.live { color: var(--on-screen-accent); }
+</style>

@@ -1,0 +1,95 @@
+---
+import { execSync } from 'node:child_process';
+import katex from 'katex';
+import Arrow from './Arrow.astro';
+import { person, links, credits } from '../data/site';
+
+let lastUpdated = new Date();
+try {
+  const iso = execSync('git log -1 --format=%cI', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
+  if (iso) lastUpdated = new Date(iso);
+} catch {}
+const updated = lastUpdated.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+const year = new Date().getFullYear();
+const x0 = katex.renderToString('x_0', { throwOnError: false });
+
+const profiles = [
+  { label: 'OpenReview', href: links.openreview },
+  { label: 'GitHub', href: links.github },
+  { label: 'LinkedIn', href: links.linkedin },
+];
+---
+
+<section class="section contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap section-grid">
+    <h2 class="section-title" id="contact-title">Contact</h2>
+    <div class="section-body">
+      <a class="mail" href={`mailto:${person.email}`}>{person.email}</a>
+      <ul class="profiles">
+        {profiles.map((p) => (
+          <li>
+            <a class="arrow-link" href={p.href}>
+              {p.label}
+              <Arrow />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="colophon">
+  <div class="wrap colophon-grid">
+    <p class="sample" aria-hidden="true"><span set:html={x0} /></p>
+    <div class="colophon-text meta">
+      <p>© {year} {person.name} · Last updated {updated}</p>
+      <p class="credits">
+        Campus photographs, toned and cropped:
+        {credits.map((c, i) => (<><a href={c.source}>{c.work}</a>, {c.license ? <>{c.author} (<a href={c.licenseUrl}>{c.license}</a>, via Wikimedia Commons)</> : <>© {c.author}</>}{i < credits.length - 1 ? '; ' : '. '}</>))}
+        ViTeX clips from <a href="https://vitex-bench.github.io/">vitex-bench.github.io</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .contact { padding-bottom: clamp(72px, 12vh, 140px); }
+  .mail {
+    display: inline-block;
+    font-size: clamp(1.75rem, 1rem + 3.6vw, 4.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 320;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+    overflow-wrap: anywhere;
+  }
+  .profiles {
+    list-style: none;
+    margin: clamp(24px, 4vw, 40px) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    font-size: var(--step-1);
+  }
+
+  .colophon {
+    border-top: 1px solid var(--rule);
+    padding-block: 28px 40px;
+  }
+  .colophon-grid {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 20px 32px;
+    align-items: start;
+  }
+  .sample {
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .colophon-text { display: grid; gap: 8px; max-width: 72ch; }
+  .credits a { text-decoration-color: var(--rule); }
+</style>
