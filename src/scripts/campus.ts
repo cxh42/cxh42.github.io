@@ -1,9 +1,13 @@
 import { QUAD_VS, NOISE_GLSL, compile, fullscreenQuad, getGL, isStill, onFrame, watchVisible, fmtT } from './gl';
 
-// Education: one sticky dark screen, driven by scroll. Campuses never pass through an empty frame:
-// each hand-over is a grain-threshold dissolve (coarse patches first, then fine grain) with a small
-// bump of forward noise at its midpoint. The incoming school holds at a residual t (still being sampled).
-// One pass, two textures, no render targets.
+// Education: one sticky dark screen tinted in each school's colour. Scroll picks the school; crossing a
+// threshold starts a timed diffusion hand-over on the shared 24 fps clock. The current campus is noised
+// forward (coarse, grainy, never white), the next campus takes over under the noise, and it is sampled
+// back to clean. Every school settles at t = 0: nothing grains at rest.
+
+const PEAK = 0.72; // how far forward the hand-over noises (t in 0..1)
+const FRAMES = 28; // about 1.17 s per hand-over
+const INTRO = 22; // the first campus sampling in as the band arrives
 
 const FS = /* glsl */ `#version 300 es
 precision highp float;
@@ -12,7 +16,6 @@ out vec4 o;
 uniform sampler2D uA;
 uniform sampler2D uB;
 uniform float uHasA;
-uniform float uCoarseA;
 uniform float uHasB;
 uniform vec2 uImgA;
 uniform vec2 uImgB;
@@ -20,6 +23,8 @@ uniform vec2 uFocusA;
 uniform vec2 uFocusB;
 uniform float uMix;
 uniform float uT;
+uniform vec3 uTint;
+uniform float uGain;
 uniform uint uFrame;
 uniform float uGrain;
 uniform float uLod;
@@ -32,44 +37,28 @@ vec2 cover(vec2 p, vec2 img, vec2 focus) {
   vec2 sc = ra > ia ? vec2(1.0, ia / ra) : vec2(ra / ia, 1.0);
   return (1.0 - sc) * focus + p * sc;
 }
-float lattice(vec2 q) {
-  vec2 i = floor(q);
-  vec2 f = fract(q);
-  f = f * f * (3.0 - 2.0 * f);
-  uvec2 k = uvec2(ivec2(i) + 4096);
-  float a = rnd(uvec3(k, 7u));
-  float b = rnd(uvec3(k + uvec2(1u, 0u), 7u));
-  float c = rnd(uvec3(k + uvec2(0u, 1u), 7u));
-  float d = rnd(uvec3(k + uvec2(1u, 1u), 7u));
-  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
-}
 void main() {
   vec2 p = vec2(vUv.x, 1.0 - vUv.y);
   float ab = alphaBar(uT);
   float nz = sqrt(1.0 - ab);
   float lod = uLod * nz;
-  // On entry, side A is the incoming photo itself at its coarsest mip: the band opens on the campus's
-  // own mean colour and resolves coarse to fine, never through black patches.
-  vec3 a = mix(uScreen, textureLod(uA, cover(p, uImgA, uFocusA), max(lod, uCoarseA * 9.0)).rgb, uHasA);
+  vec3 a = mix(uScreen, textureLod(uA, cover(p, uImgA, uFocusA), lod).rgb, uHasA);
   vec3 b = mix(uScreen, textureLod(uB, cover(p, uImgB, uFocusB), lod).rgb, uHasB);
-  // Dissolve field: two octaves of value noise plus pixel grain, so the new campus arrives in
-  // soft patches that sharpen into grain rather than as a flat cross-fade.
-  vec2 q = p * vec2(uSize.x / uSize.y, 1.0);
+  vec3 x0 = mix(a, b, uMix) * 2.0 - 1.0;
   vec2 cell = floor(gl_FragCoord.xy / uGrain);
-  float field = 0.6 * lattice(q * 5.0) + 0.25 * lattice(q * 17.0) + 0.15 * rnd(uvec3(uvec2(cell), 3u));
-  float edge = uMix * 1.16 - 0.08;
-  float m = smoothstep(field - 0.05, field + 0.05, edge);
-  vec3 x0 = mix(a, b, m) * 2.0 - 1.0;
   float eps = gauss(uvec3(uvec2(cell), uFrame));
   vec3 xt = sqrt(ab) * x0 + nz * eps * 0.55;
   vec3 c = clamp(xt * 0.5 + 0.5, 0.0, 1.0);
+  // Screening-room tone, applied after the noise so pure noise reads as dark grain.
   float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
-  c = mix(vec3(l), c, 0.62);
-  vec3 col = pow(c, vec3(1.18)) * mix(0.54, 0.42, nz);
-  // Scrims: lower left under the degree, the top under the heading, the right edge under the rail.
-  float s = smoothstep(1.25, 0.1, length(vUv * vec2(0.9, 1.6)));
-  col = mix(col, uScreen, s * 0.72);
-  col = mix(col, uScreen, smoothstep(0.78, 1.0, vUv.y) * 0.55);
+  vec3 col = pow(mix(vec3(l), c, 0.62), vec3(1.18)) * mix(0.56, 0.42, nz);
+  col *= uGain;
+  // The school's colour as a filter over the photograph.
+  float lum = dot(col, vec3(0.2126, 0.7152, 0.0722));
+  col = mix(col, lum * (uTint * 2.4 + 0.1), 0.6);
+  // Scrims: lower left under the degree, top left under the heading and index, right edge under the rail.
+  col = mix(col, uScreen, smoothstep(1.25, 0.1, length(vUv * vec2(0.9, 1.6))) * 0.7);
+  col = mix(col, uScreen, smoothstep(1.1, 0.2, length((vUv - vec2(0.0, 1.0)) * vec2(1.2, 1.5))) * 0.55);
   col = mix(col, uScreen, smoothstep(0.8, 1.0, vUv.x) * 0.7);
   o = vec4(col, 1.0);
 }`;
@@ -80,6 +69,8 @@ type Item = {
   sm: string;
   focus: [number, number];
   focusNarrow: [number, number];
+  tint: [number, number, number];
+  gain: number;
   incoming: boolean;
   img?: HTMLImageElement;
 };
@@ -88,13 +79,22 @@ const pair = (v: string | undefined): [number, number] => {
   const [x, y] = (v || '50% 50%').split(' ').map((n) => parseFloat(n) / 100);
   return [x, y];
 };
+const hex = (h: string | undefined): [number, number, number] => {
+  const n = parseInt((h || '#808080').slice(1), 16);
+  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
+};
+const smooth = (x: number) => {
+  const c = Math.min(1, Math.max(0, x));
+  return c * c * (3 - 2 * c);
+};
 
 export function initCampus() {
   const root = document.documentElement;
   const section = document.querySelector<HTMLElement>('[data-edu]');
   const canvas = document.querySelector<HTMLCanvasElement>('[data-edu-canvas]');
   const out = document.querySelector<HTMLElement>('[data-edu-t]');
-  const ticks = Array.from(document.querySelectorAll<HTMLElement>('[data-edu-tick]'));
+  const index = document.querySelector<HTMLElement>('[data-edu-index]');
+  const goButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-edu-go]'));
   if (!section || !canvas || isStill()) return;
 
   const gl = getGL(canvas, { alpha: false });
@@ -113,14 +113,16 @@ export function initCampus() {
     sm: el.dataset.srcSm!,
     focus: pair(el.dataset.focus),
     focusNarrow: pair(el.dataset.focusNarrow || el.dataset.focus),
+    tint: hex(el.dataset.tint),
+    gain: Number(el.dataset.exposure || 1),
     incoming: el.dataset.incoming === '1',
   }));
+  const n = items.length;
 
   const { program, u } = prog;
   const draw = fullscreenQuad(gl, program);
   const textures = items.map(() => gl.createTexture()!);
   const loaded = items.map(() => false);
-  // Bound in place of a campus that has not decoded yet, so no sampler ever reads an empty unit.
   const blank = gl.createTexture()!;
   gl.bindTexture(gl.TEXTURE_2D, blank);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([11, 12, 14, 255]));
@@ -163,54 +165,97 @@ export function initCampus() {
     });
   }
 
-  const hold = (i: number) => (i >= 0 && items[i].incoming ? 0.14 : 0);
-  const ease = (x: number) => x * x * (3 - 2 * x);
+  const hold = (_i: number) => 0; // nothing grains at rest, the incoming school included
 
-  // Scroll -> { from, to, mix }. -1 is the empty screen the band opens on.
-  // While the band scrolls in, the first campus dissolves in; once pinned, each school holds for a
-  // unit and each hand-over dissolves across a unit.
-  function state() {
+  // Which school the scroll position asks for: equal thirds of the pinned range.
+  function target() {
     const r = section!.getBoundingClientRect();
-    const vh = window.innerHeight;
-    const n = items.length;
-    if (r.top > 0) {
-      const e = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.8)));
-      return { from: -1, to: 0, mix: ease(e) };
-    }
-    const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh)));
-    const units = 2 * n - 1;
-    const x = p * units;
-    const k = Math.min(units - 1, Math.floor(x));
-    if (k % 2 === 0) return { from: k / 2, to: k / 2, mix: 0 };
-    const from = (k - 1) / 2;
-    return { from, to: from + 1, mix: ease(x - k) };
+    const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - window.innerHeight)));
+    return Math.min(n - 1, Math.floor(p * n));
   }
 
+  let shown = 0; // the school on screen (or leaving, mid hand-over)
+  let next = 0; // the school arriving
+  let frame0 = -1; // frame the current hand-over started, -1 when idle
+  let entered = false;
+  let introFrame = -1;
   let visible = false;
-  let lastOn = -2;
-  function bindItem(unit: number, idx: number, narrow: boolean, coarse = false) {
+  let lastText = -2;
+
+  let lastMark = -1;
+  function mark(i: number) {
+    if (i === lastMark) return;
+    lastMark = i;
+    index?.style.setProperty('--edu-i', String(i));
+    goButtons.forEach((b, k) => b.setAttribute('aria-current', String(k === i)));
+  }
+  function showText(i: number) {
+    if (i === lastText) return;
+    lastText = i;
+    items.forEach((it, k) => it.el.classList.toggle('is-on', k === i));
+  }
+
+  function bindItem(unit: number, idx: number, narrow: boolean) {
     gl!.activeTexture(gl!.TEXTURE0 + unit);
-    gl!.bindTexture(gl!.TEXTURE_2D, idx >= 0 && loaded[idx] ? textures[idx] : blank);
+    gl!.bindTexture(gl!.TEXTURE_2D, loaded[idx] ? textures[idx] : blank);
     const pre = unit === 0 ? 'A' : 'B';
-    const img = idx >= 0 ? items[idx].img : undefined;
-    const f = idx >= 0 ? (narrow ? items[idx].focusNarrow : items[idx].focus) : [0.5, 0.5];
+    const img = items[idx].img;
+    const f = narrow ? items[idx].focusNarrow : items[idx].focus;
     gl!.uniform1i(u(`u${pre}`), unit);
-    gl!.uniform1f(u(`uHas${pre}`), idx >= 0 && loaded[idx] ? 1 : 0);
+    gl!.uniform1f(u(`uHas${pre}`), loaded[idx] ? 1 : 0);
     gl!.uniform2f(u(`uImg${pre}`), img ? img.naturalWidth : 16, img ? img.naturalHeight : 9);
     gl!.uniform2f(u(`uFocus${pre}`), f[0], f[1]);
-    if (unit === 0) gl!.uniform1f(u('uCoarseA'), coarse ? 1 : 0);
   }
 
   function tick(frame: number) {
     if (!visible) return;
-    const { from, to, mix } = state();
-    const cur = mix < 0.5 ? from : to;
-    const t = hold(from) + (hold(to) - hold(from)) * mix + 0.2 * Math.sin(Math.PI * mix);
-    if (cur !== lastOn) {
-      lastOn = cur;
-      items.forEach((it, i) => it.el.classList.toggle('is-on', i === cur));
-      ticks.forEach((k, i) => k.classList.toggle('is-on', i === cur));
+    const r = section!.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    // Arrival: the band opens noisy; once it is well in view, the first campus is sampled clean.
+    if (r.top > vh * 0.98) {
+      entered = false;
+      introFrame = -1;
+    } else if (!entered && r.top < vh * 0.55) {
+      entered = true;
+      introFrame = frame;
     }
+
+    // A threshold crossed while idle starts a hand-over toward the requested school.
+    const want = target();
+    if (frame0 < 0 && want !== shown && entered) {
+      next = want;
+      frame0 = frame;
+    }
+
+    let t: number;
+    let mix = 0;
+    let tint = items[shown].tint;
+    if (frame0 >= 0) {
+      const k = Math.min(1, (frame - frame0) / FRAMES);
+      // Forward quickly to the peak, then sample back slowly; the next campus takes over under the noise.
+      const bump = k < 0.4 ? smooth(k / 0.4) : 1 - smooth((k - 0.4) / 0.6);
+      mix = smooth((k - 0.3) / 0.25);
+      t = Math.min(1, hold(shown) * (1 - mix) + hold(next) * mix + (PEAK - 0.06) * bump);
+      const tm = smooth((k - 0.15) / 0.6);
+      tint = [0, 1, 2].map((c) => items[shown].tint[c] * (1 - tm) + items[next].tint[c] * tm) as [number, number, number];
+      showText(mix < 0.5 ? shown : next);
+      mark(mix < 0.5 ? shown : next);
+      if (k >= 1) {
+        shown = next;
+        frame0 = -1;
+        mix = 0;
+        tint = items[shown].tint;
+      }
+    } else if (!entered) {
+      t = PEAK;
+      showText(-1);
+    } else {
+      const k = introFrame < 0 ? 1 : Math.min(1, (frame - introFrame) / INTRO);
+      t = hold(shown) + (PEAK - hold(shown)) * (1 - smooth(k));
+      showText(k > 0.5 ? shown : -1);
+    }
+
     if (out) {
       out.textContent = fmtT(t);
       out.classList.toggle('live', t > 0.0005);
@@ -218,18 +263,32 @@ export function initCampus() {
     const narrow = canvas!.width / canvas!.height < 1;
     gl!.viewport(0, 0, canvas!.width, canvas!.height);
     gl!.useProgram(program);
-    bindItem(0, from < 0 ? to : from, narrow, from < 0);
-    bindItem(1, to, narrow);
-    gl!.uniform1f(u('uMix'), from === to ? 0 : mix);
+    bindItem(0, shown, narrow);
+    bindItem(1, frame0 >= 0 ? next : shown, narrow);
+    gl!.uniform1f(u('uMix'), mix);
     gl!.uniform1f(u('uT'), t);
+    gl!.uniform3fv(u('uTint'), tint);
+    const g = frame0 >= 0 ? items[shown].gain * (1 - mix) + items[next].gain * mix : items[shown].gain;
+    gl!.uniform1f(u('uGain'), g);
     gl!.uniform1ui(u('uFrame'), frame >>> 0);
     gl!.uniform1f(u('uGrain'), Math.max(1, Math.round(1.6 * dpr)));
-    gl!.uniform1f(u('uLod'), 6.5);
+    gl!.uniform1f(u('uLod'), 7.0);
     gl!.uniform2f(u('uSize'), canvas!.width, canvas!.height);
     gl!.uniform3fv(u('uScreen'), screen);
     draw();
   }
 
+  // The index is a way in as well as a readout: a row scrolls to that school's stretch of the band.
+  goButtons.forEach((b) =>
+    b.addEventListener('click', () => {
+      const i = Number(b.dataset.eduGo);
+      const r = section!.getBoundingClientRect();
+      const y = window.scrollY + r.top + ((i + 0.5) / n) * (r.height - window.innerHeight);
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }),
+  );
+
+  mark(0);
   watchVisible(section, (on) => {
     visible = on;
     if (on) load();

@@ -19,7 +19,7 @@ export function initTyping() {
   const text = document.querySelector<HTMLElement>('[data-ins-text]');
   const caret = document.querySelector<HTMLElement>('[data-caret]');
   const label = document.querySelector<HTMLElement>('[data-ins-style]');
-  if (!box || !text || !caret || !label || isStill()) return;
+  if (!box || !text || !caret || isStill()) return;
 
   // Warm every hand up front: six subsets of three glyphs, about 12 KB in all.
   const ready = Promise.all(
@@ -36,7 +36,7 @@ export function initTyping() {
 
   const setHand = (i: number) => {
     text.style.fontFamily = `"${HANDS[i].family}", var(--font-cjk)`;
-    label.textContent = HANDS[i].label;
+    if (label) label.textContent = HANDS[i].label;
   };
   setHand(0);
 
@@ -69,7 +69,7 @@ export function initTyping() {
           if (shown === 0) {
             phase = 'gap';
             clock = 0;
-            label.classList.add('swap');
+            label?.classList.add('swap');
           }
         }
         break;
@@ -78,7 +78,7 @@ export function initTyping() {
         if (clock >= 14) {
           hand = (hand + 1) % HANDS.length;
           setHand(hand);
-          label.classList.remove('swap');
+          label?.classList.remove('swap');
           caret.classList.remove('off');
           phase = 'type';
           clock = 0;

@@ -1,38 +1,28 @@
 ---
-import { areas, projects } from '../data/site';
+import { areas } from '../data/site';
 ---
 
 <section class="section" id="research" aria-labelledby="research-title">
   <div class="wrap section-grid">
     <h2 class="section-title" id="research-title">Research</h2>
     <div class="section-body">
-      <p class="thesis">I work on <em>generative AI</em>, most recently on video generation models.</p>
+      <p class="thesis">I work on <em>generative AI</em>. Right now that means video generation models.</p>
 
       <p class="lead">
-        My current work is video scene text editing: rewriting the words on signs, boards and product labels inside a
-        real video while everything else in the frame keeps its content, motion and camera path. Before video, I worked
-        on vision-language models and on 3D Gaussian Splatting, which took me into virtual reality.
+        Most of my recent work is on video generation. I am also increasingly drawn to large language models and want
+        to work on them next. Before video, I worked on vision-language models and on 3D Gaussian Splatting, which took
+        me into virtual reality.
       </p>
 
       <dl class="areas">
         {areas.map((a) => (
           <div class="area">
             <dt>{a.name}</dt>
-            <dd>{a.note}</dd>
+            <dd class="status">{a.status}</dd>
+            {a.note && <dd class="note">{a.note}</dd>}
           </div>
         ))}
       </dl>
-
-      {projects.map((p) => (
-        <article class="project">
-          <div class="project-head">
-            <h3 class="project-title">{p.title}</h3>
-            <p class="meta">{p.year} · {p.context}</p>
-          </div>
-          <p class="project-text">{p.text}</p>
-          <p class="project-tags meta">{p.tags.join(' · ')}</p>
-        </article>
-      ))}
     </div>
   </div>
 </section>
@@ -43,7 +33,7 @@ import { areas, projects } from '../data/site';
     line-height: 1.12;
     letter-spacing: -0.028em;
     font-weight: 320;
-    max-width: 24ch;
+    max-width: 22ch;
   }
   .thesis em {
     font-style: normal;
@@ -55,49 +45,27 @@ import { areas, projects } from '../data/site';
     max-width: 62ch;
   }
 
+  /* A ledger of areas: name, where it stands, one line on what it is. */
   .areas {
     margin: clamp(36px, 5vw, 56px) 0 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: clamp(24px, 3vw, 48px);
     border-top: 1px solid var(--rule);
   }
   .area {
     display: grid;
-    grid-template-columns: minmax(10rem, 0.9fr) minmax(0, 1.4fr);
-    gap: 6px 20px;
+    grid-template-columns: minmax(12rem, 1.1fr) minmax(8rem, 0.7fr) minmax(0, 1.6fr);
+    gap: 4px 24px;
     padding-block: 16px;
     border-bottom: 1px solid var(--rule);
     align-items: baseline;
   }
-  .area dt { font-weight: 450; letter-spacing: -0.005em; }
-  .area dd { margin: 0; color: var(--ink-2); font-size: 0.9375rem; }
+  .area dt { font-size: var(--step-1); font-weight: 400; letter-spacing: -0.01em; }
+  .area dd { margin: 0; }
+  .status { font-size: var(--step--1); letter-spacing: 0.01em; color: var(--graphite); }
+  .area:first-child .status { color: var(--ink); font-weight: 500; }
+  .note { color: var(--ink-2); font-size: 0.9375rem; }
 
-  /* A project is its own unit: framed by the plate tint so it never blends into the list above. */
-  .project {
-    margin-top: clamp(32px, 4vw, 48px);
-    padding: clamp(20px, 2.6vw, 36px);
-    background: var(--plate-2);
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-    gap: 16px clamp(24px, 3vw, 48px);
-  }
-  .project-title {
-    font-size: var(--step-2);
-    line-height: 1.18;
-    letter-spacing: -0.018em;
-    font-weight: 400;
-  }
-  .project-head .meta { margin-top: 10px; }
-  .project-text { color: var(--ink-2); max-width: 60ch; }
-  .project-tags { grid-column: 2; }
-
-  @media (max-width: 900px) {
-    .areas { grid-template-columns: 1fr; }
-    .project { grid-template-columns: 1fr; }
-    .project-tags { grid-column: 1; }
-  }
-  @media (max-width: 520px) {
-    .area { grid-template-columns: 1fr; }
+  @media (max-width: 760px) {
+    .area { grid-template-columns: 1fr auto; }
+    .note { grid-column: 1 / -1; }
   }
 </style>

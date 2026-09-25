@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-25T17:53:33+00:00",
+  "generatedAt": "2026-09-25T19:00:22+00:00",
   "title": "Design System: Xinghao Chen",
   "extensions": {
     "colorMeta": {
@@ -429,28 +429,75 @@
         ],
         "note": "Alpha hairline/tint over the ground; ramp derived from its base colour.",
         "theme": "always-dark Education screen band, both themes"
+      },
+      "school-maroon": {
+        "role": "tertiary",
+        "displayName": "Aggie Maroon",
+        "canonical": "#500000",
+        "tonalRamp": [
+          "#390505",
+          "#680808",
+          "#970c0c",
+          "#c61010",
+          "#ed2626",
+          "#f25f5f",
+          "#f79c9c",
+          "#fcd9d9"
+        ],
+        "note": "Texas A&M photo filter inside the screen band only; shader lum*(tint*2.4+0.1) mixed at 0.6, static mix-blend-mode: color at 0.7.",
+        "theme": "always-dark Education screen band, both themes"
+      },
+      "school-purple": {
+        "role": "tertiary",
+        "displayName": "Husky Purple",
+        "canonical": "#4b2e83",
+        "tonalRamp": [
+          "#1b122b",
+          "#31214f",
+          "#473073",
+          "#5d3f97",
+          "#7a5aba",
+          "#9d85cc",
+          "#c3b4df",
+          "#e8e2f3"
+        ],
+        "note": "University of Washington photo filter inside the screen band only; shader lum*(tint*2.4+0.1) mixed at 0.6, static mix-blend-mode: color at 0.7.",
+        "theme": "always-dark Education screen band, both themes"
+      },
+      "school-blue": {
+        "role": "tertiary",
+        "displayName": "Henan Blue",
+        "canonical": "#0b4ea2",
+        "tonalRamp": [
+          "#081c35",
+          "#0e3362",
+          "#154b8e",
+          "#1c62bb",
+          "#3380e1",
+          "#68a1e9",
+          "#a2c5f1",
+          "#dbe9fa"
+        ],
+        "note": "Henan University photo filter inside the screen band only; shader lum*(tint*2.4+0.1) mixed at 0.6, static mix-blend-mode: color at 0.7.",
+        "theme": "always-dark Education screen band, both themes"
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Hero name only; sampled out of grain before the DOM text takes over. Caps at 15rem."
+        "purpose": "Hero name only; sampled out of grain before the DOM text takes over. Container width / 7.4, capped at 13rem."
       },
       "display-mobile": {
         "displayName": "Display Mobile",
         "purpose": "Hero name at 760px and below, one word per line."
       },
-      "inscription": {
-        "displayName": "Inscription",
-        "purpose": "陈星昊 set vertical-rl beside the portrait; cycles through CJK Kai, CJK Xing, CJK Song, CJK Cao, CJK WenKai and CJK XingKai (six faces subset to U+9648 U+661F U+660A, single regular weight)."
+      "cjk-name": {
+        "displayName": "CJK Name",
+        "purpose": "陈星昊 on the surname's baseline at 0.19em of the name, ink-2, with a caret; cycles through six hands subset to U+9648 U+661F U+660A."
       },
-      "inscription-mobile": {
-        "displayName": "Inscription Mobile",
-        "purpose": "The inscription at 760px and below, against the right gutter."
-      },
-      "inscription-label": {
-        "displayName": "Inscription Label",
-        "purpose": "Graphite name of the current hand (楷书 行书 宋体 草书 楷体 行楷), 0.3em tracking."
+      "cjk-name-mobile": {
+        "displayName": "CJK Name Mobile",
+        "purpose": "陈星昊 at 0.26em of the name at 760px and below."
       },
       "band-headline": {
         "displayName": "Band Headline",
@@ -464,9 +511,13 @@
         "displayName": "Headline",
         "purpose": "Section titles; margin column at 1280px and up."
       },
+      "venue": {
+        "displayName": "Venue",
+        "purpose": "Venue header opening each publication panel (e.g. NeurIPS 2026), weight 500, with the track beside it and a rule-strong line under it."
+      },
       "statement": {
         "displayName": "Statement",
-        "purpose": "Research thesis; emphasis by weight 450, never italic."
+        "purpose": "Research thesis, max 22ch; emphasis by weight 450, never italic."
       },
       "title": {
         "displayName": "Title",
@@ -474,7 +525,7 @@
       },
       "lead": {
         "displayName": "Lead",
-        "purpose": "News entries, menu links, profile links."
+        "purpose": "News entries, menu links, profile links, research area names (400)."
       },
       "body": {
         "displayName": "Body",
@@ -482,11 +533,11 @@
       },
       "small": {
         "displayName": "Small",
-        "purpose": "Secondary UI and list text: ViTeX scene buttons, research-area notes, country rows, wordmark (450)."
+        "purpose": "Secondary UI and list text: ViTeX scene buttons, area notes, country rows, school index names, wordmark (450)."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Meta, dates, venue, credits, bar controls; graphite, sentence case."
+        "purpose": "Meta, dates, statuses, tags, captions, venue credits, bar controls; graphite, sentence case."
       },
       "rail-label": {
         "displayName": "Rail Label",
@@ -494,11 +545,19 @@
       },
       "readout": {
         "displayName": "Readout",
-        "purpose": "Size of every t / alpha-bar readout line (KaTeX label plus Notation numeral)."
+        "purpose": "Instrument t / alpha-bar readouts (the ViTeX stage)."
       },
       "notation": {
         "displayName": "Notation",
         "purpose": "KaTeX equations and every live t / alpha-bar numeral; min-width 2.9ch."
+      },
+      "equation": {
+        "displayName": "Equation",
+        "purpose": "Hero forward-diffusion formula; ornament, graphite at 0.6 opacity, hidden at 760px and below."
+      },
+      "readout-small": {
+        "displayName": "Small Readout",
+        "purpose": "Hero equation readout and the school-index t readout."
       },
       "colophon-mark": {
         "displayName": "Colophon Mark",
@@ -526,7 +585,7 @@
       {
         "name": "ease-out",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Chrome transitions: link underline and colour (160ms), toggle colour, rail label weight and tick scaleX (200ms), bar fill (240ms), wordmark (300ms), rail (400ms)."
+        "purpose": "Chrome transitions: link underline and colour (160ms), toggle colour, rail label weight and tick scaleX (200ms), bar fill (240ms), wordmark (300ms), rail (400ms), school-index marker (420ms)."
       },
       {
         "name": "readout-step",
@@ -540,17 +599,17 @@
       },
       {
         "name": "hero-settle",
-        "value": "625ms steps(15), foot delayed 125ms; starts below t = 0.34",
-        "purpose": "Inscription and hero foot unblur (8px) and appear as the name approaches t = 0."
+        "value": "opacity 625ms steps(15), foot delayed 125ms; starts below t = 0.34",
+        "purpose": "Chinese name and hero foot fade in as the name approaches t = 0. Opacity only; no filter on text."
       },
       {
         "name": "portrait",
-        "value": "intro 44 steps; scroll s = scrollY / 0.9vh, t = 0.9·s^1.2, rise 0.14·s, fade smoothstep over s 0.12–0.55",
-        "purpose": "Particle portrait sampled in with the name, then diffused, lifted and faded on scroll; clipped at the hero rule with a 56px soft edge."
+        "value": "intro 44 steps; ~4.4k points at 2.0 CSS px (±25%), alpha 0.66 light / 0.78 dark; scroll s = scrollY / 0.9vh, t = 0.9·s^1.2, rise 0.14·s, fade smoothstep over s 0.12–0.55",
+        "purpose": "Authored profile bust (outline plus five progressively smoothed offset rings, not from a photo) sampled in with the name, then diffused, lifted and faded on scroll; clipped at the hero rule with a 56px soft edge, cleared behind 陈星昊, thinned to 0.4 behind the h1."
       },
       {
-        "name": "inscription-typing",
-        "value": "hold 84 frames (caret 12 on / 12 off), erase 1 char per 3 frames, gap 14 frames, type 1 char per 6 frames; label 250ms steps(6)",
+        "name": "cjk-typing",
+        "value": "hold 84 frames (caret 12 on / 12 off), erase 1 char per 3 frames, gap 14 frames, type 1 char per 6 frames",
         "purpose": "陈星昊 typed and erased in six hands on the shared clock after the name settles."
       },
       {
@@ -560,8 +619,8 @@
       },
       {
         "name": "campus-sampler",
-        "value": "scroll-driven over a 340svh track; dissolve field 0.6·value(5) + 0.25·value(17) + 0.15·grain, ±0.05 edge; +0.2·sin(π·mix) noise bump; incoming holds at t = 0.14; entry from coarsest mip; text 500ms steps(12), blur 10px",
-        "purpose": "Campus hand-overs in the screen band: one pass, two textures."
+        "value": "arrival 22 frames from t = 0.72; hand-over 28 frames on a scroll threshold (thirds of a 330svh pinned track): forward to peak by 40%, mix under the noise, back to t = 0; tint and gain crossfade; text opacity 375ms steps(9)",
+        "purpose": "Campus hand-overs in the screen band: timed noise round trip, school-tinted, never through white; every school rests at t = 0."
       },
       {
         "name": "globe-sampler",
@@ -576,22 +635,18 @@
       {
         "name": "reduced-motion",
         "value": "html.still",
-        "purpose": "Samplers render once at t = 0, no clock loop, inscription still without caret, instant theme swap, scroll-behavior auto."
+        "purpose": "Samplers render once at t = 0, no clock loop, Chinese name still without caret, instant theme swap, scroll-behavior auto."
       },
       {
         "name": "no-webgl",
         "value": "html.no-gl",
-        "purpose": "Text shown immediately, no portrait, ViTeX video plays, screen band shows static toned plates, globe hidden."
+        "purpose": "Text shown immediately, no portrait, ViTeX video plays, screen band shows static tinted plates, globe hidden."
       }
     ],
     "breakpoints": [
       {
         "name": "xs",
         "value": "420px"
-      },
-      {
-        "name": "area-rows",
-        "value": "520px"
       },
       {
         "name": "sm",
@@ -652,17 +707,17 @@
       "name": "Schedule Rail",
       "kind": "nav",
       "refersTo": "schedule-rail",
-      "description": "Right-edge section navigation at 1100px and up: every section labelled; current in ink at 500 with its tick scaled from 9px to 18px; cobalt marker glides on the line.",
-      "html": "<nav class=\"ds-rail\" aria-label=\"Sections\"><ol><li><a href=\"#\"><span>Research</span><span class=\"ds-tick\"></span></a></li><li><a href=\"#\" aria-current=\"true\"><span>Publications</span><span class=\"ds-tick\"></span></a></li><li><a href=\"#\"><span>Education</span><span class=\"ds-tick\"></span></a></li></ol><span class=\"ds-line\"></span><span class=\"ds-marker\"></span></nav>",
-      "css": ".ds-rail{position:relative;width:120px;font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-rail ol{list-style:none;margin:0;padding:0;display:grid;gap:18px}.ds-rail a{display:flex;align-items:center;justify-content:flex-end;gap:12px;text-decoration:none;font-size:.8125rem;letter-spacing:.01em;line-height:1;padding-block:3px;color:var(--graphite,#63676e);transition:color 200ms cubic-bezier(.16,1,.3,1)}.ds-rail a:hover,.ds-rail a[aria-current=true]{color:var(--ink,#101113)}.ds-rail a[aria-current=true] span:first-child{font-weight:500}.ds-tick{width:18px;height:1px;background:var(--rule-strong,rgb(16 17 19/.32));flex:none;transform:scaleX(.5);transform-origin:right center;transition:transform 200ms cubic-bezier(.16,1,.3,1),background-color 200ms cubic-bezier(.16,1,.3,1)}.ds-rail a[aria-current=true] .ds-tick{transform:none;background:var(--ink,#101113)}.ds-rail a:focus-visible{outline:1.5px solid var(--accent,#2f4bd8);outline-offset:3px;border-radius:2px}.ds-line{position:absolute;right:0;top:-14px;bottom:-14px;width:1px;background:var(--rule,rgb(16 17 19/.14))}.ds-marker{position:absolute;right:-1px;top:33px;width:3px;height:16px;margin-top:-8px;background:var(--accent,#2f4bd8)}"
+      "description": "Right-edge section navigation at 1100px and up: every section labelled; current in ink at 500 with its tick scaled from 9px to 18px; an ink marker glides on the line.",
+      "html": "<nav class=\"ds-rail\" aria-label=\"Sections\"><ol><li><a href=\"#\"><span>Research</span><span class=\"ds-tick\"></span></a></li><li><a href=\"#\" aria-current=\"true\"><span>Publications</span><span class=\"ds-tick\"></span></a></li><li><a href=\"#\"><span>Projects</span><span class=\"ds-tick\"></span></a></li><li><a href=\"#\"><span>Education</span><span class=\"ds-tick\"></span></a></li></ol><span class=\"ds-line\"></span><span class=\"ds-marker\"></span></nav>",
+      "css": ".ds-rail{position:relative;width:120px;font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-rail ol{list-style:none;margin:0;padding:0;display:grid;gap:18px}.ds-rail a{display:flex;align-items:center;justify-content:flex-end;gap:12px;text-decoration:none;font-size:.8125rem;letter-spacing:.01em;line-height:1;padding-block:3px;color:var(--graphite,#63676e);transition:color 200ms cubic-bezier(.16,1,.3,1)}.ds-rail a:hover,.ds-rail a[aria-current=true]{color:var(--ink,#101113)}.ds-rail a[aria-current=true] span:first-child{font-weight:500}.ds-tick{width:18px;height:1px;background:var(--rule-strong,rgb(16 17 19/.32));flex:none;transform:scaleX(.5);transform-origin:right center;transition:transform 200ms cubic-bezier(.16,1,.3,1),background-color 200ms cubic-bezier(.16,1,.3,1)}.ds-rail a[aria-current=true] .ds-tick{transform:none;background:var(--ink,#101113)}.ds-rail a:focus-visible{outline:1.5px solid var(--accent,#2f4bd8);outline-offset:3px;border-radius:2px}.ds-line{position:absolute;right:0;top:-14px;bottom:-14px;width:1px;background:var(--rule,rgb(16 17 19/.14))}.ds-marker{position:absolute;right:-1px;top:65px;width:3px;height:16px;margin-top:-8px;background:var(--ink,#101113)}"
     },
     {
-      "name": "Inscription",
+      "name": "CJK Name",
       "kind": "custom",
-      "refersTo": "inscription",
-      "description": "陈星昊 set vertically in the current hand, with a horizontal caret and the hand's name in graphite.",
-      "html": "<div class=\"ds-ins\"><span class=\"ds-line\"><span lang=\"zh-Hans\">陈星昊</span><span class=\"ds-caret\"></span></span><span class=\"ds-style\" lang=\"zh-Hans\">楷书</span></div>",
-      "css": ".ds-ins{writing-mode:vertical-rl;display:flex;flex-direction:column;gap:.7rem;align-items:flex-start;color:var(--ink,#101113)}.ds-line{display:inline-flex;align-items:center;font-family:var(--font-cjk,'CJK Kai','Kaiti SC','STKaiti','KaiTi',serif);font-size:clamp(2.6rem,1.4rem + 3.2vw,4.75rem);line-height:1.12;letter-spacing:.06em;min-inline-size:3.55em}.ds-caret{display:inline-block;inline-size:.07em;block-size:.9em;margin-inline-start:.1em;background:var(--ink,#101113);animation:ds-blink 1s steps(1) infinite}.ds-style{align-self:flex-end;font-family:var(--font-cjk,'CJK Kai','Kaiti SC','STKaiti','KaiTi',serif);font-size:.8125rem;letter-spacing:.3em;color:var(--graphite,#63676e)}@keyframes ds-blink{50%{opacity:0}}"
+      "refersTo": "cjk-name",
+      "description": "陈星昊 in ink-2 on the surname's baseline at 0.19em of the name, with a caret; no script label.",
+      "html": "<h1 class=\"ds-name\"><span class=\"ds-fam\">Chen<span class=\"ds-cjk\" lang=\"zh-Hans\">陈星昊<span class=\"ds-caret\"></span></span></span></h1>",
+      "css": ".ds-name{margin:0;font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif);font-weight:300;font-size:6rem;line-height:.9;letter-spacing:-.04em;color:var(--ink,#101113)}.ds-fam{position:relative;display:inline-block}.ds-cjk{position:absolute;left:100%;bottom:.16em;margin-left:.2em;display:inline-flex;align-items:center;font-family:var(--font-cjk,'CJK Kai','Kaiti SC','STKaiti','KaiTi',serif);font-size:.19em;font-weight:400;line-height:1;letter-spacing:.08em;color:var(--ink-2,#3a3c40);white-space:nowrap}.ds-caret{display:inline-block;width:.07em;height:.95em;margin-left:.08em;background:currentColor;animation:ds-blink 1s steps(1) infinite}@keyframes ds-blink{50%{opacity:0}}"
     },
     {
       "name": "Live t Readout",
@@ -673,12 +728,28 @@
       "css": ".ds-readout{display:flex;gap:20px;align-items:baseline;margin:0;color:var(--graphite,#63676e);font-size:.95rem;font-family:KaTeX_Main,'Times New Roman',serif}.ds-lbl i{font-family:KaTeX_Math,'Times New Roman',serif}.ds-num{font-size:1.08em;min-width:2.9ch;color:var(--graphite,#63676e);transition:color 200ms steps(5)}.ds-live{color:var(--accent,#2f4bd8)}"
     },
     {
+      "name": "Venue Header",
+      "kind": "custom",
+      "refersTo": "venue-head",
+      "description": "Opens each publication panel: display-size venue at 500 plus the track, rule-strong line under it.",
+      "html": "<header class=\"ds-venue\"><p class=\"ds-vn\">NeurIPS 2026</p><p class=\"ds-vt\">Evaluations &amp; Datasets Track</p></header>",
+      "css": ".ds-venue{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;padding-bottom:clamp(14px,1.6vw,20px);border-bottom:1px solid var(--rule-strong,rgb(16 17 19/.32));font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-vn{margin:0;font-size:clamp(1.75rem,1.2rem + 1.8vw,2.6rem);line-height:1;letter-spacing:-.03em;font-weight:500;color:var(--ink,#101113)}.ds-vt{margin:0;font-size:1.0625rem;letter-spacing:-.005em;color:var(--ink-2,#3a3c40)}"
+    },
+    {
       "name": "Plate Panel",
       "kind": "card",
       "refersTo": "plate-panel",
-      "description": "The only container: a square plate-2 tint, no border or shadow, one per publication or project.",
-      "html": "<article class=\"ds-panel\"><div><h3 class=\"ds-pt\">The University of Washington campus in VR</h3><p class=\"ds-meta\">2024 · Reality Lab</p></div><p class=\"ds-ptext\">A walkable campus reconstructed from Gaussian splats and rendered for a headset.</p></article>",
-      "css": ".ds-panel{background:var(--plate-2,#eeeeeb);padding:clamp(16px,2.6vw,36px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:16px clamp(24px,3vw,48px);font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-pt{margin:0;font-size:clamp(1.45rem,1.1rem + 1.2vw,1.875rem);line-height:1.18;letter-spacing:-.018em;font-weight:400;color:var(--ink,#101113)}.ds-meta{margin:10px 0 0;font-size:.8125rem;letter-spacing:.01em;color:var(--graphite,#63676e)}.ds-ptext{margin:0;font-size:1.0625rem;line-height:1.6;font-weight:350;color:var(--ink-2,#3a3c40)}@media (max-width:900px){.ds-panel{grid-template-columns:1fr}}"
+      "description": "The only container: a square plate-2 tint, no border or shadow. Project variant: optional 16:9 image pair, then name and meta left, account, tags and links right.",
+      "html": "<article class=\"ds-panel\"><div><h3 class=\"ds-pt\">CoastalSeg</h3><p class=\"ds-sub\">Image segmentation for coastal erosion monitoring</p><p class=\"ds-meta\">2025 · University of Washington Applied Physics Laboratory · capstone project</p></div><div><p class=\"ds-ptext\">A system for multi-class segmentation of shoreline photos uploaded by community members, with outlier detection and multi-image perspective correction.</p><p class=\"ds-meta\">Semantic segmentation · Outlier detection · Perspective alignment</p></div></article>",
+      "css": ".ds-panel{background:var(--plate-2,#eeeeeb);padding:clamp(16px,2.6vw,36px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:20px clamp(24px,3vw,48px);align-items:start;font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-pt{margin:0;font-size:clamp(1.45rem,1.1rem + 1.2vw,1.875rem);line-height:1.15;letter-spacing:-.018em;font-weight:400;color:var(--ink,#101113)}.ds-sub{margin:6px 0 0;font-size:1.0625rem;color:var(--ink-2,#3a3c40)}.ds-meta{margin:12px 0 0;font-size:.8125rem;letter-spacing:.01em;color:var(--graphite,#63676e)}.ds-ptext{margin:0;max-width:60ch;font-size:1.0625rem;line-height:1.6;font-weight:350;color:var(--ink-2,#3a3c40)}@media (max-width:900px){.ds-panel{grid-template-columns:1fr;gap:16px}}"
+    },
+    {
+      "name": "Research Ledger",
+      "kind": "custom",
+      "refersTo": "area-row",
+      "description": "Name, status and optional note per row; the current row's status in ink at 500.",
+      "html": "<dl class=\"ds-areas\"><div><dt>Video generation</dt><dd class=\"ds-st\">Current focus</dd><dd class=\"ds-note\">Published: ViTeX-Bench, NeurIPS 2026.</dd></div><div><dt>Large language models</dt><dd class=\"ds-st\">Growing interest</dd></div></dl>",
+      "css": ".ds-areas{margin:0;border-top:1px solid var(--rule,rgb(16 17 19/.14));font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-areas div{display:grid;grid-template-columns:minmax(12rem,1.1fr) minmax(8rem,.7fr) minmax(0,1.6fr);gap:4px 24px;padding-block:16px;border-bottom:1px solid var(--rule,rgb(16 17 19/.14));align-items:baseline}.ds-areas dt{font-size:1.3125rem;font-weight:400;letter-spacing:-.01em;color:var(--ink,#101113)}.ds-areas dd{margin:0}.ds-st{font-size:.8125rem;letter-spacing:.01em;color:var(--graphite,#63676e)}.ds-areas div:first-child .ds-st{color:var(--ink,#101113);font-weight:500}.ds-note{font-size:.9375rem;color:var(--ink-2,#3a3c40)}"
     },
     {
       "name": "Ledger Row",
@@ -692,18 +763,18 @@
       "name": "Screen Band Entry",
       "kind": "custom",
       "refersTo": "screen-band",
-      "description": "Always-dark Education band entry: band headline, school title, dates in on-screen soft ink, hairline tick index.",
-      "html": "<div class=\"ds-band\"><h3 class=\"ds-deg\">Ph.D., Computer Science</h3><p class=\"ds-school\">Texas A&amp;M University</p><p class=\"ds-dates\"><span class=\"ds-flag\">Incoming</span><span>Spring 2027</span></p><div class=\"ds-index\"><span class=\"ds-ticks\"><i class=\"on\"></i><i></i><i></i></span><span>t = 140</span></div></div>",
-      "css": ".ds-band{background:var(--screen,#0b0c0e);color:var(--on-screen,#e7e6e1);padding:48px clamp(20px,5vw,72px);font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-deg{margin:0;font-size:clamp(2.1rem,1.3rem + 3.4vw,4.75rem);line-height:1.02;letter-spacing:-.035em;font-weight:300}.ds-school{margin:12px 0 0;font-size:clamp(1.45rem,1.1rem + 1.2vw,1.875rem);letter-spacing:-.012em;font-weight:400}.ds-dates{margin:14px 0 0;display:flex;gap:4px 14px;font-size:.8125rem;letter-spacing:.02em;color:var(--on-screen-2,#b5b4ae)}.ds-flag{color:var(--on-screen,#e7e6e1);font-weight:500}.ds-index{display:flex;justify-content:space-between;align-items:baseline;margin-top:28px;padding-top:14px;border-top:1px solid rgb(231 230 225/.18);color:var(--on-screen-2,#b5b4ae);font-size:.95rem}.ds-ticks{display:flex;gap:10px;align-items:center}.ds-ticks i{width:28px;height:1px;background:rgb(231 230 225/.28)}.ds-ticks i.on{height:2px;background:var(--on-screen,#e7e6e1)}"
+      "description": "Always-dark Education band: vertical school index (rule, ink marker, clickable rows), band headline, school title, dates in on-screen soft ink.",
+      "html": "<div class=\"ds-band\"><nav class=\"ds-idx\"><span class=\"ds-r\"></span><span class=\"ds-m\"></span><button aria-current=\"true\"><span class=\"ds-s\">Texas A&amp;M</span><span class=\"ds-y\">2027</span></button><button><span class=\"ds-s\">Washington</span><span class=\"ds-y\">2025</span></button><button><span class=\"ds-s\">Henan</span><span class=\"ds-y\">2024</span></button></nav><h3 class=\"ds-deg\">Ph.D., Computer Science</h3><p class=\"ds-school\">Texas A&amp;M University</p><p class=\"ds-dates\"><span class=\"ds-flag\">Incoming</span><span>Spring 2027</span></p></div>",
+      "css": ".ds-band{background:var(--screen,#0b0c0e);color:var(--on-screen,#e7e6e1);padding:48px clamp(20px,5vw,72px);font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-idx{position:relative;padding-left:18px;width:max-content;margin-bottom:40px}.ds-idx button{display:flex;align-items:baseline;gap:14px;height:34px;background:none;border:0;padding:0;cursor:pointer;font:inherit;font-size:.9375rem;letter-spacing:.005em;color:var(--on-screen-2,#b5b4ae);transition:color 200ms cubic-bezier(.16,1,.3,1)}.ds-idx button:hover,.ds-idx button[aria-current=true]{color:var(--on-screen,#e7e6e1)}.ds-idx button[aria-current=true] .ds-s{font-weight:500}.ds-idx button:focus-visible{outline:1.5px solid var(--on-screen-accent,#9aa5ff);outline-offset:3px;border-radius:2px}.ds-s{min-width:7.5rem;text-align:left}.ds-y{font-size:.8125rem;font-variant-numeric:tabular-nums}.ds-r{position:absolute;left:0;top:6px;height:90px;width:1px;background:rgb(231 230 225/.24)}.ds-m{position:absolute;left:-1px;top:9px;width:3px;height:16px;background:var(--on-screen,#e7e6e1)}.ds-deg{margin:0;font-size:clamp(2.1rem,1.3rem + 3.4vw,4.75rem);line-height:1.02;letter-spacing:-.035em;font-weight:300}.ds-school{margin:12px 0 0;font-size:clamp(1.45rem,1.1rem + 1.2vw,1.875rem);letter-spacing:-.012em;font-weight:400}.ds-dates{margin:14px 0 0;display:flex;gap:4px 14px;font-size:.8125rem;letter-spacing:.02em;color:var(--on-screen-2,#b5b4ae)}.ds-flag{color:var(--on-screen,#e7e6e1);font-weight:500}"
     }
   ],
   "narrative": {
     "northStar": "The Denoising Trajectory",
-    "overview": "**Creative North Star: \"The Denoising Trajectory\"**\n\nThe page behaves like one diffusion sampling run. Every state that changes arrives as a short noise-to-signal trajectory: per-pixel Gaussian grain (PCG hash into Box-Muller, WebGL2) resolving coarse shape first and crisp edges last, on the cosine ᾱ schedule, while a KaTeX readout of the live timestep counts down to t = 0. The name and a particle portrait are sampled out of noise together in the first viewport; the portrait diffuses back into noise as the reader scrolls. ViTeX scene switches, the campus hand-overs, the visitor globe and the Light/Dark switch use the same grammar. When a trajectory ends, its grain is gone: the settled page is clean ground.\n\nThe material is an off-white plate in light and a near-black void in dark, printed in near-black or bone ink. Structure is carried by hairlines, tabular numerals and notation, with one container: a flat, square plate-2 tint panel that holds each publication and each project. Density is editorial and generous: long section air, a 12-column grid with margin headings at wide widths, and one full-bleed dark screen band where the campuses resolve. The name also stands in Chinese as a vertical inscription, typed and erased in six hands on the shared clock. The single cobalt accent is instrumentation: it lights when something is being sampled, and rests to graphite when t reaches 0.\n\nConfirmed rejections: bordered, rounded or shadowed cards, pills, decorative shadows, eyebrows or kickers above headings, glow, gradients on the accent, neon or cyber styling, standing grain or texture at rest, and any hover motion beyond colour and underline changes.",
+    "overview": "**Creative North Star: \"The Denoising Trajectory\"**\n\nThe page behaves like one diffusion sampling run. Every state that changes arrives as a short noise-to-signal trajectory: per-pixel Gaussian grain (PCG hash into Box-Muller, WebGL2) resolving coarse shape first and crisp edges last, on the cosine ᾱ schedule, while a KaTeX readout of the live timestep counts down to t = 0. The name and an authored particle profile are sampled out of noise together in the first viewport; the profile diffuses back into noise as the reader scrolls. ViTeX scene switches, the campus hand-overs, the visitor globe and the Light/Dark switch use the same grammar. When a trajectory ends, its grain is gone: the settled page is clean ground.\n\nThe material is an off-white plate in light and a near-black void in dark, printed in near-black or bone ink. Structure is carried by hairlines, tabular numerals and notation, with one container: a flat, square plate-2 tint panel that holds each publication and each project. Density is editorial and generous: long section air, a 12-column grid with margin headings at wide widths, and one full-bleed dark screen band where the campuses resolve, each filtered in its school's colour. 陈星昊 is a second, quieter voice that follows the surname on its baseline, typed and erased in six hands on the shared clock. The single cobalt accent is instrumentation: it lights only on a live t readout or a visitor mark, and rests to graphite when t reaches 0. Positional markers (rail, school index) are ink.\n\nConfirmed rejections: bordered, rounded or shadowed cards, pills, decorative shadows, small eyebrows or kickers above headings, glow, gradients on the accent, neon or cyber styling, standing grain or texture at rest, filters or blur on text, and any hover motion beyond colour and underline changes.",
     "keyCharacteristics": [
       "Gaussian noise is the only transition vocabulary; it exists only while something is being sampled, and the ground is clean at rest.",
-      "One shared 24 fps clock; every sampler, the inscription and every stepped CSS transition land on its frames.",
-      "Hairline instruments (1px rules, 9px ticks, 1px underlines) and one flat plate-2 tint panel instead of boxes.",
+      "One shared 24 fps clock; every sampler, the Chinese name's typing and every stepped CSS transition land on its frames.",
+      "Hairline instruments (1px rules, 9px ticks, 1px underlines, 3×16px ink markers) and one flat plate-2 tint panel instead of boxes.",
       "Geologica at light weights with negative tracking; KaTeX Computer Modern for every number that means t; six calligraphic and print hands for 陈星昊.",
       "Light and dark are both first-class and follow the system until the visitor chooses.",
       "Reduced motion and no-WebGL are complete, still pages, never degraded ones."
@@ -711,7 +782,7 @@
     "rules": [
       {
         "name": "The Live-Only Accent Rule",
-        "body": "Cobalt means \"t > 0 right now\", \"you are here\" on the rail, or \"a visitor was here\". Anything at rest, including the colophon x₀, is ink or graphite.",
+        "body": "Cobalt means \"t > 0 right now\" or \"a visitor was here\". Position (\"you are here\" on the rail or the school index) and anything at rest, including the colophon x₀, is ink or graphite.",
         "section": "colors"
       },
       {
@@ -720,13 +791,18 @@
         "section": "colors"
       },
       {
+        "name": "The Band-Only School Colour Rule",
+        "body": "The school colours filter photographs inside the screen band and appear nowhere else.",
+        "section": "colors"
+      },
+      {
         "name": "The Light Hand Rule",
-        "body": "Nothing on the page is heavier than 550 (author name and venue); headings sit between 300 and 400. Weight is not how hierarchy is made; size and tracking are.",
+        "body": "Nothing on the page is heavier than 550 (the author's own name). Headings sit between 300 and 400; the one heavier display line is the 500 venue header, because the venue is what a reader checks first. Otherwise size and tracking make hierarchy, not weight.",
         "section": "typography"
       },
       {
         "name": "The Notation Rule",
-        "body": "Any number that is a timestep or schedule value is KaTeX_Main at 1.08em of a 0.95rem readout, with a 2.9ch minimum width, so it never reflows while it counts.",
+        "body": "Any number that is a timestep or schedule value is KaTeX_Main at 1.08em of its readout, with a 2.9ch minimum width, so it never reflows while it counts.",
         "section": "typography"
       },
       {
@@ -741,18 +817,19 @@
       },
       {
         "name": "The Clean Ground Rule",
-        "body": "At rest the ground is flat plate or void. Grain and particles exist only while a trajectory runs; the hero canvas clears and stops once the name settles, and the portrait never draws below the hero rule.",
+        "body": "At rest the ground is flat plate or void. Grain and particles exist only while a trajectory runs; the hero canvas clears and stops once the name settles, every campus settles at t = 0, and the portrait never draws below the hero rule or behind 陈星昊.",
         "section": "elevation"
       }
     ],
     "dos": [
       "Do make every new state change a noise-to-signal trajectory on the shared 24 fps clock; content samplers also show a live t readout.",
-      "Do clear and stop a sampler when its trajectory ends; the ground at rest is flat plate or void.",
-      "Do keep the accent to live readouts (t > 0), the rail marker and visitor marks, plus focus ring, caret and selection; return readouts to graphite at t = 0.",
+      "Do clear and stop a sampler when its trajectory ends; the ground at rest is flat plate or void, and every campus rests at t = 0.",
+      "Do keep the accent to live readouts (t > 0) and visitor marks, plus focus ring, caret-color and selection; return readouts to graphite at t = 0. Position markers are ink.",
       "Do separate content with 1px hairlines (rule / rule-strong) and ledger rows; when a unit needs to stand apart, give it a square plate-2 panel.",
       "Do set numerals tabular and timesteps in KaTeX_Main at 1.08em with a 2.9ch minimum.",
-      "Do keep headings at weight 300–400 with negative tracking (-0.015em to -0.04em).",
+      "Do keep headings at weight 300–400 with negative tracking (-0.015em to -0.04em); the venue header at 500 is the one exception.",
       "Do size stepped CSS transitions to whole frames (41.667ms multiples) with `steps(n)`.",
+      "Do reveal text by opacity only.",
       "Do ship the still path and the no-WebGL path as finished pages.",
       "Do define every new neutral for plate, void and, if it can appear there, the screen band.",
       "Do subset any CJK face to the glyphs it sets and self-host it."
@@ -760,11 +837,13 @@
     "donts": [
       "Don't use bordered, rounded or shadowed cards, pills or badges; the only container is the square plate-2 panel, and radius is 0 except the 2px focus outline.",
       "Don't add shadows beyond the menu sheet.",
-      "Don't place eyebrows or kickers above headings; supporting lines (venue, dates, notes) go below the title.",
+      "Don't place small eyebrows or kickers above headings; supporting lines (dates, meta, notes) go below the title. The display-size venue header that opens a publication panel is the only line above a title.",
       "Don't animate hover with lifts, scales, parallax or cursor followers; hover changes colour or underline only.",
-      "Don't give the accent a glow, gradient, fill or rest state.",
-      "Don't crossfade or slide where the world samples; no crossfades for theme or scene changes.",
-      "Don't leave grain, particles or texture standing on the page at rest, or let the portrait draw below the hero rule.",
+      "Don't give the accent a glow, gradient, fill or rest state, or use it for position markers.",
+      "Don't blur or filter text, in reveals or anywhere else.",
+      "Don't crossfade or slide where the world samples; no crossfades for theme or scene changes, and campus hand-overs cross under the noise, never through white.",
+      "Don't leave grain, particles or texture standing on the page at rest, or let the portrait draw below the hero rule or behind 陈星昊.",
+      "Don't use the school colours outside the screen band.",
       "Don't use uppercase labels or letter-spaced small caps.",
       "Don't run a second animation clock or free-running requestAnimationFrame outside gl.ts."
     ]

@@ -1,0 +1,124 @@
+---
+import { getImage } from 'astro:assets';
+import Arrow from './Arrow.astro';
+import { projects } from '../data/site';
+import coastalPhoto from '../assets/projects/coastalseg-photo.jpg';
+import coastalSeg from '../assets/projects/coastalseg-segmentation.jpg';
+
+const sources = { 'coastalseg-photo': coastalPhoto, 'coastalseg-segmentation': coastalSeg } as const;
+const img = async (key: keyof typeof sources) => {
+  const [avif, webp] = await Promise.all([
+    getImage({ src: sources[key], width: 900, format: 'avif', quality: 58 }),
+    getImage({ src: sources[key], width: 900, format: 'webp', quality: 74 }),
+  ]);
+  return { avif: avif.src, webp: webp.src, w: 900, h: Math.round((900 * sources[key].height) / sources[key].width) };
+};
+const items = await Promise.all(
+  projects.map(async (p) => ({
+    ...p,
+    media: p.images
+      ? { before: await img(p.images.before as keyof typeof sources), after: await img(p.images.after as keyof typeof sources) }
+      : null,
+  })),
+);
+---
+
+<section class="section" id="projects" aria-labelledby="projects-title">
+  <div class="wrap section-grid">
+    <h2 class="section-title" id="projects-title">Projects</h2>
+
+    <ol class="section-body projects">
+      {items.map((p) => (
+        <li class="project">
+          <article aria-labelledby={`project-${p.id}`}>
+            {p.media && (
+              <figure class="media">
+                <div class="pair">
+                  {[['before', 'Community photo'], ['after', 'Segmentation']].map(([k, label]) => {
+                    const m = p.media![k as 'before' | 'after'];
+                    return (
+                      <div class="shot">
+                        <picture>
+                          <source type="image/avif" srcset={m.avif} />
+                          <img src={m.webp} width={m.w} height={m.h} alt={`${p.title}: ${label.toLowerCase()} of a shoreline site.`} loading="lazy" decoding="async" />
+                        </picture>
+                        <span class="meta">{label}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </figure>
+            )}
+            <div class="lhs">
+              <h3 class="title" id={`project-${p.id}`}>{p.title}</h3>
+              <p class="subtitle">{p.subtitle}</p>
+              <p class="meta when">{p.year} · {p.context}</p>
+            </div>
+            <div class="rhs">
+              <p class="body">{p.text}</p>
+              {p.team && <p class="meta team">{p.team}</p>}
+              <p class="meta tags">{p.tags.join(' · ')}</p>
+              {p.links.length > 0 && (
+                <ul class="links">
+                  {p.links.map((l) => (
+                    <li><a class="arrow-link" href={l.href}>{l.label}<Arrow /></a></li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </article>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .projects {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(16px, 2vw, 24px);
+  }
+  /* Same unit as a paper: a square plate-tint panel, nothing else. Images, when there are any, run across
+     the top; then the name and its context on the left, the account on the right. */
+  .project {
+    background: var(--plate-2);
+    padding: clamp(16px, 2.6vw, 36px);
+  }
+  .project article {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: 20px clamp(24px, 3vw, 48px);
+    align-items: start;
+  }
+  .media { margin: 0 0 clamp(4px, 1vw, 12px); grid-column: 1 / -1; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .shot img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+  .shot .meta { display: block; margin-top: 8px; }
+
+  .title {
+    font-size: var(--step-2);
+    line-height: 1.15;
+    letter-spacing: -0.018em;
+    font-weight: 400;
+  }
+  .subtitle { margin-top: 6px; color: var(--ink-2); }
+  .when { margin-top: 12px; }
+  .body { color: var(--ink-2); max-width: 60ch; }
+  .team,
+  .tags { margin-top: 12px; }
+  .links {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+  }
+
+  @media (max-width: 900px) {
+    .project article { grid-template-columns: 1fr; gap: 16px; }
+  }
+</style>

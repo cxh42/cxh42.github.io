@@ -18,21 +18,42 @@ export const links = {
   advisor: 'https://vztu.github.io/',
 };
 
-// Research areas, most recent first. Kept to what the site owner has confirmed.
+// Research areas, current first. Kept to what the site owner has confirmed.
 export const areas = [
-  { name: 'Video generation', note: 'Current focus: video scene text editing (ViTeX-Bench, NeurIPS 2026).' },
-  { name: 'Vision-language models', note: 'Earlier research.' },
-  { name: '3D Gaussian Splatting', note: 'Earlier research: scenes reconstructed from phone captures.' },
-  { name: 'Virtual reality', note: 'A walkable UW campus tour for Meta Quest (2025).' },
+  { name: 'Video generation', status: 'Current focus', note: 'Published: ViTeX-Bench, NeurIPS 2026.' },
+  { name: 'Large language models', status: 'Growing interest', note: '' },
+  { name: 'Vision-language models', status: 'Earlier research', note: '' },
+  { name: '3D vision & VR', status: 'Earlier research', note: '3D Gaussian Splatting, and a UW campus tour for Meta Quest.' },
 ];
 
+// Things I built, newest first. Shown after the publications.
 export const projects = [
   {
-    title: 'The University of Washington campus in VR',
+    id: 'coastalseg',
+    title: 'CoastalSeg',
+    subtitle: 'Image segmentation for coastal erosion monitoring',
+    year: '2025',
+    context: 'University of Washington Applied Physics Laboratory · capstone project',
+    text: 'A system for multi-class segmentation of shoreline photos uploaded by community members, with outlier detection and multi-image perspective correction. The segmentation model, DeepLabV3+ with an EfficientNet-B6 encoder, reaches 0.93 IoU. Built for coastal research at the UW Applied Physics Laboratory and used with MyCoast Washington.',
+    team: 'With Zheheng Li, Dylan Scott, Aaryan Shah, Bauka Zhandulla and Sarah Li.',
+    tags: ['Semantic segmentation', 'Outlier detection', 'Perspective alignment'],
+    links: [
+      { label: 'Code', href: 'https://github.com/cxh42/CoastalSeg' },
+      { label: 'Demo', href: 'https://huggingface.co/spaces/AveMujica/CoastalSegment' },
+    ],
+    images: { before: 'coastalseg-photo', after: 'coastalseg-segmentation' },
+  },
+  {
+    id: 'uw-vr',
+    title: 'The UW campus in VR',
+    subtitle: 'A walkable campus tour for Meta Quest',
     year: '2025',
     context: 'Developing Immersive Experiences for AR/VR, University of Washington',
     text: 'I photographed landmark buildings and sculptures around the University of Washington with a phone, reconstructed them as 3D Gaussian splats, and assembled them into a campus tour you can walk through in a Meta Quest headset.',
+    team: '',
     tags: ['3D Gaussian Splatting', 'Meta Quest', 'Phone capture'],
+    links: [],
+    images: null,
   },
 ];
 
@@ -68,6 +89,10 @@ export const education = [
   {
     id: 'tamu',
     school: 'Texas A&M University',
+    short: 'Texas A&M',
+    year: '2027',
+    tint: '#500000',
+    exposure: 1.45,
     degree: 'Ph.D. in Computer Science',
     dates: 'Spring 2027 –',
     detail: 'TACO Group · Advisor: Dr. Zhengzhong Tu',
@@ -76,6 +101,10 @@ export const education = [
   {
     id: 'uw',
     school: 'University of Washington',
+    short: 'Washington',
+    year: '2025',
+    tint: '#4b2e83',
+    exposure: 1,
     degree: 'M.S. in Electrical & Computer Engineering',
     dates: 'Sep 2024 – Dec 2025',
     detail: '',
@@ -84,6 +113,10 @@ export const education = [
   {
     id: 'henu',
     school: 'Henan University',
+    short: 'Henan',
+    year: '2024',
+    tint: '#0b4ea2',
+    exposure: 1,
     degree: 'B.E. in Automation',
     dates: 'Sep 2020 – Jun 2024',
     detail: '',
@@ -114,11 +147,11 @@ export const news = [
 
 export const credits = [
   {
-    work: 'Academic Building',
-    author: 'Texas A&M University',
+    work: 'Academic Building, Texas A&M University',
+    author: 'Alexey Sergeev',
     license: '',
     licenseUrl: '',
-    source: 'https://stories.tamu.edu/',
+    source: 'https://www.asergeev.com/',
   },
   {
     work: 'Suzzallo Library and Red Square',
@@ -139,6 +172,7 @@ export const credits = [
 export const sections = [
   { id: 'research', label: 'Research' },
   { id: 'publications', label: 'Publications' },
+  { id: 'projects', label: 'Projects' },
   { id: 'education', label: 'Education' },
   { id: 'news', label: 'News' },
   { id: 'visitors', label: 'Visitors' },
