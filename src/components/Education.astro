@@ -8,23 +8,23 @@ import henu from '../assets/campus/henu.jpg';
 
 const photos = { tamu, uw, henu } as const;
 const alts = {
-  tamu: 'The dome of the Academic Building at Texas A&M University, framed by oak branches.',
+  tamu: 'The Academic Building at Texas A&M University at dusk.',
   uw: 'Suzzallo Library and Red Square at the University of Washington.',
   henu: 'The Grand Auditorium of Henan University.',
 } as const;
 // Where the photo's subject sits, so a cover crop never loses it.
-const focus = { tamu: '60% 36%', uw: '44% 55%', henu: '50% 48%' } as const;
+const focus = { tamu: '30% 42%', uw: '44% 55%', henu: '50% 48%' } as const;
 // Portrait screens crop hard from the sides: keep the dome, the library and the hall in frame.
-const focusNarrow = { tamu: '63% 40%', uw: '26% 55%', henu: '50% 48%' } as const;
+const focusNarrow = { tamu: '27% 42%', uw: '26% 55%', henu: '50% 48%' } as const;
 
 const entries = await Promise.all(
   education.map(async (e) => {
     const src = photos[e.id];
     const [lg, sm, avifLg, avifSm] = await Promise.all([
-      getImage({ src, width: 2200, format: 'webp', quality: 78 }),
-      getImage({ src, width: 1100, format: 'webp', quality: 74 }),
-      getImage({ src, width: 2200, format: 'avif', quality: 60 }),
-      getImage({ src, width: 1100, format: 'avif', quality: 56 }),
+      getImage({ src, width: 2200, format: 'webp', quality: 76 }),
+      getImage({ src, width: 1100, format: 'webp', quality: 72 }),
+      getImage({ src, width: 2200, format: 'avif', quality: 58 }),
+      getImage({ src, width: 1100, format: 'avif', quality: 54 }),
     ]);
     return { ...e, lg: lg.src, sm: sm.src, avifLg: avifLg.src, avifSm: avifSm.src, alt: alts[e.id], focus: focus[e.id], focusNarrow: focusNarrow[e.id] };
   }),
@@ -38,9 +38,37 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     <div class="edu-frame wrap">
       <h2 class="section-title edu-title" id="education-title">Education</h2>
 
+      {/* Vertical, like the scroll that drives it: one row per school, the marker on the current one. */}
+      <nav class="edu-index" aria-label="Schools" data-edu-index>
+        <span class="edu-rule" aria-hidden="true"></span>
+        <span class="edu-marker" aria-hidden="true"></span>
+        <ol>
+          {entries.map((e, i) => (
+            <li>
+              <button type="button" data-edu-go={i} aria-current={i === 0 ? 'true' : 'false'}>
+                <span class="edu-short">{e.short}</span>
+                <span class="edu-year">{e.year}</span>
+              </button>
+            </li>
+          ))}
+        </ol>
+        <span class="edu-t" aria-hidden="true"><span set:html={tLabel} /><span class="num" data-edu-t>0</span></span>
+      </nav>
+
       <ol class="edu-list">
         {entries.map((e, i) => (
-          <li class="edu-item" data-edu-item={i} data-src-lg={e.lg} data-src-sm={e.sm} data-incoming={e.incoming ? '1' : undefined} data-focus={e.focus} data-focus-narrow={e.focusNarrow}>
+          <li
+            class="edu-item"
+            data-edu-item={i}
+            data-src-lg={e.lg}
+            data-src-sm={e.sm}
+            data-incoming={e.incoming ? '1' : undefined}
+            data-focus={e.focus}
+            data-focus-narrow={e.focusNarrow}
+            data-tint={e.tint}
+            data-exposure={e.exposure}
+            style={`--tint:${e.tint};--exposure:${e.exposure}`}
+          >
             <picture class="edu-photo">
               <source type="image/avif" srcset={`${e.avifSm} 1100w, ${e.avifLg} 2200w`} sizes="100vw" />
               <source type="image/webp" srcset={`${e.sm} 1100w, ${e.lg} 2200w`} sizes="100vw" />
@@ -58,13 +86,6 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
           </li>
         ))}
       </ol>
-
-      <div class="edu-index" aria-hidden="true">
-        <span class="edu-ticks">
-          {entries.map((_, i) => <span class="edu-tick" data-edu-tick={i} />)}
-        </span>
-        <span class="edu-t"><span set:html={tLabel} /><span class="num" data-edu-t>0</span></span>
-      </div>
     </div>
   </div>
 </section>
@@ -80,11 +101,12 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
   .edu-canvas { display: none; }
   .edu-title { color: var(--edu-ink); }
 
-  /* Static layout: every school is its own dark plate. Also the reduced-motion and no-WebGL page. */
+  /* Static layout: every school is its own dark plate in its colour. Also the reduced-motion and no-WebGL page. */
   .edu-frame {
     position: relative;
     padding-block: clamp(88px, 13vh, 168px) 0;
   }
+  .edu-index { display: none; }
   .edu-list { list-style: none; margin: 40px 0 0; padding: 0; }
   .edu-item {
     position: relative;
@@ -104,26 +126,25 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
   }
   .edu-photo img {
     object-fit: cover;
-    filter: grayscale(0.35) brightness(0.52) contrast(1.05);
+    filter: grayscale(0.35) brightness(calc(0.52 * var(--exposure, 1))) contrast(1.05);
+  }
+  .edu-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--tint);
+    mix-blend-mode: color;
+    opacity: 0.7;
   }
   .edu-item::after {
     content: '';
     position: absolute;
     inset: 0;
+    z-index: 1;
     background: linear-gradient(to top, rgb(6 7 8 / 0.82), rgb(6 7 8 / 0) 58%);
   }
-  .edu-text { position: relative; z-index: 1; max-width: 46rem; }
-  .edu-dates {
-    margin-top: 14px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 14px;
-    align-items: baseline;
-    font-size: var(--step--1);
-    letter-spacing: 0.02em;
-    color: var(--on-screen-2);
-  }
-  .edu-flag { color: var(--edu-ink); font-weight: 500; }
+  .edu-text { position: relative; z-index: 2; max-width: 46rem; }
   .edu-degree {
     margin-top: 0;
     font-size: clamp(2.1rem, 1.3rem + 3.4vw, 4.75rem);
@@ -137,10 +158,21 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     letter-spacing: -0.012em;
     font-weight: 400;
   }
-  .edu-index { display: none; }
+  .edu-dates {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    align-items: baseline;
+    font-size: var(--step--1);
+    letter-spacing: 0.02em;
+    color: var(--on-screen-2);
+  }
+  .edu-flag { color: var(--edu-ink); font-weight: 500; }
 
-  /* Live layout: one sticky screen; the sampler hands each campus to the next. */
-  :global(html.edu-gl) .edu { height: 340svh; }
+  /* Live layout: one sticky screen. Crossing a scroll threshold sends the current campus into noise and
+     samples the next one out of it. */
+  :global(html.edu-gl) .edu { height: 330svh; }
   :global(html.edu-gl) .edu-stage {
     position: sticky;
     top: 0;
@@ -158,8 +190,8 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     height: 100%;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto 1fr auto;
-    padding-block: calc(var(--header-h) + clamp(24px, 6vh, 64px)) clamp(28px, 6vh, 64px);
+    grid-template-rows: auto auto 1fr;
+    padding-block: calc(var(--header-h) + clamp(24px, 6vh, 64px)) clamp(32px, 7vh, 72px);
   }
   :global(html.edu-gl) .edu-frame > * { grid-column: 1 / -1; }
   :global(html.edu-gl) .edu-list { margin: 0; display: grid; align-items: end; }
@@ -170,31 +202,68 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     padding: 0;
     overflow: visible;
     opacity: 0;
-    filter: blur(10px);
-    transition: opacity 500ms steps(12), filter 500ms steps(12);
+    transition: opacity 375ms steps(9);
   }
-  :global(html.edu-gl) .edu-item.is-on { opacity: 1; filter: none; }
+  :global(html.edu-gl) .edu-item.is-on { opacity: 1; }
+  :global(html.edu-gl) .edu-item::before,
   :global(html.edu-gl) .edu-item::after,
   :global(html.edu-gl) .edu-photo { display: none; }
+
   :global(html.edu-gl) .edu-index {
+    --row: 34px;
+    display: block;
+    position: relative;
+    margin-top: clamp(20px, 3vh, 32px);
+    padding-left: 18px;
+    width: max-content;
+  }
+  .edu-index ol { list-style: none; margin: 0; padding: 0; }
+  .edu-index button {
     display: flex;
-    justify-content: space-between;
     align-items: baseline;
-    margin-top: 28px;
-    padding-top: 14px;
-    border-top: 1px solid rgb(231 230 225 / 0.18);
+    gap: 14px;
+    height: var(--row);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
     color: var(--on-screen-2);
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
+    letter-spacing: 0.005em;
+    transition: color 200ms var(--ease-out);
   }
-  .edu-ticks { display: flex; gap: 10px; align-items: center; }
-  .edu-tick {
-    width: 28px;
-    height: 1px;
-    background: rgb(231 230 225 / 0.28);
-    transition: background-color 300ms var(--ease-out);
+  .edu-index button:hover { color: var(--edu-ink); }
+  .edu-index button[aria-current='true'] { color: var(--edu-ink); }
+  .edu-index button[aria-current='true'] .edu-short { font-weight: 500; }
+  .edu-short { min-width: 7.5rem; text-align: left; }
+  .edu-year { font-size: var(--step--1); color: var(--on-screen-2); font-variant-numeric: tabular-nums; }
+  .edu-rule {
+    position: absolute;
+    left: 0;
+    top: 6px;
+    height: calc(var(--row) * 3 - 12px);
+    width: 1px;
+    background: rgb(231 230 225 / 0.24);
   }
-  .edu-tick.is-on { background: var(--edu-ink); height: 2px; }
-  .edu-t { display: inline-flex; align-items: baseline; gap: 0.25em; }
+  .edu-marker {
+    position: absolute;
+    left: -1px;
+    top: calc(var(--row) / 2 - 8px);
+    width: 3px;
+    height: 16px;
+    background: var(--edu-ink);
+    transform: translateY(calc(var(--edu-i, 0) * var(--row)));
+    transition: transform 420ms var(--ease-out);
+  }
+  .edu-t {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25em;
+    margin-top: 10px;
+    color: var(--on-screen-2);
+    font-size: 0.75rem;
+    opacity: 0.7;
+  }
   .num {
     font-family: KaTeX_Main, 'Times New Roman', serif;
     font-size: 1.08em;
@@ -203,4 +272,9 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     transition: color 200ms steps(5);
   }
   .num.live { color: var(--on-screen-accent); }
+
+  @media (max-width: 760px) {
+    :global(html.edu-gl) .edu-index { --row: 30px; }
+    .edu-short { min-width: 6.5rem; }
+  }
 </style>

@@ -37,11 +37,18 @@ uniform vec3 uInk;
 uniform float uAlpha;
 uniform float uFloor;
 uniform float uSoft;
+uniform vec4 uHole;
+uniform vec4 uName;
 void main() {
   float d = length(gl_PointCoord - 0.5);
   float a = smoothstep(0.5, 0.3, d) * vA * uAlpha;
   // Nothing below the hero's rule: the foot and everything after it stay on a clean ground.
   a *= smoothstep(uFloor, uFloor + uSoft, gl_FragCoord.y);
+  // Nothing behind 陈星昊, and only a whisper behind the English name, so neither competes with dots.
+  vec2 f = gl_FragCoord.xy;
+  float inHole = step(uHole.x, f.x) * step(f.x, uHole.z) * step(uHole.y, f.y) * step(f.y, uHole.w);
+  float inName = step(uName.x, f.x) * step(f.x, uName.z) * step(uName.y, f.y) * step(f.y, uName.w);
+  a *= (1.0 - inHole) * mix(1.0, 0.4, inName);
   o = vec4(uInk * a, a);
 }`;
 
@@ -65,6 +72,8 @@ export function initPortrait() {
   const { program, u } = prog;
   const still = isStill();
   const foot = document.querySelector<HTMLElement>('.hero-foot');
+  const cjk = document.querySelector<HTMLElement>('[data-inscription]');
+  const nameEl = document.querySelector<HTMLElement>('[data-hero-name]');
 
   let count = 0;
   const vao = gl.createVertexArray();
@@ -119,7 +128,7 @@ export function initPortrait() {
     gl!.uniform2f(u('uCenter'), cx * dpr, cy * dpr);
     gl!.uniform1f(u('uScale'), h * dpr);
     gl!.uniform2f(u('uRes'), canvas!.width, canvas!.height);
-    gl!.uniform1f(u('uPx'), 1.7 * dpr);
+    gl!.uniform1f(u('uPx'), 2.0 * dpr);
     gl!.uniform1f(u('uTime'), still ? 0 : (performance.now() - start) / 1000);
     gl!.uniform1f(u('uRise'), 0.14 * s);
     gl!.uniform1f(u('uSpread'), 0.55);
@@ -129,7 +138,14 @@ export function initPortrait() {
     gl!.uniform1f(u('uSoft'), 56 * dpr);
     // Hold density while it scatters, then let go over the last half of the hero.
     const fade = 1 - Math.min(1, Math.max(0, (s - 0.12) / 0.43));
-    gl!.uniform1f(u('uAlpha'), (dark ? 0.62 : 0.5) * fade * fade * (3 - 2 * fade));
+    gl!.uniform1f(u('uAlpha'), (dark ? 0.78 : 0.66) * fade * fade * (3 - 2 * fade));
+    const rect = (el: Element | null, pad: number) => {
+      if (!el) return [0, 0, 0, 0];
+      const r = el.getBoundingClientRect();
+      return [(r.left - pad) * dpr, (H - r.bottom - pad) * dpr, (r.right + pad) * dpr, (H - r.top + pad) * dpr];
+    };
+    gl!.uniform4fv(u('uHole'), rect(cjk, 12));
+    gl!.uniform4fv(u('uName'), rect(nameEl, 0));
     gl!.bindVertexArray(vao);
     gl!.drawArrays(gl!.POINTS, 0, count);
     gl!.bindVertexArray(null);

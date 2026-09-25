@@ -21,6 +21,10 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
         return (
           <li class="paper">
             <article aria-labelledby={`pub-${pub.id}`}>
+              <header class="venue-head">
+                <p class="venue-big">{pub.venue}</p>
+                <p class="venue-track-big">{pub.track}</p>
+              </header>
               {first && (
                 <figure class="vitex" data-vitex>
                   <div class="stage" data-vitex-stage>
@@ -67,10 +71,6 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
                   <h3 class="pub-title" id={`pub-${pub.id}`}>{pub.title}</h3>
                   <p class="authors">
                     {pub.authors.map((a, i) => (<>{a === person.name ? <strong>{a}</strong> : <span>{a}</span>}{i < pub.authors.length - 1 ? ', ' : ''}</>))}
-                  </p>
-                  <p class="venue">
-                    <span class="venue-name">{pub.venue}</span>
-                    <span class="venue-track">{pub.track}</span>
                   </p>
                 </div>
                 <div class="pub-detail">
@@ -200,17 +200,28 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     gap: 28px clamp(28px, 4vw, 64px);
     margin-top: clamp(40px, 5vw, 64px);
   }
-  .venue {
-    margin-top: 12px;
+  /* The venue leads each paper: it is the first thing a reader checks. */
+  .venue-head {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px 12px;
     align-items: baseline;
-    font-size: var(--step--1);
-    letter-spacing: 0.01em;
+    gap: 4px 16px;
+    padding-bottom: clamp(14px, 1.6vw, 20px);
+    margin-bottom: clamp(16px, 2vw, 24px);
+    border-bottom: 1px solid var(--rule-strong);
   }
-  .venue-name { font-weight: 550; color: var(--ink); }
-  .venue-track { color: var(--graphite); }
+  .venue-big {
+    font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .venue-track-big {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    letter-spacing: -0.005em;
+  }
   .pub-title {
     margin-top: 0;
     font-size: var(--step-2);

@@ -38,8 +38,11 @@ The site belongs to a researcher who works on moving images (video generation an
 **Identity**
 - Name: **Xinghao Chen**. This is the most prominent element on the site.
 - Chinese name: **陈星昊**, shown secondary.
-- Research focus: **generative AI**, currently **video generation models** (updated 2026-09-26; the user asked not to be framed only as a video-generation researcher).
+- Research focus: **generative AI**, currently **video generation models**. ViTeX is a publication, not the current focus (updated 2026-09-26). The user is also strongly interested in **large language models** and wants to work on them.
 - Earlier research: **vision-language models (VLM)** and **3D Gaussian Splatting (3DGS)**.
+- Projects (their own section, after Publications):
+  - **CoastalSeg** (https://github.com/cxh42/CoastalSeg). A 2025 UW capstone and APL student-led project: multi-class segmentation of community-uploaded shoreline photos, with outlier detection and multi-image perspective correction. It uses DeepLabV3+ with an EfficientNet-B6 encoder and reaches 0.93 IoU, and is used with MyCoast Washington. Team: Xinghao Chen (listed first), Zheheng Li, Dylan Scott, Aaryan Shah, Bauka Zhandulla, Sarah Li. Demos are on Hugging Face Spaces.
+  - The UW VR tour (below).
 - VR project (2025, UW course "Developing Immersive Experiences for AR/VR"): photographed UW landmark buildings and sculptures with a phone, reconstructed them as 3D Gaussian splats, and built a virtual campus tour for **Meta Quest**. The 3DGS reconstruction detail comes from the old site's news item; the user described the phone capture and the Quest tour.
 - Status: will join **Texas A&M University** as a PhD student in **January 2027**, in the **TACO group** (`https://taco-group.github.io/`), advised by **Dr. Zhengzhong Tu** (`https://vztu.github.io/`).
 
@@ -73,7 +76,7 @@ The site belongs to a researcher who works on moving images (video generation an
 - Ambitious, modern motion and interaction, per the user's explicit request.
 
 **Excluded content (binding)**
-- No personal photo for now. (The particle silhouette is allowed; see Evidence on Hand.)
+- No personal photo for now, and nothing derived from one (the silhouette is an authored figure).
 - No CV PDF, and none of the old CV's past experiences.
 - No Portfolio section or items.
 - 3DGS may now appear, but only as earlier research and the VR project (the user reversed the earlier exclusion on 2026-09-26).
@@ -97,6 +100,13 @@ These visual constraints came from the user and are binding. They're recorded wi
 - Education entries may have dark, high-resolution, representative imagery of each school as backgrounds. The user offered this as a suggestion, not a hard requirement ("不一定局限于此").
 - Light/dark mode toggle.
 - It must read well on phones.
+- Added 2026-09-26 (second round):
+  - The page is English-first. 陈星昊 is clearly secondary: small, after the English name, never overlapping it.
+  - The equation is ornament only: small, faint, and hidden on phones.
+  - The publication venue (e.g. NeurIPS 2026) is prominent.
+  - Campus photos carry each school's colour as a filter: TAMU maroon, UW purple, Henan blue.
+  - School changes are threshold-triggered, timed noise-and-denoise transitions, never a white flash.
+  - The school index is vertical, matching the scroll direction.
 - Added 2026-09-26:
   - The hero background must feel clean in both themes, with no "dirty" grain field.
   - 陈星昊 is set in a calligraphic but readable hand. A blinking cursor types it, erases it and retypes it in a different Chinese typeface each cycle.
@@ -111,10 +121,10 @@ These visual constraints came from the user and are binding. They're recorded wi
 - ViTeX-Bench project page assets (the user's own work): `https://vitex-bench.github.io/static/images/teaser.png`, `pipeline.png`, `arch.png`.
 - School logos from the old site are in git history at `HEAD~1:images/uwlogo.png` and `HEAD~1:images/henulogo.png`. No TAMU logo is on hand.
 - Campus photographs (in `src/assets/campus/`):
-  - Texas A&M: a photo the user chose from Texas A&M's own site (stories.tamu.edu). All rights stay with the university; it's credited in the footer.
+  - Texas A&M: Academic Building at dusk by Alexey Sergeev (asergeev.com), chosen by the user. It's © the photographer, credited in the footer; no open license was found.
   - UW: a photo the user chose from a UW site (cdn.uconnectlabs.com). All rights stay with the university; it's credited in the footer.
   - Henan University: "河南大学礼堂2020" by ScareCriterion12, CC BY-SA 4.0 via Wikimedia Commons.
-- Particle portrait: the hero's particle silhouette is sampled from the outline of the old site's headshot (`HEAD~1:images/bio-photo.jpg`). Only the outline and heavily blurred light/dark masses are used, so no facial features can be recovered, and the photo itself is never shipped. The user asked for "粒子代表我的人物剪影" on 2026-09-26.
+- Particle portrait: an authored, designed profile bust facing left (`scripts/figure-profile.svg`), rendered as particles along its contour lines. It must **not** be derived from the user's photo; the user withdrew that on 2026-09-26.
 - There are no personal photos, testimonials, talks, teaching entries, awards or citation counts. Don't fabricate any of these.
 
 ## Product Principles
