@@ -1,28 +1,30 @@
 ---
-import { areas } from '../data/site';
+import { interests, publications } from '../data/site';
+const paper = publications[0];
 ---
 
 <section class="section" id="research" aria-labelledby="research-title">
   <div class="wrap section-grid">
     <h2 class="section-title" id="research-title">Research</h2>
     <div class="section-body">
-      <p class="thesis">I work on <em>generative AI</em>. Right now that means video generation models.</p>
+      <p class="thesis">I am a <em>generative AI</em> researcher, currently working on video generation.</p>
 
       <p class="lead">
-        Most of my recent work is on video generation. I am also increasingly drawn to large language models and want
-        to work on them next. Before video, I worked on vision-language models and on 3D Gaussian Splatting, which took
-        me into virtual reality.
+        My research interests include video generation, large language models (LLMs) and vision-language models
+        (VLMs), and 3D Gaussian Splatting (3DGS). My recent work, {paper.title.split(':')[0]}, introduces a benchmark
+        and a 14B reference model for high-fidelity video scene text editing and appears at {paper.venue}. In Spring
+        2027 I will start my Ph.D. in Computer Science at Texas A&amp;M University, advised by Dr. Zhengzhong Tu.
       </p>
 
-      <dl class="areas">
-        {areas.map((a) => (
-          <div class="area">
-            <dt>{a.name}</dt>
-            <dd class="status">{a.status}</dd>
-            {a.note && <dd class="note">{a.note}</dd>}
-          </div>
+      <h3 class="interests-title">Research interests</h3>
+      <ul class="interests">
+        {interests.map((a) => (
+          <li>
+            <span class="name">{a.name}</span>
+            {a.note && <span class="note">{a.note}</span>}
+          </li>
         ))}
-      </dl>
+      </ul>
     </div>
   </div>
 </section>
@@ -44,28 +46,27 @@ import { areas } from '../data/site';
     color: var(--ink-2);
     max-width: 62ch;
   }
-
-  /* A ledger of areas: name, where it stands, one line on what it is. */
-  .areas {
-    margin: clamp(36px, 5vw, 56px) 0 0;
+  .interests-title {
+    margin-top: clamp(36px, 5vw, 56px);
+    font-size: var(--step--1);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--graphite);
+  }
+  .interests {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
     border-top: 1px solid var(--rule);
   }
-  .area {
-    display: grid;
-    grid-template-columns: minmax(12rem, 1.1fr) minmax(8rem, 0.7fr) minmax(0, 1.6fr);
-    gap: 4px 24px;
+  .interests li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
     padding-block: 16px;
     border-bottom: 1px solid var(--rule);
-    align-items: baseline;
   }
-  .area dt { font-size: var(--step-1); font-weight: 400; letter-spacing: -0.01em; }
-  .area dd { margin: 0; }
-  .status { font-size: var(--step--1); letter-spacing: 0.01em; color: var(--graphite); }
-  .area:first-child .status { color: var(--ink); font-weight: 500; }
-  .note { color: var(--ink-2); font-size: 0.9375rem; }
-
-  @media (max-width: 760px) {
-    .area { grid-template-columns: 1fr auto; }
-    .note { grid-column: 1 / -1; }
-  }
+  .name { font-size: var(--step-1); letter-spacing: -0.01em; }
+  .note { font-size: var(--step--1); letter-spacing: 0.01em; color: var(--ink); font-weight: 500; white-space: nowrap; }
 </style>
