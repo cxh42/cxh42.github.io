@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .g { fill: #101113; }
+    @media (prefers-color-scheme: dark) { .g { fill: #e7e6e1; } }
+  </style>
+  <!-- grain resolving into a solid block: noise on the left, signal on the right -->
+  <g class="g">
+    <rect x="3" y="5" width="2" height="2" opacity=".35"/>
+    <rect x="6" y="11" width="2" height="2" opacity=".35"/>
+    <rect x="3" y="17" width="2" height="2" opacity=".35"/>
+    <rect x="7" y="23" width="2" height="2" opacity=".35"/>
+    <rect x="4" y="26" width="2" height="2" opacity=".35"/>
+    <rect x="10" y="4" width="2" height="2" opacity=".6"/>
+    <rect x="11" y="9" width="2" height="2" opacity=".6"/>
+    <rect x="9" y="14" width="2" height="2" opacity=".6"/>
+    <rect x="12" y="19" width="2" height="2" opacity=".6"/>
+    <rect x="10" y="25" width="2" height="2" opacity=".6"/>
+    <rect x="14" y="7" width="2" height="2" opacity=".8"/>
+    <rect x="15" y="13" width="2" height="2" opacity=".8"/>
+    <rect x="14" y="22" width="2" height="2" opacity=".8"/>
+    <rect x="18" y="4" width="11" height="24"/>
+  </g>
+</svg>

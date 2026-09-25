@@ -1,0 +1,772 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-25T17:53:33+00:00",
+  "title": "Design System: Xinghao Chen",
+  "extensions": {
+    "colorMeta": {
+      "plate": {
+        "role": "neutral",
+        "displayName": "Plate",
+        "canonical": "#f7f7f5",
+        "oklch": "oklch(97.6% 0.003 106.4)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#252524",
+          "#424241",
+          "#626260",
+          "#838381",
+          "#a6a6a4",
+          "#cacac9",
+          "#f0f0ee"
+        ]
+      },
+      "plate-2": {
+        "role": "neutral",
+        "displayName": "Tint Plate",
+        "canonical": "#eeeeeb",
+        "oklch": "oklch(94.8% 0.004 106.5)",
+        "tonalRamp": [
+          "#0b0b09",
+          "#252523",
+          "#424240",
+          "#62625f",
+          "#838381",
+          "#a6a6a3",
+          "#cbcbc8",
+          "#f0f0ed"
+        ],
+        "note": "Panel fill for publications and projects; the only container."
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#101113",
+        "oklch": "oklch(17.7% 0.004 264.5)",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#242527",
+          "#414244",
+          "#606164",
+          "#818285",
+          "#a4a5a8",
+          "#c8c9cc",
+          "#edeef1"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#3a3c40",
+        "oklch": "oklch(35.6% 0.007 264.5)",
+        "tonalRamp": [
+          "#0a0b0e",
+          "#232529",
+          "#404246",
+          "#5f6166",
+          "#808287",
+          "#a3a5aa",
+          "#c7c9ce",
+          "#eceef4"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "#63676e",
+        "oklch": "oklch(51.3% 0.012 261.8)",
+        "tonalRamp": [
+          "#080b10",
+          "#22252b",
+          "#3e4249",
+          "#5d6168",
+          "#7e828a",
+          "#a1a5ad",
+          "#c5c9d1",
+          "#eaeff7"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgb(16 17 19 / 0.14)",
+        "oklch": "oklch(17.7% 0.004 264.5)",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#242527",
+          "#414244",
+          "#606164",
+          "#818285",
+          "#a4a5a8",
+          "#c8c9cc",
+          "#edeef1"
+        ],
+        "note": "Alpha hairline/tint over the ground; ramp derived from its base colour."
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Strong Hairline",
+        "canonical": "rgb(16 17 19 / 0.32)",
+        "oklch": "oklch(17.7% 0.004 264.5)",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#242527",
+          "#414244",
+          "#606164",
+          "#818285",
+          "#a4a5a8",
+          "#c8c9cc",
+          "#edeef1"
+        ],
+        "note": "Alpha hairline/tint over the ground; ramp derived from its base colour."
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Sampling Cobalt",
+        "canonical": "#2f4bd8",
+        "oklch": "oklch(48.9% 0.217 268.0)",
+        "tonalRamp": [
+          "#150065",
+          "#11008b",
+          "#1a23b1",
+          "#304dd8",
+          "#4d73ff",
+          "#6c98ff",
+          "#8ebeff",
+          "#b1e5ff"
+        ]
+      },
+      "select": {
+        "role": "primary",
+        "displayName": "Selection Tint",
+        "canonical": "rgb(47 75 216 / 0.22)",
+        "oklch": "oklch(48.9% 0.217 268.0)",
+        "tonalRamp": [
+          "#150065",
+          "#11008b",
+          "#1a23b1",
+          "#304dd8",
+          "#4d73ff",
+          "#6c98ff",
+          "#8ebeff",
+          "#b1e5ff"
+        ],
+        "note": "Alpha hairline/tint over the ground; ramp derived from its base colour."
+      },
+      "void": {
+        "role": "neutral",
+        "displayName": "Void",
+        "canonical": "#09090b",
+        "oklch": "oklch(14.1% 0.004 285.8)",
+        "tonalRamp": [
+          "#0b0b0d",
+          "#252527",
+          "#424245",
+          "#616164",
+          "#838386",
+          "#a6a6a9",
+          "#cacacd",
+          "#f0f0f3"
+        ],
+        "theme": "dark (html[data-theme=dark] or system dark without an explicit light choice); same CSS custom property as its light counterpart"
+      },
+      "void-2": {
+        "role": "neutral",
+        "displayName": "Tint Void",
+        "canonical": "#131316",
+        "oklch": "oklch(18.8% 0.006 285.8)",
+        "tonalRamp": [
+          "#0b0b0e",
+          "#252528",
+          "#424245",
+          "#616165",
+          "#838387",
+          "#a6a6aa",
+          "#cacace",
+          "#eff0f4"
+        ],
+        "theme": "dark (html[data-theme=dark] or system dark without an explicit light choice); same CSS custom property as its light counterpart",
+        "note": "Dark panel fill."
+      },
+      "dark-ink": {
+        "role": "neutral",
+        "displayName": "Bone Ink",
+        "canonical": "#e9e8e4",
+        "oklch": "oklch(93.1% 0.005 95.1)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#262522",
+          "#43423f",
+          "#63625e",
+          "#848380",
+          "#a7a6a2",
+          "#cbcac7",
+          "#f1f0ec"
+        ],
+        "theme": "dark (html[data-theme=dark] or system dark without an explicit light choice); same CSS custom property as its light counterpart"
+      },
+      "dark-ink-2": {
+        "role": "neutral",
+        "displayName": "Soft Bone Ink",
+        "canonical": "#b9b8b2",
+        "oklch": "oklch(78.2% 0.008 98.9)",
+        "tonalRamp": [
+          "#0c0b07",
+          "#262521",
+          "#43423d",
+          "#62615c",
+          "#83827d",
+          "#a6a59f",
+          "#cac9c3",
+          "#f0efe8"
+        ],
+        "theme": "dark (html[data-theme=dark] or system dark without an explicit light choice); same CSS custom property as its light counterpart"
+      },
+      "dark-graphite": {
+        "role": "neutral",
+        "displayName": "Dark Graphite",
+        "canonical": "#8c9097",
+        "oklch": "oklch(65.2% 0.011 261.8)",
+        "tonalRamp": [
+          "#090b10",
+          "#22252b",
+          "#3f4248",
+          "#5e6168",
+          "#7f8289",
+          "#a1a5ac",
+          "#c5c9d1",
+          "#eaeff6"
+        ],
+        "theme": "dark (html[data-theme=dark] or system dark without an explicit light choice); same CSS custom property as its light counterpart"
+      },
+      "dark-rule": {
+        "role": "neutral",
+        "displayName": "Void Hairline",
+        "canonical": "rgb(231 230 225 / 0.13)",
+        "oklch": "oklch(92.4% 0.007 97.4)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#262521",
+          "#43423e",
+          "#62615d",
+          "#83827e",
+          "#a6a5a0",
+          "#cac9c4",
+          "#f0eee9"
+        ],
+        "note": "Alpha hairline/tint over the ground; ramp derived from its base colour.",
+        "theme": "dark (html[data-theme=dark] or system dark without an explicit light choice); same CSS custom property as its light counterpart"
+      },
+      "dark-rule-strong": {
+        "role": "neutral",
+        "displayName": "Void Strong Hairline",
+        "canonical": "rgb(231 230 225 / 0.3)",
+        "oklch": "oklch(92.4% 0.007 97.4)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#262521",
+          "#43423e",
+          "#62615d",
+          "#83827e",
+          "#a6a5a0",
+          "#cac9c4",
+          "#f0eee9"
+        ],
+        "note": "Alpha hairline/tint over the ground; ramp derived from its base colour.",
+        "theme": "dark (html[data-theme=dark] or system dark without an explicit light choice); same CSS custom property as its light counterpart"
+      },
+      "dark-accent": {
+        "role": "primary",
+        "displayName": "Sampling Cobalt on Void",
+        "canonical": "#8b98ff",
+        "oklch": "oklch(71.4% 0.150 276.5)",
+        "tonalRamp": [
+          "#0d0048",
+          "#1b0a6b",
+          "#32328f",
+          "#4d54b4",
+          "#6c77da",
+          "#8d9aff",
+          "#b0bfff",
+          "#d4e5ff"
+        ],
+        "theme": "dark (html[data-theme=dark] or system dark without an explicit light choice); same CSS custom property as its light counterpart"
+      },
+      "dark-select": {
+        "role": "primary",
+        "displayName": "Void Selection Tint",
+        "canonical": "rgb(139 152 255 / 0.28)",
+        "oklch": "oklch(71.4% 0.150 276.5)",
+        "tonalRamp": [
+          "#0d0048",
+          "#1b0a6b",
+          "#32328f",
+          "#4d54b4",
+          "#6c77da",
+          "#8d9aff",
+          "#b0bfff",
+          "#d4e5ff"
+        ],
+        "note": "Alpha hairline/tint over the ground; ramp derived from its base colour.",
+        "theme": "dark (html[data-theme=dark] or system dark without an explicit light choice); same CSS custom property as its light counterpart"
+      },
+      "screen": {
+        "role": "neutral",
+        "displayName": "Screen",
+        "canonical": "#0b0c0e",
+        "oklch": "oklch(15.4% 0.005 264.4)",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#242527",
+          "#414244",
+          "#606164",
+          "#818285",
+          "#a3a5a8",
+          "#c7c9cc",
+          "#edeef2"
+        ],
+        "theme": "always-dark Education screen band, both themes"
+      },
+      "screen-dark": {
+        "role": "neutral",
+        "displayName": "Screen (dark theme)",
+        "canonical": "#060708",
+        "oklch": "oklch(12.8% 0.003 245.8)",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#242527",
+          "#404244",
+          "#606163",
+          "#818284",
+          "#a3a5a7",
+          "#c7c9cb",
+          "#edeff1"
+        ],
+        "theme": "always-dark Education screen band, both themes"
+      },
+      "on-screen": {
+        "role": "neutral",
+        "displayName": "On-Screen Ink",
+        "canonical": "#e7e6e1",
+        "oklch": "oklch(92.4% 0.007 97.4)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#262521",
+          "#43423e",
+          "#62615d",
+          "#83827e",
+          "#a6a5a0",
+          "#cac9c4",
+          "#f0eee9"
+        ],
+        "theme": "always-dark Education screen band, both themes"
+      },
+      "on-screen-2": {
+        "role": "neutral",
+        "displayName": "On-Screen Soft Ink",
+        "canonical": "#b5b4ae",
+        "oklch": "oklch(76.9% 0.008 98.9)",
+        "tonalRamp": [
+          "#0c0b07",
+          "#262521",
+          "#43423d",
+          "#62615c",
+          "#83827d",
+          "#a6a59f",
+          "#cac9c3",
+          "#f0efe8"
+        ],
+        "theme": "always-dark Education screen band, both themes"
+      },
+      "on-screen-accent": {
+        "role": "primary",
+        "displayName": "Sampling Cobalt on Screen",
+        "canonical": "#9aa5ff",
+        "oklch": "oklch(75.0% 0.130 277.5)",
+        "tonalRamp": [
+          "#0b0040",
+          "#1b1362",
+          "#343585",
+          "#5157a9",
+          "#7079cf",
+          "#929cf5",
+          "#b5c1ff",
+          "#d9e6ff"
+        ],
+        "theme": "always-dark Education screen band, both themes"
+      },
+      "on-screen-rule": {
+        "role": "neutral",
+        "displayName": "On-Screen Hairline",
+        "canonical": "rgb(231 230 225 / 0.18)",
+        "oklch": "oklch(92.4% 0.007 97.4)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#262521",
+          "#43423e",
+          "#62615d",
+          "#83827e",
+          "#a6a5a0",
+          "#cac9c4",
+          "#f0eee9"
+        ],
+        "note": "Alpha hairline/tint over the ground; ramp derived from its base colour.",
+        "theme": "always-dark Education screen band, both themes"
+      },
+      "on-screen-rule-strong": {
+        "role": "neutral",
+        "displayName": "On-Screen Strong Hairline",
+        "canonical": "rgb(231 230 225 / 0.28)",
+        "oklch": "oklch(92.4% 0.007 97.4)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#262521",
+          "#43423e",
+          "#62615d",
+          "#83827e",
+          "#a6a5a0",
+          "#cac9c4",
+          "#f0eee9"
+        ],
+        "note": "Alpha hairline/tint over the ground; ramp derived from its base colour.",
+        "theme": "always-dark Education screen band, both themes"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero name only; sampled out of grain before the DOM text takes over. Caps at 15rem."
+      },
+      "display-mobile": {
+        "displayName": "Display Mobile",
+        "purpose": "Hero name at 760px and below, one word per line."
+      },
+      "inscription": {
+        "displayName": "Inscription",
+        "purpose": "陈星昊 set vertical-rl beside the portrait; cycles through CJK Kai, CJK Xing, CJK Song, CJK Cao, CJK WenKai and CJK XingKai (six faces subset to U+9648 U+661F U+660A, single regular weight)."
+      },
+      "inscription-mobile": {
+        "displayName": "Inscription Mobile",
+        "purpose": "The inscription at 760px and below, against the right gutter."
+      },
+      "inscription-label": {
+        "displayName": "Inscription Label",
+        "purpose": "Graphite name of the current hand (楷书 行书 宋体 草书 楷体 行楷), 0.3em tracking."
+      },
+      "band-headline": {
+        "displayName": "Band Headline",
+        "purpose": "Degree titles in the dark screen band."
+      },
+      "closing": {
+        "displayName": "Closing",
+        "purpose": "The email address that closes the page."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles; margin column at 1280px and up."
+      },
+      "statement": {
+        "displayName": "Statement",
+        "purpose": "Research thesis; emphasis by weight 450, never italic."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Role line, paper and project titles, school name, visitor lede."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "News entries, menu links, profile links."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose, 66ch measure, tabular numerals."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Secondary UI and list text: ViTeX scene buttons, research-area notes, country rows, wordmark (450)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Meta, dates, venue, credits, bar controls; graphite, sentence case."
+      },
+      "rail-label": {
+        "displayName": "Rail Label",
+        "purpose": "Schedule rail section names, always shown; current at weight 500 in ink."
+      },
+      "readout": {
+        "displayName": "Readout",
+        "purpose": "Size of every t / alpha-bar readout line (KaTeX label plus Notation numeral)."
+      },
+      "notation": {
+        "displayName": "Notation",
+        "purpose": "KaTeX equations and every live t / alpha-bar numeral; min-width 2.9ch."
+      },
+      "colophon-mark": {
+        "displayName": "Colophon Mark",
+        "purpose": "The x₀ signing the footer, in ink."
+      }
+    },
+    "shadows": [
+      {
+        "name": "menu-sheet",
+        "value": "0 1px 0 var(--rule), 0 18px 32px -24px rgb(0 0 0 / 0.35)",
+        "purpose": "The phone/tablet section menu only; the one cast shadow in the system."
+      },
+      {
+        "name": "bar-hairline",
+        "value": "0 1px 0 var(--rule)",
+        "purpose": "Top bar once scrolled; a hairline drawn with box-shadow, not elevation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "clock",
+        "value": "24 fps (41.667ms per frame)",
+        "purpose": "The single shared clock in gl.ts (onFrame). Every sampler ticks on its frame boundaries; CSS --frame mirrors it."
+      },
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Chrome transitions: link underline and colour (160ms), toggle colour, rail label weight and tick scaleX (200ms), bar fill (240ms), wordmark (300ms), rail (400ms)."
+      },
+      {
+        "name": "readout-step",
+        "value": "200ms steps(5)",
+        "purpose": "Readout colour between graphite and accent."
+      },
+      {
+        "name": "hero-sampler",
+        "value": "40 reverse steps (~1.7s) from t = 1 to 0, then clear and stop",
+        "purpose": "Name sampled out of grain; two frames after t = 0 the canvas clears and stops, leaving clean ground. 3.2s CSS safety reveal."
+      },
+      {
+        "name": "hero-settle",
+        "value": "625ms steps(15), foot delayed 125ms; starts below t = 0.34",
+        "purpose": "Inscription and hero foot unblur (8px) and appear as the name approaches t = 0."
+      },
+      {
+        "name": "portrait",
+        "value": "intro 44 steps; scroll s = scrollY / 0.9vh, t = 0.9·s^1.2, rise 0.14·s, fade smoothstep over s 0.12–0.55",
+        "purpose": "Particle portrait sampled in with the name, then diffused, lifted and faded on scroll; clipped at the hero rule with a 56px soft edge."
+      },
+      {
+        "name": "inscription-typing",
+        "value": "hold 84 frames (caret 12 on / 12 off), erase 1 char per 3 frames, gap 14 frames, type 1 char per 6 frames; label 250ms steps(6)",
+        "purpose": "陈星昊 typed and erased in six hands on the shared clock after the name settles."
+      },
+      {
+        "name": "vitex-sampler",
+        "value": "intro 30 frames; switch 9 frames forward, hold at peak, 15 frames back",
+        "purpose": "ViTeX scene change as a noise round trip."
+      },
+      {
+        "name": "campus-sampler",
+        "value": "scroll-driven over a 340svh track; dissolve field 0.6·value(5) + 0.25·value(17) + 0.15·grain, ±0.05 edge; +0.2·sin(π·mix) noise bump; incoming holds at t = 0.14; entry from coarsest mip; text 500ms steps(12), blur 10px",
+        "purpose": "Campus hand-overs in the screen band: one pass, two textures."
+      },
+      {
+        "name": "globe-sampler",
+        "value": "36-frame diffusion of visitor points; slow yaw 0.0036 rad/frame",
+        "purpose": "Visitor marks arrive from noise onto the globe."
+      },
+      {
+        "name": "theme-threshold",
+        "value": "12 frames (500ms) step-end grain-threshold mask on ::view-transition-new(root); 128px field tiled at 256px",
+        "purpose": "Light/Dark switch sampled into place, never faded."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "html.still",
+        "purpose": "Samplers render once at t = 0, no clock loop, inscription still without caret, instant theme swap, scroll-behavior auto."
+      },
+      {
+        "name": "no-webgl",
+        "value": "html.no-gl",
+        "purpose": "Text shown immediately, no portrait, ViTeX video plays, screen band shows static toned plates, globe hidden."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "xs",
+        "value": "420px"
+      },
+      {
+        "name": "area-rows",
+        "value": "520px"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "760px"
+      },
+      {
+        "name": "lg",
+        "value": "900px"
+      },
+      {
+        "name": "rail",
+        "value": "1100px"
+      },
+      {
+        "name": "margin-headings",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Inline Link",
+      "kind": "custom",
+      "refersTo": "link-inline",
+      "description": "Default link: inherits colour, 1px underline in strong hairline that turns to currentColor on hover.",
+      "html": "<p class=\"ds-p\">Incoming Ph.D. student at <a class=\"ds-link\" href=\"#\">Texas A&amp;M University</a>.</p>",
+      "css": ".ds-p{font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif);font-weight:350;font-size:1.0625rem;line-height:1.6;color:var(--ink-2,#3a3c40);margin:0}.ds-link{color:inherit;text-decoration-line:underline;text-decoration-thickness:1px;text-underline-offset:.22em;text-decoration-color:var(--rule-strong,rgb(16 17 19/.32));transition:text-decoration-color 160ms cubic-bezier(.16,1,.3,1),color 160ms cubic-bezier(.16,1,.3,1)}.ds-link:hover{text-decoration-color:currentColor}.ds-link:focus-visible{outline:1.5px solid var(--accent,#2f4bd8);outline-offset:3px;border-radius:2px}"
+    },
+    {
+      "name": "Arrow Link",
+      "kind": "custom",
+      "refersTo": "link-arrow",
+      "description": "Outbound profile or paper link with an inline SVG arrow.",
+      "html": "<a class=\"ds-arrow\" href=\"#\">GitHub<svg viewBox=\"0 0 12 12\" aria-hidden=\"true\"><path d=\"M3 9 9 3M4 3h5v5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg></a>",
+      "css": ".ds-arrow{display:inline-flex;align-items:baseline;gap:.3em;font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif);font-weight:350;font-size:1.3125rem;color:var(--ink,#101113);text-decoration-line:underline;text-decoration-thickness:1px;text-underline-offset:.22em;text-decoration-color:var(--rule-strong,rgb(16 17 19/.32));transition:text-decoration-color 160ms cubic-bezier(.16,1,.3,1)}.ds-arrow svg{width:.72em;height:.72em;flex:none;align-self:center}.ds-arrow:hover{text-decoration-color:currentColor}.ds-arrow:focus-visible{outline:1.5px solid var(--accent,#2f4bd8);outline-offset:3px;border-radius:2px}"
+    },
+    {
+      "name": "Text Toggle",
+      "kind": "button",
+      "refersTo": "toggle-text",
+      "description": "Theme switch and ViTeX scene buttons (scene buttons at 0.9375rem): bare text, graphite at rest, ink with a 1px underline when pressed.",
+      "html": "<div class=\"ds-toggle\" role=\"group\" aria-label=\"Colour theme\"><button type=\"button\" aria-pressed=\"true\">Light</button><span class=\"ds-sep\" aria-hidden=\"true\"></span><button type=\"button\" aria-pressed=\"false\">Dark</button></div>",
+      "css": ".ds-toggle{display:flex;align-items:center;gap:10px;font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif);font-size:.8125rem;letter-spacing:.01em}.ds-toggle button{font:inherit;background:none;border:0;padding:6px 0;cursor:pointer;color:var(--graphite,#63676e);position:relative;transition:color 200ms cubic-bezier(.16,1,.3,1)}.ds-toggle button:hover{color:var(--ink,#101113)}.ds-toggle button[aria-pressed=true]{color:var(--ink,#101113)}.ds-toggle button[aria-pressed=true]::after{content:'';position:absolute;left:0;right:0;bottom:2px;height:1px;background:currentColor}.ds-toggle button:focus-visible{outline:1.5px solid var(--accent,#2f4bd8);outline-offset:3px;border-radius:2px}.ds-sep{width:1px;height:12px;background:var(--rule-strong,rgb(16 17 19/.32))}"
+    },
+    {
+      "name": "Top Bar",
+      "kind": "nav",
+      "refersTo": "top-bar",
+      "description": "Fixed 64px bar; plate and a hairline once scrolled. Wordmark appears only after the hero name leaves.",
+      "html": "<header class=\"ds-bar\"><a class=\"ds-wm\" href=\"#\">Xinghao Chen</a><div class=\"ds-end\"><a href=\"#\">Email</a><span>Light</span><span class=\"ds-dim\">Dark</span></div></header>",
+      "css": ".ds-bar{height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-inline:clamp(20px,5vw,72px);background:var(--plate,#f7f7f5);box-shadow:0 1px 0 var(--rule,rgb(16 17 19/.14));color:var(--ink,#101113);font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-wm{font-size:.9375rem;font-weight:450;letter-spacing:-.01em;color:inherit;text-decoration:none}.ds-end{display:flex;gap:clamp(16px,2.4vw,32px);font-size:.8125rem;letter-spacing:.01em}.ds-end a{color:inherit;text-decoration:none}.ds-end a:hover{text-decoration:underline;text-underline-offset:.22em}.ds-dim{color:var(--graphite,#63676e)}"
+    },
+    {
+      "name": "Schedule Rail",
+      "kind": "nav",
+      "refersTo": "schedule-rail",
+      "description": "Right-edge section navigation at 1100px and up: every section labelled; current in ink at 500 with its tick scaled from 9px to 18px; cobalt marker glides on the line.",
+      "html": "<nav class=\"ds-rail\" aria-label=\"Sections\"><ol><li><a href=\"#\"><span>Research</span><span class=\"ds-tick\"></span></a></li><li><a href=\"#\" aria-current=\"true\"><span>Publications</span><span class=\"ds-tick\"></span></a></li><li><a href=\"#\"><span>Education</span><span class=\"ds-tick\"></span></a></li></ol><span class=\"ds-line\"></span><span class=\"ds-marker\"></span></nav>",
+      "css": ".ds-rail{position:relative;width:120px;font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-rail ol{list-style:none;margin:0;padding:0;display:grid;gap:18px}.ds-rail a{display:flex;align-items:center;justify-content:flex-end;gap:12px;text-decoration:none;font-size:.8125rem;letter-spacing:.01em;line-height:1;padding-block:3px;color:var(--graphite,#63676e);transition:color 200ms cubic-bezier(.16,1,.3,1)}.ds-rail a:hover,.ds-rail a[aria-current=true]{color:var(--ink,#101113)}.ds-rail a[aria-current=true] span:first-child{font-weight:500}.ds-tick{width:18px;height:1px;background:var(--rule-strong,rgb(16 17 19/.32));flex:none;transform:scaleX(.5);transform-origin:right center;transition:transform 200ms cubic-bezier(.16,1,.3,1),background-color 200ms cubic-bezier(.16,1,.3,1)}.ds-rail a[aria-current=true] .ds-tick{transform:none;background:var(--ink,#101113)}.ds-rail a:focus-visible{outline:1.5px solid var(--accent,#2f4bd8);outline-offset:3px;border-radius:2px}.ds-line{position:absolute;right:0;top:-14px;bottom:-14px;width:1px;background:var(--rule,rgb(16 17 19/.14))}.ds-marker{position:absolute;right:-1px;top:33px;width:3px;height:16px;margin-top:-8px;background:var(--accent,#2f4bd8)}"
+    },
+    {
+      "name": "Inscription",
+      "kind": "custom",
+      "refersTo": "inscription",
+      "description": "陈星昊 set vertically in the current hand, with a horizontal caret and the hand's name in graphite.",
+      "html": "<div class=\"ds-ins\"><span class=\"ds-line\"><span lang=\"zh-Hans\">陈星昊</span><span class=\"ds-caret\"></span></span><span class=\"ds-style\" lang=\"zh-Hans\">楷书</span></div>",
+      "css": ".ds-ins{writing-mode:vertical-rl;display:flex;flex-direction:column;gap:.7rem;align-items:flex-start;color:var(--ink,#101113)}.ds-line{display:inline-flex;align-items:center;font-family:var(--font-cjk,'CJK Kai','Kaiti SC','STKaiti','KaiTi',serif);font-size:clamp(2.6rem,1.4rem + 3.2vw,4.75rem);line-height:1.12;letter-spacing:.06em;min-inline-size:3.55em}.ds-caret{display:inline-block;inline-size:.07em;block-size:.9em;margin-inline-start:.1em;background:var(--ink,#101113);animation:ds-blink 1s steps(1) infinite}.ds-style{align-self:flex-end;font-family:var(--font-cjk,'CJK Kai','Kaiti SC','STKaiti','KaiTi',serif);font-size:.8125rem;letter-spacing:.3em;color:var(--graphite,#63676e)}@keyframes ds-blink{50%{opacity:0}}"
+    },
+    {
+      "name": "Live t Readout",
+      "kind": "custom",
+      "refersTo": "t-readout-live",
+      "description": "KaTeX-labelled timestep; cobalt while t > 0, graphite at t = 0, colour change stepped 200ms/5.",
+      "html": "<p class=\"ds-readout\"><span class=\"ds-lbl\"><i>t</i>=</span><span class=\"ds-num ds-live\">412</span><span class=\"ds-lbl\"><i>ᾱ<sub>t</sub></i>=</span><span class=\"ds-num\">0.000</span></p>",
+      "css": ".ds-readout{display:flex;gap:20px;align-items:baseline;margin:0;color:var(--graphite,#63676e);font-size:.95rem;font-family:KaTeX_Main,'Times New Roman',serif}.ds-lbl i{font-family:KaTeX_Math,'Times New Roman',serif}.ds-num{font-size:1.08em;min-width:2.9ch;color:var(--graphite,#63676e);transition:color 200ms steps(5)}.ds-live{color:var(--accent,#2f4bd8)}"
+    },
+    {
+      "name": "Plate Panel",
+      "kind": "card",
+      "refersTo": "plate-panel",
+      "description": "The only container: a square plate-2 tint, no border or shadow, one per publication or project.",
+      "html": "<article class=\"ds-panel\"><div><h3 class=\"ds-pt\">The University of Washington campus in VR</h3><p class=\"ds-meta\">2024 · Reality Lab</p></div><p class=\"ds-ptext\">A walkable campus reconstructed from Gaussian splats and rendered for a headset.</p></article>",
+      "css": ".ds-panel{background:var(--plate-2,#eeeeeb);padding:clamp(16px,2.6vw,36px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:16px clamp(24px,3vw,48px);font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-pt{margin:0;font-size:clamp(1.45rem,1.1rem + 1.2vw,1.875rem);line-height:1.18;letter-spacing:-.018em;font-weight:400;color:var(--ink,#101113)}.ds-meta{margin:10px 0 0;font-size:.8125rem;letter-spacing:.01em;color:var(--graphite,#63676e)}.ds-ptext{margin:0;font-size:1.0625rem;line-height:1.6;font-weight:350;color:var(--ink-2,#3a3c40)}@media (max-width:900px){.ds-panel{grid-template-columns:1fr}}"
+    },
+    {
+      "name": "Ledger Row",
+      "kind": "custom",
+      "refersTo": "ledger-row",
+      "description": "News and count lists: top rule, 1px rule per row, graphite tabular date column.",
+      "html": "<ul class=\"ds-ledger\"><li><span class=\"ds-date\">Spring 2027</span><span class=\"ds-text\">Joining Texas A&amp;M University as a Ph.D. student in Computer Science.</span></li><li><span class=\"ds-date\">Sep 24, 2026</span><span class=\"ds-text\">ViTeX-Bench accepted to NeurIPS 2026, Evaluations &amp; Datasets Track.</span></li></ul>",
+      "css": ".ds-ledger{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule,rgb(16 17 19/.14));font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-ledger li{display:grid;grid-template-columns:minmax(8.5rem,1fr) minmax(0,3.2fr);gap:8px 32px;padding-block:22px;border-bottom:1px solid var(--rule,rgb(16 17 19/.14));align-items:baseline}.ds-date{font-size:.8125rem;letter-spacing:.02em;color:var(--graphite,#63676e);font-variant-numeric:tabular-nums}.ds-text{font-size:1.3125rem;line-height:1.4;letter-spacing:-.008em;color:var(--ink,#101113);font-weight:350}"
+    },
+    {
+      "name": "Screen Band Entry",
+      "kind": "custom",
+      "refersTo": "screen-band",
+      "description": "Always-dark Education band entry: band headline, school title, dates in on-screen soft ink, hairline tick index.",
+      "html": "<div class=\"ds-band\"><h3 class=\"ds-deg\">Ph.D., Computer Science</h3><p class=\"ds-school\">Texas A&amp;M University</p><p class=\"ds-dates\"><span class=\"ds-flag\">Incoming</span><span>Spring 2027</span></p><div class=\"ds-index\"><span class=\"ds-ticks\"><i class=\"on\"></i><i></i><i></i></span><span>t = 140</span></div></div>",
+      "css": ".ds-band{background:var(--screen,#0b0c0e);color:var(--on-screen,#e7e6e1);padding:48px clamp(20px,5vw,72px);font-family:var(--font-sans,'Geologica Variable',system-ui,sans-serif)}.ds-deg{margin:0;font-size:clamp(2.1rem,1.3rem + 3.4vw,4.75rem);line-height:1.02;letter-spacing:-.035em;font-weight:300}.ds-school{margin:12px 0 0;font-size:clamp(1.45rem,1.1rem + 1.2vw,1.875rem);letter-spacing:-.012em;font-weight:400}.ds-dates{margin:14px 0 0;display:flex;gap:4px 14px;font-size:.8125rem;letter-spacing:.02em;color:var(--on-screen-2,#b5b4ae)}.ds-flag{color:var(--on-screen,#e7e6e1);font-weight:500}.ds-index{display:flex;justify-content:space-between;align-items:baseline;margin-top:28px;padding-top:14px;border-top:1px solid rgb(231 230 225/.18);color:var(--on-screen-2,#b5b4ae);font-size:.95rem}.ds-ticks{display:flex;gap:10px;align-items:center}.ds-ticks i{width:28px;height:1px;background:rgb(231 230 225/.28)}.ds-ticks i.on{height:2px;background:var(--on-screen,#e7e6e1)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Denoising Trajectory",
+    "overview": "**Creative North Star: \"The Denoising Trajectory\"**\n\nThe page behaves like one diffusion sampling run. Every state that changes arrives as a short noise-to-signal trajectory: per-pixel Gaussian grain (PCG hash into Box-Muller, WebGL2) resolving coarse shape first and crisp edges last, on the cosine ᾱ schedule, while a KaTeX readout of the live timestep counts down to t = 0. The name and a particle portrait are sampled out of noise together in the first viewport; the portrait diffuses back into noise as the reader scrolls. ViTeX scene switches, the campus hand-overs, the visitor globe and the Light/Dark switch use the same grammar. When a trajectory ends, its grain is gone: the settled page is clean ground.\n\nThe material is an off-white plate in light and a near-black void in dark, printed in near-black or bone ink. Structure is carried by hairlines, tabular numerals and notation, with one container: a flat, square plate-2 tint panel that holds each publication and each project. Density is editorial and generous: long section air, a 12-column grid with margin headings at wide widths, and one full-bleed dark screen band where the campuses resolve. The name also stands in Chinese as a vertical inscription, typed and erased in six hands on the shared clock. The single cobalt accent is instrumentation: it lights when something is being sampled, and rests to graphite when t reaches 0.\n\nConfirmed rejections: bordered, rounded or shadowed cards, pills, decorative shadows, eyebrows or kickers above headings, glow, gradients on the accent, neon or cyber styling, standing grain or texture at rest, and any hover motion beyond colour and underline changes.",
+    "keyCharacteristics": [
+      "Gaussian noise is the only transition vocabulary; it exists only while something is being sampled, and the ground is clean at rest.",
+      "One shared 24 fps clock; every sampler, the inscription and every stepped CSS transition land on its frames.",
+      "Hairline instruments (1px rules, 9px ticks, 1px underlines) and one flat plate-2 tint panel instead of boxes.",
+      "Geologica at light weights with negative tracking; KaTeX Computer Modern for every number that means t; six calligraphic and print hands for 陈星昊.",
+      "Light and dark are both first-class and follow the system until the visitor chooses.",
+      "Reduced motion and no-WebGL are complete, still pages, never degraded ones."
+    ],
+    "rules": [
+      {
+        "name": "The Live-Only Accent Rule",
+        "body": "Cobalt means \"t > 0 right now\", \"you are here\" on the rail, or \"a visitor was here\". Anything at rest, including the colophon x₀, is ink or graphite.",
+        "section": "colors"
+      },
+      {
+        "name": "The Paired Theme Rule",
+        "body": "Every neutral has a void counterpart in the same role; never introduce a light-only or dark-only colour outside the screen band.",
+        "section": "colors"
+      },
+      {
+        "name": "The Light Hand Rule",
+        "body": "Nothing on the page is heavier than 550 (author name and venue); headings sit between 300 and 400. Weight is not how hierarchy is made; size and tracking are.",
+        "section": "typography"
+      },
+      {
+        "name": "The Notation Rule",
+        "body": "Any number that is a timestep or schedule value is KaTeX_Main at 1.08em of a 0.95rem readout, with a 2.9ch minimum width, so it never reflows while it counts.",
+        "section": "typography"
+      },
+      {
+        "name": "The Three Glyph Rule",
+        "body": "CJK faces ship subset to the three glyphs of 陈星昊 and nothing else; a new CJK string means a new subset, never a full font.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Shadow Rule",
+        "body": "The menu sheet is the only surface allowed a cast shadow. Anything else that needs separation gets a hairline or the plate-2 tint.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Clean Ground Rule",
+        "body": "At rest the ground is flat plate or void. Grain and particles exist only while a trajectory runs; the hero canvas clears and stops once the name settles, and the portrait never draws below the hero rule.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do make every new state change a noise-to-signal trajectory on the shared 24 fps clock; content samplers also show a live t readout.",
+      "Do clear and stop a sampler when its trajectory ends; the ground at rest is flat plate or void.",
+      "Do keep the accent to live readouts (t > 0), the rail marker and visitor marks, plus focus ring, caret and selection; return readouts to graphite at t = 0.",
+      "Do separate content with 1px hairlines (rule / rule-strong) and ledger rows; when a unit needs to stand apart, give it a square plate-2 panel.",
+      "Do set numerals tabular and timesteps in KaTeX_Main at 1.08em with a 2.9ch minimum.",
+      "Do keep headings at weight 300–400 with negative tracking (-0.015em to -0.04em).",
+      "Do size stepped CSS transitions to whole frames (41.667ms multiples) with `steps(n)`.",
+      "Do ship the still path and the no-WebGL path as finished pages.",
+      "Do define every new neutral for plate, void and, if it can appear there, the screen band.",
+      "Do subset any CJK face to the glyphs it sets and self-host it."
+    ],
+    "donts": [
+      "Don't use bordered, rounded or shadowed cards, pills or badges; the only container is the square plate-2 panel, and radius is 0 except the 2px focus outline.",
+      "Don't add shadows beyond the menu sheet.",
+      "Don't place eyebrows or kickers above headings; supporting lines (venue, dates, notes) go below the title.",
+      "Don't animate hover with lifts, scales, parallax or cursor followers; hover changes colour or underline only.",
+      "Don't give the accent a glow, gradient, fill or rest state.",
+      "Don't crossfade or slide where the world samples; no crossfades for theme or scene changes.",
+      "Don't leave grain, particles or texture standing on the page at rest, or let the portrait draw below the hero rule.",
+      "Don't use uppercase labels or letter-spaced small caps.",
+      "Don't run a second animation clock or free-running requestAnimationFrame outside gl.ts."
+    ]
+  }
+}

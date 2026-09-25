@@ -1,0 +1,134 @@
+---
+import katex from 'katex';
+import visitors from '../data/visitors.json';
+import centroids from '../data/centroids.json';
+
+type Country = { code: string; name: string; count: number };
+const cents = centroids as Record<string, [number, number]>;
+const countries = (visitors.countries as Country[])
+  .filter((c) => c.count > 0)
+  .sort((a, b) => b.count - a.count);
+const marks = countries
+  .filter((c) => cents[c.code])
+  .map((c) => ({ lat: cents[c.code][0], lon: cents[c.code][1], n: c.count }));
+const total: number = visitors.total ?? 0;
+const top = countries.slice(0, 8);
+const updated = visitors.updated
+  ? new Date(visitors.updated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })
+  : null;
+const fmt = (n: number) => n.toLocaleString('en-US');
+const tLabel = katex.renderToString('t=', { throwOnError: false });
+---
+
+<section class="section" id="visitors" aria-labelledby="visitors-title">
+  <div class="wrap section-grid">
+    <h2 class="section-title" id="visitors-title">Visitors</h2>
+
+    <div class="section-body visitors">
+      <div class="globe-wrap">
+        <canvas class="globe" data-globe data-marks={JSON.stringify(marks)} aria-hidden="true"></canvas>
+        <p class="globe-t" aria-hidden="true"><span set:html={tLabel} /><span class="num" data-globe-t>0</span></p>
+        <p class="globe-hint meta" aria-hidden="true">Drag to turn</p>
+      </div>
+
+      <div class="stats">
+        {total > 0 ? (
+          <>
+            <p class="stats-lede">
+              <span class="figure">{fmt(total)}</span> {total === 1 ? 'visit' : 'visits'} from
+              <span class="figure">{countries.length}</span> {countries.length === 1 ? 'country' : 'countries'}.
+            </p>
+            <ol class="country-list">
+              {top.map((c) => (
+                <li>
+                  <span class="c-name">{c.name}</span>
+                  <span class="c-count">{fmt(c.count)}</span>
+                </li>
+              ))}
+            </ol>
+          </>
+        ) : (
+          <>
+            <p class="stats-lede">No visits recorded yet.</p>
+            <p class="stats-sub">
+              Each country lights up on the globe once someone visits from there. You may well be the first.
+            </p>
+          </>
+        )}
+        <p class="meta source">
+          Counted without cookies by GoatCounter{updated ? `, updated ${updated}` : ', updated daily'}.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .visitors {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 32px clamp(32px, 5vw, 80px);
+    align-items: center;
+  }
+  .globe-wrap { position: relative; }
+  .globe {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 620px;
+    touch-action: pan-y;
+    cursor: grab;
+  }
+  .globe:active { cursor: grabbing; }
+  .globe-t {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: inline-flex;
+    gap: 0.25em;
+    align-items: baseline;
+    color: var(--graphite);
+    font-size: 0.95rem;
+  }
+  .globe-hint { position: absolute; right: 0; bottom: 2px; }
+  :global(html.no-gl) .globe-wrap { display: none; }
+  :global(html:not(.globe-gl)) .globe-t,
+  :global(html:not(.globe-gl)) .globe-hint { display: none; }
+  .num {
+    font-family: KaTeX_Main, 'Times New Roman', serif;
+    font-size: 1.08em;
+    min-width: 2.9ch;
+    color: var(--graphite);
+    transition: color 200ms steps(5);
+  }
+  .num.live { color: var(--accent); }
+
+  .stats-lede {
+    font-size: var(--step-2);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 380;
+  }
+  .figure { color: var(--accent); font-weight: 450; }
+  .stats-sub { margin-top: 12px; color: var(--ink-2); max-width: 36ch; }
+  .country-list {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .country-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 9px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.9375rem;
+  }
+  .c-count { color: var(--graphite); font-variant-numeric: tabular-nums; }
+  .source { margin-top: 20px; }
+
+  @media (max-width: 900px) {
+    .visitors { grid-template-columns: 1fr; }
+    .globe { max-width: 520px; margin-inline: auto; }
+  }
+</style>

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.impeccable/review/
+.impeccable/mocks/
+.DS_Store
+.impeccable/hook.cache.json
+.impeccable/questions/
+.claude/

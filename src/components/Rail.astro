@@ -1,0 +1,97 @@
+---
+import { sections } from '../data/site';
+---
+
+<nav class="rail" aria-label="Sections" data-rail>
+  <ol>
+    {sections.map((s) => (
+      <li>
+        <a href={`#${s.id}`} data-rail-link={s.id}>
+          <span class="rail-label">{s.label}</span>
+          <span class="rail-tick" aria-hidden="true"></span>
+        </a>
+      </li>
+    ))}
+  </ol>
+  <span class="rail-line" aria-hidden="true"></span>
+  <span class="rail-marker" aria-hidden="true" data-rail-marker></span>
+</nav>
+
+<style>
+  .rail {
+    display: none;
+  }
+  @media (min-width: 1100px) {
+    .rail {
+      display: block;
+      position: fixed;
+      z-index: 30;
+      right: var(--gutter);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 120px;
+      transition: opacity 400ms var(--ease-out);
+    }
+  }
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  /* Every section is always named; the current one is set in ink, heavier, with a longer tick. */
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    text-decoration: none;
+    font-size: 0.8125rem;
+    letter-spacing: 0.01em;
+    color: var(--graphite);
+    line-height: 1;
+    padding-block: 3px;
+    transition: color 200ms var(--ease-out);
+  }
+  .rail-label { transition: font-weight 200ms var(--ease-out); }
+  a[aria-current='true'] { color: var(--ink); }
+  a[aria-current='true'] .rail-label { font-weight: 500; }
+  a:hover { color: var(--ink); }
+  .rail-tick {
+    width: 18px;
+    height: 1px;
+    background: var(--rule-strong);
+    flex: none;
+    transform: scaleX(0.5);
+    transform-origin: right center;
+    transition: transform 200ms var(--ease-out), background-color 200ms var(--ease-out);
+  }
+  a[aria-current='true'] .rail-tick { transform: none; background: var(--ink); }
+  .rail-line {
+    position: absolute;
+    right: 0;
+    top: -14px;
+    bottom: -14px;
+    width: 1px;
+    background: var(--rule);
+  }
+  /* Any label, tick or marker that sits over the dark campus band switches to screen ink. */
+  a:global(.on-dark),
+  .rail-marker:global(.on-dark) {
+    --rule-strong: rgb(231 230 225 / 0.5);
+    --graphite: #b5b4ae;
+    --ink: #e7e6e1;
+    --accent: #9aa5ff;
+  }
+  .rail-marker {
+    position: absolute;
+    right: -1px;
+    top: 0;
+    width: 3px;
+    height: 16px;
+    margin-top: -8px;
+    background: var(--accent);
+    transform: translateY(var(--marker-y, 0px));
+  }
+</style>
