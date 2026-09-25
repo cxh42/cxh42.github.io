@@ -264,7 +264,7 @@ components:
 
 **Creative North Star: "The Denoising Trajectory"**
 
-The page behaves like one diffusion sampling run. Every state that changes arrives as a short noise-to-signal trajectory: per-pixel Gaussian grain (PCG hash into Box-Muller, WebGL2) resolving coarse shape first and crisp edges last, on the cosine ᾱ schedule, while a KaTeX readout of the live timestep counts down to t = 0. The name and a particle silhouette of the site owner are sampled out of noise together in the first viewport; the profile diffuses back into noise as the reader scrolls. ViTeX scene switches, the campus hand-overs, the visitor globe and the Light/Dark switch use the same grammar. When a trajectory ends, its grain is gone: the settled page is clean ground.
+The page behaves like one diffusion sampling run. Every state that changes arrives as a short noise-to-signal trajectory: per-pixel Gaussian grain (PCG hash into Box-Muller, WebGL2) resolving coarse shape first and crisp edges last, on the cosine ᾱ schedule, while a KaTeX readout of the live timestep counts down to t = 0. A particle silhouette of the site owner is sampled out of noise in the first viewport while the name stays plain text from the first paint; the profile diffuses back into noise as the reader scrolls. ViTeX scene switches, the campus hand-overs, the visitor globe and the Light/Dark switch use the same grammar. When a trajectory ends, its grain is gone: the settled page is clean ground.
 
 The material is an off-white plate in light and a near-black void in dark, printed in near-black or bone ink. Structure is carried by hairlines, tabular numerals and notation, with one container: a flat, square plate-2 tint panel that holds each publication and each project. Density is editorial and generous: long section air, a 12-column grid with margin headings at wide widths, and one full-bleed dark screen band where the campuses resolve, each filtered in its school's colour. 陈星昊 is a second, quieter voice that follows the surname on its baseline, typed and erased in six hands on the shared clock. The single cobalt accent is instrumentation: it lights only on a live t readout or a visitor mark, and rests to graphite when t reaches 0. Positional markers (rail, school index) are ink.
 
@@ -358,7 +358,7 @@ Flat. Depth comes from sampling itself, the one tint step and the one dark scree
 ### Named Rules
 **The One Shadow Rule.** The menu sheet is the only surface allowed a cast shadow. Anything else that needs separation gets a hairline or the plate-2 tint.
 
-**The Clean Ground Rule.** At rest the ground is flat plate or void. Grain and particles exist only while a trajectory runs; the hero canvas clears and stops once the name settles, every campus settles at t = 0, and the portrait never draws below the hero rule.
+**The Clean Ground Rule.** At rest the ground is flat plate or void. Grain and particles exist only while a trajectory runs; every campus settles at t = 0, and the portrait never draws below the hero rule.
 
 ## Shapes
 
@@ -398,7 +398,7 @@ A KaTeX label (t=, ᾱ_t=) followed by a numeral in Notation type. Graphite at r
 
 ### Grain Samplers (signature)
 WebGL2 canvases sharing gl.ts noise and schedule, ticking on the one 24 fps clock:
-- **Hero name:** 40 reverse steps (about 1.7s) from t = 1 to 0. The Chinese name and foot fade in (opacity only, 625ms in 15 steps, foot delayed 125ms) below t = 0.34. At t = 0 the DOM text takes over and two frames later the canvas clears and stops. A 3.2s CSS safety reveals text if the sampler never runs.
+- **Hero name:** never animated, hidden or redrawn; it is plain text from the first paint. The equation readout counts t from 1 to 0 over 40 steps (about 1.7s) alongside the portrait's sampling, then 陈星昊 fades in (opacity, 625ms in 15 steps) and its typing loop starts.
 - **Particle portrait:** the site owner's own silhouette, sampled from the outline and heavily blurred tonal masses of a headshot (no facial features; about 11k points, 1.7 CSS px). Ink points at alpha 0.5 on light and 0.62 on dark, drawn straight through 陈星昊 with no mask, sampled over 44 steps alongside the name. On scroll (s = scrollY / 0.9 viewport heights) it is re-noised to t = 0.9·s^1.2, rises by 0.14 of its height and fades out between s = 0.12 and 0.55 (smoothstep). It stops drawing once past the hero. Reduced motion draws it once at rest.
 - **ViTeX stage:** first view samples in over 30 frames; a scene switch noises forward over 9 frames, holds at the peak until the next clip has a frame, then samples back over 15.
 - **Campus band:** the band arrives at t = 0.72 and samples the first campus clean over 22 frames. Each school owns one 70svh step of the pinned range; one mouse-wheel gesture moves exactly one school (inertia is swallowed until the gesture ends, and past either end the wheel scrolls the page), while touch and keyboard follow the nearest step. Changing school starts a timed 24-frame hand-over: forward to the peak over the first 40%, the next campus takes over under the noise, then back to t = 0; the school tint and exposure gain crossfade with it. Noise is scaled grain over a mip-blurred photo, toned dark, so it never passes through white. Every school settles at t = 0. Degree text switches by opacity (375ms, 9 steps).

@@ -135,10 +135,20 @@ export function initPortrait() {
     gl!.bindVertexArray(null);
   }
 
+  let cleared = false;
   function tick(frame: number) {
     if (step < STEPS) step++;
-    // Past the hero the portrait has fully dispersed: nothing left to draw.
-    if (window.scrollY > window.innerHeight * 1.05 && step >= STEPS) return;
+    // Past the hero the portrait has fully dispersed: clear the fixed canvas once (a jump from the rail
+    // skips the fade), then draw nothing until the reader comes back.
+    if (window.scrollY > window.innerHeight * 1.05 && step >= STEPS) {
+      if (!cleared) {
+        gl!.clearColor(0, 0, 0, 0);
+        gl!.clear(gl!.COLOR_BUFFER_BIT);
+        cleared = true;
+      }
+      return;
+    }
+    cleared = false;
     render(frame);
   }
 

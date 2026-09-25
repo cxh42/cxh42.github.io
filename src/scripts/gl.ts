@@ -37,7 +37,9 @@ uint pcg(uint v) {
   uint w = ((s >> ((s >> 28u) + 4u)) ^ s) * 277803737u;
   return (w >> 22u) ^ w;
 }
-float rnd(uvec3 p) { return float(pcg(p.x + pcg(p.y + pcg(p.z)))) * (1.0 / 4294967296.0); }
+// Keep 24 bits before converting: some desktop drivers (NVIDIA via ANGLE/GL) return 0 for float() of a
+// full 32-bit uint, which flattens the noise to a constant.
+float rnd(uvec3 p) { return float(pcg(p.x + pcg(p.y + pcg(p.z))) >> 8u) * (1.0 / 16777216.0); }
 float gauss(uvec3 p) {
   float u1 = max(rnd(p), 1e-7);
   float u2 = rnd(p + uvec3(7u, 13u, 101u));
