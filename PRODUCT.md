@@ -38,7 +38,7 @@ The site belongs to a researcher who works on moving images (video generation an
 **Identity**
 - Name: **Xinghao Chen**. This is the most prominent element on the site.
 - Chinese name: **陈星昊**, shown secondary.
-- Research focus: **generative AI**, currently **video generation models**. ViTeX is a publication, not the current focus (updated 2026-09-26). The user is also strongly interested in **large language models** and wants to work on them.
+- Self-description (user's wording, 2026-09-26): **"Generative AI researcher, currently working on video generation."** Research interests: **video generation, LLMs & VLMs, 3D Gaussian Splatting**. Write it the way PhD students' homepages do; don't frame anything as a "growing interest".
 - Earlier research: **vision-language models (VLM)** and **3D Gaussian Splatting (3DGS)**.
 - Projects (their own section, after Publications):
   - **CoastalSeg** (https://github.com/cxh42/CoastalSeg). A 2025 UW capstone and APL student-led project: multi-class segmentation of community-uploaded shoreline photos, with outlier detection and multi-image perspective correction. It uses DeepLabV3+ with an EfficientNet-B6 encoder and reaches 0.93 IoU, and is used with MyCoast Washington. Team: Xinghao Chen (listed first), Zheheng Li, Dylan Scott, Aaryan Shah, Bauka Zhandulla, Sarah Li. Demos are on Hugging Face Spaces.
@@ -76,7 +76,7 @@ The site belongs to a researcher who works on moving images (video generation an
 - Ambitious, modern motion and interaction, per the user's explicit request.
 
 **Excluded content (binding)**
-- No personal photo for now, and nothing derived from one (the silhouette is an authored figure).
+- No personal photo for now. (The particle silhouette derived from the headshot is allowed.)
 - No CV PDF, and none of the old CV's past experiences.
 - No Portfolio section or items.
 - 3DGS may now appear, but only as earlier research and the VR project (the user reversed the earlier exclusion on 2026-09-26).
@@ -105,7 +105,9 @@ These visual constraints came from the user and are binding. They're recorded wi
   - The equation is ornament only: small, faint, and hidden on phones.
   - The publication venue (e.g. NeurIPS 2026) is prominent.
   - Campus photos carry each school's colour as a filter: TAMU maroon, UW purple, Henan blue.
-  - School changes are threshold-triggered, timed noise-and-denoise transitions, never a white flash.
+  - School changes are timed noise-and-denoise transitions, never a white flash. One mouse-wheel scroll moves to the next school.
+  - Education lists full school names, degree abbreviations (Ph.D., M.S., B.E.) and full year ranges (2027 –, 2024 – 2025, 2020 – 2024). The TAMU photo keeps its top (the dome) in frame.
+  - The hero has its own ground, distinct from the rest of the page but still clean. Nothing opaque sits behind 陈星昊.
   - The school index is vertical, matching the scroll direction.
 - Added 2026-09-26:
   - The hero background must feel clean in both themes, with no "dirty" grain field.
@@ -124,7 +126,7 @@ These visual constraints came from the user and are binding. They're recorded wi
   - Texas A&M: Academic Building at dusk by Alexey Sergeev (asergeev.com), chosen by the user. It's © the photographer, credited in the footer; no open license was found.
   - UW: a photo the user chose from a UW site (cdn.uconnectlabs.com). All rights stay with the university; it's credited in the footer.
   - Henan University: "河南大学礼堂2020" by ScareCriterion12, CC BY-SA 4.0 via Wikimedia Commons.
-- Particle portrait: an authored, designed profile bust facing left (`scripts/figure-profile.svg`), rendered as particles along its contour lines. It must **not** be derived from the user's photo; the user withdrew that on 2026-09-26.
+- Particle portrait: the user's own silhouette, from the outline and heavily blurred masses of the old headshot (`HEAD~1:images/bio-photo.jpg`); no facial features and the photo is never shipped. The user tried an authored figure and asked on 2026-09-26 to go back to this one.
 - There are no personal photos, testimonials, talks, teaching entries, awards or citation counts. Don't fabricate any of these.
 
 ## Product Principles

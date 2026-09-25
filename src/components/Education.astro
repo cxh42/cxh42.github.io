@@ -13,9 +13,9 @@ const alts = {
   henu: 'The Grand Auditorium of Henan University.',
 } as const;
 // Where the photo's subject sits, so a cover crop never loses it.
-const focus = { tamu: '30% 42%', uw: '44% 55%', henu: '50% 48%' } as const;
+const focus = { tamu: '30% 0%', uw: '44% 55%', henu: '50% 48%' } as const;
 // Portrait screens crop hard from the sides: keep the dome, the library and the hall in frame.
-const focusNarrow = { tamu: '27% 42%', uw: '26% 55%', henu: '50% 48%' } as const;
+const focusNarrow = { tamu: '27% 0%', uw: '26% 55%', henu: '50% 48%' } as const;
 
 const entries = await Promise.all(
   education.map(async (e) => {
@@ -46,8 +46,9 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
           {entries.map((e, i) => (
             <li>
               <button type="button" data-edu-go={i} aria-current={i === 0 ? 'true' : 'false'}>
-                <span class="edu-short">{e.short}</span>
-                <span class="edu-year">{e.year}</span>
+                <span class="edu-short">{e.school}</span>
+                <span class="edu-abbr">{e.abbr}</span>
+                <span class="edu-year">{e.years}</span>
               </button>
             </li>
           ))}
@@ -172,7 +173,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
 
   /* Live layout: one sticky screen. Crossing a scroll threshold sends the current campus into noise and
      samples the next one out of it. */
-  :global(html.edu-gl) .edu { height: 330svh; }
+  :global(html.edu-gl) .edu { height: calc(100svh + 2 * 70svh); } /* one 70svh step per hand-over */
   :global(html.edu-gl) .edu-stage {
     position: sticky;
     top: 0;
@@ -235,7 +236,8 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
   .edu-index button:hover { color: var(--edu-ink); }
   .edu-index button[aria-current='true'] { color: var(--edu-ink); }
   .edu-index button[aria-current='true'] .edu-short { font-weight: 500; }
-  .edu-short { min-width: 7.5rem; text-align: left; }
+  .edu-short { min-width: 14rem; text-align: left; }
+  .edu-abbr { min-width: 2.8rem; text-align: left; }
   .edu-year { font-size: var(--step--1); color: var(--on-screen-2); font-variant-numeric: tabular-nums; }
   .edu-rule {
     position: absolute;
@@ -275,6 +277,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
 
   @media (max-width: 760px) {
     :global(html.edu-gl) .edu-index { --row: 30px; }
-    .edu-short { min-width: 6.5rem; }
+    .edu-short { min-width: 0; flex: 1; }
+    .edu-index button { font-size: 0.8125rem; gap: 10px; }
   }
 </style>

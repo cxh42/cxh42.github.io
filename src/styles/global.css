@@ -22,6 +22,7 @@
   --on-screen-2: #b5b4ae;
   --on-screen-accent: #9aa5ff;
   --select: rgb(47 75 216 / 0.22);
+  --hero-ground: radial-gradient(120% 95% at 68% 28%, #ffffff 0%, #f0f0ed 62%, #e9e9e5 100%);
 
   --font-sans: 'Geologica Variable', 'Geologica', system-ui, sans-serif;
   --font-cjk: 'CJK Kai', 'Kaiti SC', 'STKaiti', 'KaiTi', serif;
@@ -53,6 +54,7 @@
   --accent: #8b98ff;
   --screen: #060708;
   --select: rgb(139 152 255 / 0.28);
+  --hero-ground: radial-gradient(120% 95% at 68% 28%, #17171c 0%, #0e0e11 62%, #060607 100%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -68,6 +70,7 @@
     --accent: #8b98ff;
     --screen: #060708;
     --select: rgb(139 152 255 / 0.28);
+  --hero-ground: radial-gradient(120% 95% at 68% 28%, #17171c 0%, #0e0e11 62%, #060607 100%);
   }
 }
 

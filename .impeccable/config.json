@@ -32,6 +32,12 @@
         "value": "cjk xingkai",
         "createdAt": "2026-09-25T17:55:21.097Z",
         "reason": "Declared in DESIGN.md typography prose (six CJK faces for the 陈星昊 inscription); the user asked for a different typeface on each typing cycle (2026-09-26)"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#ffffff",
+        "createdAt": "2026-09-25T19:28:57.940Z",
+        "reason": "Centre stop of the hero-ground radial light; documented in DESIGN.md layout prose; the user asked for a hero ground distinct from the page (2026-09-26)"
       }
     ]
   }

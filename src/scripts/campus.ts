@@ -6,7 +6,7 @@ import { QUAD_VS, NOISE_GLSL, compile, fullscreenQuad, getGL, isStill, onFrame, 
 // back to clean. Every school settles at t = 0: nothing grains at rest.
 
 const PEAK = 0.72; // how far forward the hand-over noises (t in 0..1)
-const FRAMES = 28; // about 1.17 s per hand-over
+const FRAMES = 24; // one second per hand-over
 const INTRO = 22; // the first campus sampling in as the band arrives
 
 const FS = /* glsl */ `#version 300 es
@@ -167,11 +167,11 @@ export function initCampus() {
 
   const hold = (_i: number) => 0; // nothing grains at rest, the incoming school included
 
-  // Which school the scroll position asks for: equal thirds of the pinned range.
+  // Each school owns one step of the pinned range; the scroll position asks for the nearest one.
+  const stepPx = () => (section!.getBoundingClientRect().height - window.innerHeight) / Math.max(1, n - 1);
   function target() {
     const r = section!.getBoundingClientRect();
-    const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - window.innerHeight)));
-    return Math.min(n - 1, Math.floor(p * n));
+    return Math.min(n - 1, Math.max(0, Math.floor((-r.top + stepPx() * 0.5) / stepPx())));
   }
 
   let shown = 0; // the school on screen (or leaving, mid hand-over)
@@ -283,9 +283,38 @@ export function initCampus() {
     b.addEventListener('click', () => {
       const i = Number(b.dataset.eduGo);
       const r = section!.getBoundingClientRect();
-      const y = window.scrollY + r.top + ((i + 0.5) / n) * (r.height - window.innerHeight);
+      const y = window.scrollY + r.top + i * stepPx();
       window.scrollTo({ top: y, behavior: 'smooth' });
     }),
+  );
+
+  // A mouse wheel moves one school per gesture while the band is pinned. Trackpad inertia is swallowed
+  // until the gesture ends, and past the first or last school the wheel scrolls the page as usual.
+  let lastWheel = 0;
+  let armed = true;
+  window.addEventListener(
+    'wheel',
+    (e) => {
+      if (Math.abs(e.deltaY) < Math.abs(e.deltaX) || e.ctrlKey) return;
+      const r = section!.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const now = performance.now();
+      if (now - lastWheel > 180) armed = true;
+      lastWheel = now;
+      if (!(r.top <= 1 && r.bottom >= vh - 1)) return;
+      const cur = target();
+      const to = cur + Math.sign(e.deltaY);
+      const busy = frame0 >= 0 || !armed;
+      if (to < 0 || to >= n) {
+        if (busy) e.preventDefault();
+        return;
+      }
+      e.preventDefault();
+      if (busy) return;
+      armed = false;
+      window.scrollTo({ top: window.scrollY + r.top + to * stepPx(), behavior: 'instant' as ScrollBehavior });
+    },
+    { passive: false },
   );
 
   mark(0);

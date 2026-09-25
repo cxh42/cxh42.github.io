@@ -5,7 +5,7 @@ export const person = {
   given: 'Xinghao',
   family: 'Chen',
   cjk: '陈星昊',
-  role: 'Generative AI researcher, focused on video generation.',
+  role: 'Generative AI researcher, currently working on video generation.',
   email: 'cxh4242@gmail.com',
 };
 
@@ -18,12 +18,11 @@ export const links = {
   advisor: 'https://vztu.github.io/',
 };
 
-// Research areas, current first. Kept to what the site owner has confirmed.
-export const areas = [
-  { name: 'Video generation', status: 'Current focus', note: 'Published: ViTeX-Bench, NeurIPS 2026.' },
-  { name: 'Large language models', status: 'Growing interest', note: '' },
-  { name: 'Vision-language models', status: 'Earlier research', note: '' },
-  { name: '3D vision & VR', status: 'Earlier research', note: '3D Gaussian Splatting, and a UW campus tour for Meta Quest.' },
+// Research interests, in the order they appear on the page.
+export const interests = [
+  { name: 'Video generation', note: 'Current work' },
+  { name: 'Large language models & vision-language models', note: '' },
+  { name: '3D Gaussian Splatting', note: '' },
 ];
 
 // Things I built, newest first. Shown after the publications.
@@ -89,36 +88,36 @@ export const education = [
   {
     id: 'tamu',
     school: 'Texas A&M University',
-    short: 'Texas A&M',
-    year: '2027',
+    abbr: 'Ph.D.',
+    years: '2027 –',
     tint: '#500000',
     exposure: 1.45,
     degree: 'Ph.D. in Computer Science',
-    dates: 'Spring 2027 –',
+    dates: '2027 –',
     detail: 'TACO Group · Advisor: Dr. Zhengzhong Tu',
     incoming: true,
   },
   {
     id: 'uw',
     school: 'University of Washington',
-    short: 'Washington',
-    year: '2025',
+    abbr: 'M.S.',
+    years: '2024 – 2025',
     tint: '#4b2e83',
     exposure: 1,
     degree: 'M.S. in Electrical & Computer Engineering',
-    dates: 'Sep 2024 – Dec 2025',
+    dates: '2024 – 2025',
     detail: '',
     incoming: false,
   },
   {
     id: 'henu',
     school: 'Henan University',
-    short: 'Henan',
-    year: '2024',
+    abbr: 'B.E.',
+    years: '2020 – 2024',
     tint: '#0b4ea2',
     exposure: 1,
     degree: 'B.E. in Automation',
-    dates: 'Sep 2020 – Jun 2024',
+    dates: '2020 – 2024',
     detail: '',
     incoming: false,
   },
