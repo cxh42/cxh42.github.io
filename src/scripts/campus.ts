@@ -1,4 +1,4 @@
-import { QUAD_VS, NOISE_GLSL, compile, fullscreenQuad, getGL, isStill, onFrame, watchVisible, fmtT } from './gl';
+import { QUAD_VS, NOISE_GLSL, compile, fullscreenQuad, getGL, isStill, onFrame, watchVisible, tReadout } from './gl';
 
 // Education: one sticky dark screen tinted in each school's colour. Scroll picks the school; crossing a
 // threshold starts a timed diffusion hand-over on the shared 24 fps clock. The current campus is noised
@@ -92,7 +92,7 @@ export function initCampus() {
   const root = document.documentElement;
   const section = document.querySelector<HTMLElement>('[data-edu]');
   const canvas = document.querySelector<HTMLCanvasElement>('[data-edu-canvas]');
-  const out = document.querySelector<HTMLElement>('[data-edu-t]');
+  const setT = tReadout(document.querySelector<HTMLElement>('[data-edu-t]'));
   const index = document.querySelector<HTMLElement>('[data-edu-index]');
   const goButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-edu-go]'));
   if (!section || !canvas || isStill()) return;
@@ -256,10 +256,7 @@ export function initCampus() {
       showText(k > 0.5 ? shown : -1);
     }
 
-    if (out) {
-      out.textContent = fmtT(t);
-      out.classList.toggle('live', t > 0.0005);
-    }
+    setT(t);
     const narrow = canvas!.width / canvas!.height < 1;
     gl!.viewport(0, 0, canvas!.width, canvas!.height);
     gl!.useProgram(program);

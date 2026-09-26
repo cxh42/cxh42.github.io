@@ -75,7 +75,7 @@ The site belongs to a researcher who works on moving images (video generation an
 
 **Required features**
 - Light/dark theme toggle.
-- Global visitor map. This is a custom globe or map fed by GoatCounter location stats. A scheduled GitHub Action pulls the per-country data from the GoatCounter API and commits it as static data. The API token must be stored only as a GitHub Actions secret and never committed to the public repo or written into any file. The site had **zero recorded visits** at setup (2026-09-25), so the map needs a clear empty and low-data state.
+- Global visitor map. This is a custom globe or map fed by GoatCounter location stats. A scheduled GitHub Action pulls per-country and per-region (state/province) data from the GoatCounter API; the globe marks each region at its centroid (src/data/regions.json, from Natural Earth admin-1) and falls back to the country centroid when no region is known. GoatCounter has no city-level data and commits it as static data. The API token must be stored only as a GitHub Actions secret and never committed to the public repo or written into any file. The site had **zero recorded visits** at setup (2026-09-25), so the map needs a clear empty and low-data state.
 - Good browsing experience on mobile.
 - Ambitious, modern motion and interaction, per the user's explicit request.
 

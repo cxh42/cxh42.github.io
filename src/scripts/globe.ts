@@ -1,4 +1,4 @@
-import { alphaBar, compile, getGL, isStill, onFrame, token, watchVisible, fmtT } from './gl';
+import { alphaBar, compile, getGL, isStill, onFrame, token, watchVisible, tReadout } from './gl';
 
 // Visitors: the land is a point cloud that diffuses out of a Gaussian blob onto the sphere
 // (p_t = sqrt(ab) p0 + sqrt(1 - ab) eps). Countries with visits are marked in the accent.
@@ -55,7 +55,7 @@ const toXYZ = (lat: number, lon: number): [number, number, number] => {
 export function initGlobe() {
   const root = document.documentElement;
   const canvas = document.querySelector<HTMLCanvasElement>('[data-globe]');
-  const out = document.querySelector<HTMLElement>('[data-globe-t]');
+  const setT = tReadout(document.querySelector<HTMLElement>('[data-globe-t]'));
   if (!canvas) return;
   const gl = getGL(canvas);
   let prog: ReturnType<typeof compile> | null = null;
@@ -165,10 +165,7 @@ export function initGlobe() {
   function tick(frame: number) {
     if (!visible || !land) return;
     if (intro.length) t = intro.shift()!;
-    if (out) {
-      out.textContent = fmtT(t);
-      out.classList.toggle('live', t > 0.0005);
-    }
+    setT(t);
     if (!dragging) {
       if (!still) yaw += 0.0036;
       yaw += vYaw;
@@ -206,7 +203,6 @@ export function initGlobe() {
       started = true;
       load().then(() => {
         if (!still) intro = Array.from({ length: 36 }, (_, k) => 1 - (k + 1) / 36);
-        if (out) out.textContent = fmtT(t);
       });
     }
   }, '200px');

@@ -2,15 +2,28 @@
 import katex from 'katex';
 import visitors from '../data/visitors.json';
 import centroids from '../data/centroids.json';
+import regionCentroids from '../data/regions.json';
 
-type Country = { code: string; name: string; count: number };
+type Place = { code: string; name: string; count: number };
+type Country = Place & { regions?: Place[] };
 const cents = centroids as Record<string, [number, number]>;
+const regionCents = regionCentroids as Record<string, [number, number]>;
 const countries = (visitors.countries as Country[])
   .filter((c) => c.count > 0)
   .sort((a, b) => b.count - a.count);
-const marks = countries
-  .filter((c) => cents[c.code])
-  .map((c) => ({ lat: cents[c.code][0], lon: cents[c.code][1], n: c.count }));
+// One mark per state or province where GoatCounter knows it; a country only falls back to a single mark at
+// its centre when none of its visits could be placed more closely.
+const marks = countries.flatMap((c) => {
+  const placed = (c.regions ?? []).filter((r) => r.count > 0 && regionCents[r.code]);
+  if (placed.length) return placed.map((r) => ({ lat: regionCents[r.code][0], lon: regionCents[r.code][1], n: r.count }));
+  return cents[c.code] ? [{ lat: cents[c.code][0], lon: cents[c.code][1], n: c.count }] : [];
+});
+const regionsNamed = (c: Country) =>
+  (c.regions ?? [])
+    .filter((r) => r.count > 0 && r.name)
+    .sort((a, b) => b.count - a.count)
+    .map((r) => r.name);
+const regionCount = countries.reduce((k, c) => k + regionsNamed(c).length, 0);
 const total: number = visitors.total ?? 0;
 const top = countries.slice(0, 8);
 const updated = visitors.updated
@@ -27,7 +40,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     <div class="section-body visitors">
       <div class="globe-wrap">
         <canvas class="globe" data-globe data-marks={JSON.stringify(marks)} aria-hidden="true"></canvas>
-        <p class="globe-t" aria-hidden="true"><span set:html={tLabel} /><span class="num" data-globe-t>0</span></p>
+        <p class="globe-t t-read" aria-hidden="true"><span set:html={tLabel} /><span class="num" data-globe-t>0</span></p>
         <p class="globe-hint meta" aria-hidden="true">Drag to turn</p>
       </div>
 
@@ -36,22 +49,33 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
           <>
             <p class="stats-lede">
               <span class="figure">{fmt(total)}</span> {total === 1 ? 'visit' : 'visits'} from
+              {regionCount > 0 && (
+                <><span class="figure">{regionCount}</span> {regionCount === 1 ? 'region' : 'regions'} in </>
+              )}
               <span class="figure">{countries.length}</span> {countries.length === 1 ? 'country' : 'countries'}.
             </p>
             <ol class="country-list">
-              {top.map((c) => (
-                <li>
-                  <span class="c-name">{c.name}</span>
-                  <span class="c-count">{fmt(c.count)}</span>
-                </li>
-              ))}
+              {top.map((c) => {
+                const names = regionsNamed(c);
+                return (
+                  <li>
+                    <span class="c-name">
+                      {c.name}
+                      {names.length > 0 && (
+                        <span class="c-regions">{names.slice(0, 3).join(', ')}{names.length > 3 ? ` and ${names.length - 3} more` : ''}</span>
+                      )}
+                    </span>
+                    <span class="c-count">{fmt(c.count)}</span>
+                  </li>
+                );
+              })}
             </ol>
           </>
         ) : (
           <>
             <p class="stats-lede">No visits recorded yet.</p>
             <p class="stats-sub">
-              Each country lights up on the globe once someone visits from there. You may well be the first.
+              Each state or province lights up on the globe once someone visits from there. You may well be the first.
             </p>
           </>
         )}
@@ -120,9 +144,16 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     display: flex;
     justify-content: space-between;
     gap: 16px;
+    align-items: baseline;
     padding-block: 9px;
     border-bottom: 1px solid var(--rule);
     font-size: 0.9375rem;
+  }
+  .c-regions {
+    display: block;
+    margin-top: 2px;
+    font-size: var(--step--1);
+    color: var(--graphite);
   }
   .c-count { color: var(--graphite); font-variant-numeric: tabular-nums; }
   .source { margin-top: 20px; }

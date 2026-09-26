@@ -53,7 +53,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
             </li>
           ))}
         </ol>
-        <span class="edu-t" aria-hidden="true"><span set:html={tLabel} /><span class="num" data-edu-t>0</span></span>
+        <span class="edu-t t-read" aria-hidden="true"><span set:html={tLabel} /><span class="num" data-edu-t>0</span></span>
       </nav>
 
       <ol class="edu-list">
@@ -264,7 +264,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     margin-top: 10px;
     color: var(--on-screen-2);
     font-size: 0.75rem;
-    opacity: 0.7;
+    --t-on: 0.7;
   }
   .num {
     font-family: KaTeX_Main, 'Times New Roman', serif;
