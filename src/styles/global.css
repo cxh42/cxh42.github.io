@@ -196,5 +196,15 @@ p { margin: 0; text-wrap: pretty; }
 }
 .arrow-link svg { width: 0.72em; height: 0.72em; flex: none; align-self: center; }
 
+/* A diffusion step readout (t=…) is shown only while t is moving; at rest it fades out of the way. */
+.t-read {
+  opacity: 0;
+  transition: opacity 1.4s var(--ease-out);
+}
+.t-read.t-on {
+  opacity: var(--t-on, 1);
+  transition-duration: 180ms;
+}
+
 /* Notation rendered by KaTeX: keep it in the page's ink. */
 .katex { font-size: 1.08em; color: inherit; }

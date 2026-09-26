@@ -1,4 +1,4 @@
-import { QUAD_VS, NOISE_GLSL, compile, fullscreenQuad, getGL, isStill, onFrame, watchVisible, fmtT } from './gl';
+import { QUAD_VS, NOISE_GLSL, compile, fullscreenQuad, getGL, isStill, onFrame, watchVisible, tReadout } from './gl';
 
 // The ViTeX figure: the real edits play through the same sampler. Switching scenes runs the forward
 // process up to t = 720, swaps the clip, then samples back to t = 0.
@@ -49,6 +49,7 @@ export function initVitex() {
   const video = document.querySelector<HTMLVideoElement>('[data-vitex-video]');
   const canvas = document.querySelector<HTMLCanvasElement>('[data-vitex-canvas]');
   const out = document.querySelector<HTMLElement>('[data-vitex-t]');
+  const setT = tReadout(out);
   const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-scene]'));
   if (!fig || !video || !canvas) return;
 
@@ -137,10 +138,7 @@ export function initVitex() {
     }
     // A -1 marks the peak of the forward process: hold there, grain alive, until the next clip has a frame.
     if (path.length && path[0] !== -1) t = path.shift()!;
-    if (out) {
-      out.textContent = fmtT(t);
-      out.classList.toggle('live', t > 0.0005);
-    }
+    setT(t);
     upload();
     const W = canvas!.width;
     const H = canvas!.height;

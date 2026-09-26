@@ -146,3 +146,26 @@ export function watchVisible(el: Element, cb: (on: boolean) => void, margin = '1
 
 export const fmtT = (t: number) => String(Math.round(t * 1000));
 export const fmtAb = (t: number) => alphaBar(t).toFixed(3);
+
+/**
+ * A t readout that is only there while the process runs: each new value brings its box (class `t-read`)
+ * up, and once the number has stopped moving for `hold` ms it fades back out. Returns the setter.
+ */
+export function tReadout(num: HTMLElement | null, box: HTMLElement | null = num?.closest<HTMLElement>('.t-read') ?? null, hold = 650) {
+  let last = '';
+  let timer = 0;
+  return (t: number, extra?: () => void) => {
+    if (!num) return;
+    const s = fmtT(t);
+    if (s === last) return;
+    const first = last === '';
+    last = s;
+    num.textContent = s;
+    num.classList.toggle('live', t > 0.0005);
+    extra?.();
+    if (first || !box) return; // the value at rest is written silently
+    box.classList.add('t-on');
+    clearTimeout(timer);
+    timer = window.setTimeout(() => box.classList.remove('t-on'), hold);
+  };
+}

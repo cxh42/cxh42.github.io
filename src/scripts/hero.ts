@@ -1,4 +1,4 @@
-import { isStill, onFrame, fmtT, fmtAb } from './gl';
+import { isStill, onFrame, fmtAb, tReadout } from './gl';
 
 // The name is never hidden or redrawn: it is plain text from the first paint. What samples in on load is
 // the particle portrait behind it; this module only runs the readout on the shared clock alongside it
@@ -10,16 +10,13 @@ export function initHero() {
   const outT = document.querySelector<HTMLElement>('[data-readout-t]');
   const outAb = document.querySelector<HTMLElement>('[data-readout-ab]');
 
-  const readout = (t: number) => {
-    if (outT) {
-      outT.textContent = fmtT(t);
-      outT.classList.toggle('live', t > 0);
-    }
-    if (outAb) {
+  const setT = tReadout(outT);
+  const readout = (t: number) =>
+    setT(t, () => {
+      if (!outAb) return;
       outAb.textContent = fmtAb(t);
       outAb.classList.toggle('live', t > 0);
-    }
-  };
+    });
 
   if (isStill()) {
     readout(0);
