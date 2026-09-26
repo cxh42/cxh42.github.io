@@ -4,6 +4,7 @@ import { initHero } from './hero';
 import { initPortrait } from './portrait';
 import { initTyping } from './typing';
 import { initVitex } from './vitex';
+import { initPareto } from './pareto';
 import { initCampus } from './campus';
 import { initGlobe } from './globe';
 
@@ -13,5 +14,6 @@ initHero();
 initPortrait();
 initTyping();
 initVitex();
+initPareto();
 initCampus();
 initGlobe();

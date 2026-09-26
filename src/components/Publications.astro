@@ -18,9 +18,17 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
         return (
           <li class="paper">
             <article aria-labelledby={`pub-${pub.id}`}>
-              <header class="venue-head">
-                <p class="venue-big">{pub.venue}</p>
-                <p class="venue-track-big">{pub.track}</p>
+              <header class="pub-head">
+                <h3 class="pub-title" id={`pub-${pub.id}`}>
+                  {pub.short ? (<><span class="pub-name">{pub.short}:</span> {pub.title.slice(pub.short.length + 2).split(/(\S+-\S+)/).map((w) => (/-/.test(w) ? <span class="nw">{w}</span> : w))}</>) : pub.title}
+                </h3>
+                <p class="authors">
+                  {pub.authors.map((a, i) => (<>{a === person.name ? <strong>{a}</strong> : <span>{a}</span>}{i < pub.authors.length - 1 ? ', ' : ''}</>))}
+                </p>
+                <p class="venue">
+                  <span class="venue-badge">{pub.venue}</span>
+                  <span class="venue-track">{pub.track}</span>
+                </p>
               </header>
               {first && (
                 <figure class="vitex" data-vitex>
@@ -64,12 +72,18 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
               )}
 
               <div class="pub-text">
-                <div class="pub-head">
-                  <h3 class="pub-title" id={`pub-${pub.id}`}>{pub.title}</h3>
-                  <p class="authors">
-                    {pub.authors.map((a, i) => (<>{a === person.name ? <strong>{a}</strong> : <span>{a}</span>}{i < pub.authors.length - 1 ? ', ' : ''}</>))}
-                  </p>
-                </div>
+                {pub.pareto && (
+                  <figure class="pareto">
+                    <div class="pareto-stage">
+                      <canvas data-pareto role="img" aria-label="Three-dimensional chart of the methods evaluated on ViTeX-Bench, on SeqAcc, Warp_c and DreamSim_loc. The Pareto front is FLUX-Text, TextCtrl, RS-STE, ViTeX-Edit-14B and Wan2.1-VACE-14B."></canvas>
+                      <p class="pareto-status meta" data-pareto-status>Loading…</p>
+                    </div>
+                    <figcaption class="meta">
+                      <span class="pareto-key"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" class="k-ring" /><circle cx="8" cy="8" r="3.3" class="k-fill" /></svg>Pareto front</span>
+                      No single score: each method is a point on the three primary metrics, and the front is the set no other editor beats on all three. Live from the <a href={pub.leaderboard}>leaderboard</a>; drag to rotate.
+                    </figcaption>
+                  </figure>
+                )}
                 <div class="pub-detail">
                   <p class="summary">{pub.summary}</p>
                   <ul class="pub-links">
@@ -189,43 +203,62 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
   .num.live { color: var(--accent); }
   .caption { margin-top: 14px; max-width: 60ch; }
 
-  .pub-text {
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    gap: 28px clamp(28px, 4vw, 64px);
-    margin-top: clamp(40px, 5vw, 64px);
-  }
-  /* The venue leads each paper: it is the first thing a reader checks. */
-  .venue-head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 4px 16px;
-    padding-bottom: clamp(14px, 1.6vw, 20px);
-    margin-bottom: clamp(16px, 2vw, 24px);
-    border-bottom: 1px solid var(--rule-strong);
-  }
-  .venue-big {
-    font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.6rem);
-    line-height: 1;
-    letter-spacing: -0.03em;
-    font-weight: 500;
-    color: var(--ink);
-  }
-  .venue-track-big {
-    font-size: var(--step-0);
-    color: var(--ink-2);
-    letter-spacing: -0.005em;
-  }
+  /* The title leads each paper; the venue sits right under it as a badge, prominent but second. */
+  .pub-head { margin-bottom: clamp(22px, 2.6vw, 34px); }
   .pub-title {
-    margin-top: 0;
-    font-size: var(--step-2);
-    line-height: 1.18;
-    letter-spacing: -0.018em;
-    font-weight: 400;
+    margin: 0;
+    font-size: clamp(1.75rem, 1.15rem + 1.9vw, 2.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.028em;
+    font-weight: 380;
+    max-width: 24ch;
+    text-wrap: balance;
   }
+  .pub-name { font-weight: 550; }
+  .nw { white-space: nowrap; }
   .authors { margin-top: 14px; color: var(--ink-2); }
   .authors strong { font-weight: 550; color: var(--ink); }
+  .venue {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin-top: 16px;
+  }
+  .venue-badge {
+    display: inline-block;
+    padding: 5px 12px 6px;
+    background: var(--accent);
+    color: var(--plate);
+    font-size: var(--step-0);
+    font-weight: 550;
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+  }
+  .venue-track { color: var(--ink-2); font-size: var(--step-0); letter-spacing: -0.005em; }
+
+  .pub-text {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 28px clamp(28px, 4vw, 52px);
+    margin-top: clamp(32px, 4vw, 48px);
+    padding-top: clamp(24px, 3vw, 36px);
+    border-top: 1px solid var(--rule);
+    align-items: start;
+  }
+  .pareto { margin: 0; }
+  .pareto-stage { position: relative; aspect-ratio: 1 / 0.9; margin-top: -8px; }
+  .pareto-stage canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
+  .pareto-stage canvas:global(.is-dragging) { cursor: grabbing; }
+  .pareto-stage canvas:global(.is-hover) { cursor: pointer; }
+  .pareto-status { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; }
+  .pareto-status[hidden] { display: none; }
+  .pareto figcaption { margin-top: 10px; max-width: 52ch; }
+  .pareto-key { display: inline-flex; align-items: center; gap: 6px; margin-right: 10px; color: var(--ink); }
+  .pareto-key svg { width: 13px; height: 13px; }
+  .k-ring { fill: none; stroke: var(--accent); stroke-width: 1.2; }
+  .k-fill { fill: var(--accent); }
+  .pub-detail { padding-top: 4px; }
   .summary { color: var(--ink-2); max-width: var(--measure); }
   .pub-links {
     list-style: none;
@@ -241,6 +274,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     .pub-text { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
+    .pareto-stage { aspect-ratio: 1 / 1.18; }
     .stage { aspect-ratio: 426 / 488; }
     .stage video { object-fit: contain; }
     .stage-labels { grid-template-columns: 1fr; gap: 2px; }

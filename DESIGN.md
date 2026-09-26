@@ -55,12 +55,18 @@ typography:
     fontWeight: 400
     lineHeight: 1
     letterSpacing: "0.08em"
-  venue:
+  paper-title:
     fontFamily: "Geologica Variable, Geologica, system-ui, sans-serif"
-    fontSize: "clamp(1.75rem, 1.2rem + 1.8vw, 2.6rem)"
-    fontWeight: 500
-    lineHeight: 1
-    letterSpacing: "-0.03em"
+    fontSize: "clamp(1.75rem, 1.15rem + 1.9vw, 2.75rem)"
+    fontWeight: 380
+    lineHeight: 1.1
+    letterSpacing: "-0.028em"
+  venue-badge:
+    fontFamily: "Geologica Variable, Geologica, system-ui, sans-serif"
+    fontSize: "1.0625rem"
+    fontWeight: 550
+    lineHeight: 1.2
+    letterSpacing: "-0.005em"
   band-headline:
     fontFamily: "Geologica Variable, Geologica, system-ui, sans-serif"
     fontSize: "clamp(2.1rem, 1.3rem + 3.4vw, 4.75rem)"
@@ -212,9 +218,11 @@ components:
   hero-equation:
     textColor: "{colors.graphite}"
     typography: "{typography.equation}"
-  venue-head:
-    textColor: "{colors.ink}"
-    typography: "{typography.venue}"
+  venue-badge:
+    backgroundColor: "{colors.accent}"
+    textColor: "{colors.plate}"
+    typography: "{typography.venue-badge}"
+    padding: "5px 12px 6px"
   plate-panel:
     backgroundColor: "{colors.plate-2}"
     rounded: "{rounded.none}"
@@ -320,7 +328,8 @@ A near-monochrome instrument palette, off-white plate and cool ink, with one cob
 - **Band Headline** (300, clamp 2.1–4.75rem, 1.02, -0.035em): degree titles inside the screen band.
 - **Closing** (320, clamp 1.75–4.25rem, 1.05, -0.035em): the email address that ends the page, underlined at 1px with 0.16em offset.
 - **Headline** (330, clamp 2–2.9rem, 1.02, -0.03em): section titles, set in the margin column at ≥1280px.
-- **Venue** (500, clamp 1.75–2.6rem, line-height 1, -0.03em, ink): the venue that opens each publication panel ("NeurIPS 2026"), with the track beside it in Body size, ink-2.
+- **Paper title** (380, clamp 1.75–2.75rem, line-height 1.1, −0.028em, ink, max 24ch, balanced): opens each publication panel. The short name before the colon ("ViTeX-Bench:") is 550, and hyphenated compounds never break.
+- **Venue badge** (550, Body size, plate ink on a solid accent block, square corners): directly under the authors, with the track beside it in Body size, ink-2. Prominent, but always second to the title (user, 2026-09-26: the venue must not outrank the paper).
 - **Statement** (320, step-3, 1.12, -0.028em, max 22ch): the research thesis; emphasis is weight 450, never italic.
 - **Title** (380–400, step-2, 1.15–1.25, -0.012 to -0.018em): the role line, paper and project titles, school name, visitor lede.
 - **Lead** (350–400, 1.3125rem, 1.4): news entries, menu links, profile links, research area names (400, -0.01em).
@@ -332,7 +341,7 @@ A near-monochrome instrument palette, off-white plate and cool ink, with one cob
 - **Colophon Mark** (KaTeX_Main, 1.6rem, line-height 1, ink): the x₀ that signs the footer.
 
 ### Named Rules
-**The Light Hand Rule.** Nothing on the page is heavier than 550 (the author's own name). Headings sit between 300 and 400; the one heavier display line is the 500 venue header, because the venue is what a reader checks first. Otherwise size and tracking make hierarchy, not weight.
+**The Light Hand Rule.** Nothing on the page is heavier than 550 (the author's own name, a paper's short name, the venue badge). Headings sit between 300 and 400. Otherwise size and tracking make hierarchy, not weight.
 
 **The Notation Rule.** Any number that is a timestep or schedule value is KaTeX_Main at 1.08em of its readout, with a 2.9ch minimum width, so it never reflows while it counts.
 
@@ -378,7 +387,8 @@ Quiet and editorial. Inherit colour; 1px underline at 0.22em offset in rule-stro
 - **Corner Style:** square (0).
 - **Background:** plate-2 (void-2 in dark). No border, no shadow.
 - **Internal Padding:** clamp(16px, 2.6vw, 36px).
-- **Publication panel:** opens with the venue header (Venue type plus track, a rule-strong line under it), then the ViTeX stage and scene row, then the paper text.
+- **Publication panel:** opens with the paper title, then the authors and the venue badge with its track, then the ViTeX stage and scene row. Below a hairline, a two-column row: the Pareto figure on the left (1.25fr) and the summary with links on the right. It stacks at 900px.
+- **Pareto figure:** a 2-D canvas projection of the benchmark's three primary metrics (SeqAcc, Warp_c, DreamSim_loc) in a unit cube, read live from the ViTeX-Bench leaderboard's `submissions.jsonl`, with the paper's numbers as a fallback. Walls and ticks are ink at 8–24%. The Pareto front is a Delaunay surface in the accent (fill 10–13%, edges 60–70%), with accent ring-and-core stars and front names always shown. Other editors are small ink points and references are hollow rings. The ideal corner (1, 1, 1) is an ink star with diffraction spikes, glowing in dark only. It drifts slowly (not under `still`), rotates on drag, and names a star on hover or tap. Aspect is 1 : 0.9, or 1 : 1.18 below 640px.
 - **Project panel:** optional full-width 16:9 image pair, then two columns: title (Title, 400), subtitle (Body, ink-2) and meta (Label) on the left; body (60ch, ink-2), team, tags (Label, joined with " · ") and arrow links on the right.
 - It is the only container in the system; everything else is hairlines.
 
@@ -432,7 +442,7 @@ A hairline-topped footer: the x₀ Colophon Mark in ink at left, Label-size meta
 - **Do** keep the accent to live readouts (t > 0) and visitor marks, plus focus ring, caret-color and selection; return readouts to graphite at t = 0. Position markers are ink.
 - **Do** separate content with 1px hairlines (rule / rule-strong) and ledger rows; when a unit needs to stand apart, give it a square plate-2 panel.
 - **Do** set numerals tabular and timesteps in KaTeX_Main at 1.08em with a 2.9ch minimum.
-- **Do** keep headings at weight 300–400 with negative tracking (-0.015em to -0.04em); the venue header at 500 is the one exception.
+- **Do** keep headings at weight 300–400 with negative tracking (-0.015em to -0.04em).
 - **Do** size stepped CSS transitions to whole frames (41.667ms multiples) with `steps(n)`.
 - **Do** reveal text by opacity only.
 - **Do** ship the still path and the no-WebGL path as finished pages.
@@ -442,7 +452,7 @@ A hairline-topped footer: the x₀ Colophon Mark in ink at left, Label-size meta
 ### Don't:
 - **Don't** use bordered, rounded or shadowed cards, pills or badges; the only container is the square plate-2 panel, and radius is 0 except the 2px focus outline.
 - **Don't** add shadows beyond the menu sheet.
-- **Don't** place small eyebrows or kickers above headings; supporting lines (dates, meta, notes) go below the title. The display-size venue header that opens a publication panel is the only line above a title.
+- **Don't** place small eyebrows or kickers above headings; supporting lines (dates, meta, notes, the venue badge) go below the title.
 - **Don't** animate hover with lifts, scales, parallax or cursor followers; hover changes colour or underline only.
 - **Don't** give the accent a glow, gradient, fill or rest state, or use it for position markers.
 - **Don't** blur or filter text, in reveals or anywhere else.

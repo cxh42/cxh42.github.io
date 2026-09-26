@@ -47,16 +47,20 @@ The site belongs to a researcher who works on moving images (video generation an
 - Status: will join **Texas A&M University** as a PhD student in **January 2027**, in the **TACO group** (`https://taco-group.github.io/`), advised by **Dr. Zhengzhong Tu** (`https://vztu.github.io/`).
 
 **Publication (the only one to show for now)**
-- Title: *ViTeX-Bench: Benchmarking High Fidelity Video Scene Text Editing*
+- Title: *ViTeX-Bench: Benchmarking High-Fidelity Video Scene Text Editing* (hyphenated, as in the paper).
 - Authors, in order: **Xinghao Chen**, Xiangbo Gao, Jiongze Yu, Yuheng Wu, Zhengzhong Tu. Xinghao is first author, with no equal-contribution marking.
-- Venue: **NeurIPS 2026, Evaluations & Datasets Track, accepted on 2026-09-24.** The user states the acceptance. The public project page still says "under review" and lists anonymous authors because it hasn't been deanonymized yet; the user's statement takes precedence.
+- Venue: **NeurIPS 2026, Evaluations & Datasets Track, accepted on 2026-09-24.** The project page is deanonymized and shows the acceptance.
 - Links:
   - Project page: `https://vitex-bench.github.io/`
   - Dataset: `https://huggingface.co/datasets/ViTeX-Bench/ViTeX-Dataset`
-  - Benchmark code: `https://huggingface.co/ViTeX-Bench/ViTeX-Bench`
+  - Benchmark code: `https://github.com/ViTeX-Bench/ViTeX-Bench`
   - Model and inference code: `https://huggingface.co/ViTeX-Bench/ViTeX-Edit-14B`
-  - Leaderboard: `https://huggingface.co/spaces/ViTeX-Bench/ViTeX-Bench-Leaderboard`
-- Facts from the project page: ViTeX-Dataset has 387 real-world 720p videos with masks and instructions. ViTeX-Bench is an evaluation protocol with 13 metrics covering text correctness, visual quality and edit locality. ViTeX-Edit-14B is the reference model, at 0.688 CharAcc.
+  - Leaderboard: `https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/` (its `data/submissions.jsonl` feeds the Pareto figure)
+- Facts from the paper (revision of 2026-09-26):
+  - ViTeX-Dataset has 387 real-world 720p videos with masks and instructions: 230 with reviewed paired edits for training and 157 frozen for evaluation.
+  - The protocol has 13 metrics over text correctness, visual and temporal quality, and edit locality. It compares methods through one primary metric per axis (SeqAcc, Warp_c, DreamSim_loc) and a Pareto front, with no single score.
+  - Across eight baselines from four editing families, accurate text, temporal stability and scene preservation remain hard to achieve together.
+  - ViTeX-Edit-14B reaches CharAcc 0.688, the highest among video-native editors.
 
 **Education**
 - Texas A&M University: Ph.D. in Computer Science (CSCE), starting Spring 2027 (January 2027), TACO group, advisor Zhengzhong Tu.
@@ -103,7 +107,7 @@ These visual constraints came from the user and are binding. They're recorded wi
 - Added 2026-09-26 (second round):
   - The page is English-first. 陈星昊 is clearly secondary: small, after the English name, never overlapping it.
   - The equation is ornament only: small, faint, and hidden on phones.
-  - The publication venue (e.g. NeurIPS 2026) is prominent.
+  - The publication venue (e.g. NeurIPS 2026) is prominent, but never more prominent than the paper title (user, 2026-09-26).
   - Campus photos carry each school's colour as a filter: TAMU maroon, UW purple, Henan blue.
   - School changes are timed noise-and-denoise transitions, never a white flash. One mouse-wheel scroll moves to the next school.
   - Education lists full school names, degree abbreviations (Ph.D., M.S., B.E.) and full year ranges (2027 –, 2024 – 2025, 2020 – 2024). The TAMU photo keeps its top (the dome) in frame.

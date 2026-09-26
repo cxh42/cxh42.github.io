@@ -61,18 +61,22 @@ export const publications = [
   {
     id: 'vitex',
     year: '2026',
-    title: 'ViTeX-Bench: Benchmarking High Fidelity Video Scene Text Editing',
+    title: 'ViTeX-Bench: Benchmarking High-Fidelity Video Scene Text Editing',
+    short: 'ViTeX-Bench',
     authors: ['Xinghao Chen', 'Xiangbo Gao', 'Jiongze Yu', 'Yuheng Wu', 'Zhengzhong Tu'],
     venue: 'NeurIPS 2026',
     track: 'Evaluations & Datasets Track',
+    // Paraphrased from the paper's abstract (revision of 2026-09-26).
     summary:
-      'Video scene text editing replaces the words on signs, boards and labels in a video while the surrounding content, motion and camera stay untouched. ViTeX-Bench pairs 387 real-world 720p videos with text masks and instructions, scores every edit with 13 metrics across text correctness, visual quality and edit locality, and ships ViTeX-Edit-14B, a reference model that reaches 0.688 CharAcc.',
+      'Video scene text editing must replace the characters on signs, boards and labels while the rest of the scene and its motion stay intact. ViTeX-Bench pairs ViTeX-Dataset (387 real-world 720p videos: 230 with reviewed paired edits for training, 157 frozen for evaluation) with 13 metrics over text correctness, visual and temporal quality, and edit locality, compared through one primary metric per axis and a Pareto front instead of a single score. Across eight baselines from four editing families, accurate text, temporal stability and scene preservation remain hard to get together. The open reference editor ViTeX-Edit-14B reaches the highest CharAcc among video-native editors (0.688).',
+    pareto: true,
+    leaderboard: 'https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/',
     links: [
       { label: 'Project page', href: 'https://vitex-bench.github.io/' },
       { label: 'Dataset', href: 'https://huggingface.co/datasets/ViTeX-Bench/ViTeX-Dataset' },
-      { label: 'Benchmark', href: 'https://huggingface.co/ViTeX-Bench/ViTeX-Bench' },
+      { label: 'Benchmark code', href: 'https://github.com/ViTeX-Bench/ViTeX-Bench' },
       { label: 'Model', href: 'https://huggingface.co/ViTeX-Bench/ViTeX-Edit-14B' },
-      { label: 'Leaderboard', href: 'https://huggingface.co/spaces/ViTeX-Bench/ViTeX-Bench-Leaderboard' },
+      { label: 'Leaderboard', href: 'https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/' },
     ],
     // Source (with text mask) and ViTeX-Edit-14B output, cropped side by side from the project page showcase.
     scenes: [
