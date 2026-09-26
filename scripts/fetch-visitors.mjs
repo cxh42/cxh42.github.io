@@ -26,15 +26,16 @@ const get = async (path, retry = 2) => {
   return res.json();
 };
 
-// Regions of one country, e.g. US-TX "Texas". Visits with no known region are left out.
+// Regions of one country. The API gives each region's English name ("Texas") and no code; visits with no
+// known region come back unnamed and are left out.
 const regionsOf = async (code, start) => {
   try {
     const data = await get(`/stats/locations/${code}?start=${start}&limit=100`);
     const raw = (data.stats ?? []).map((s) => `${s.id || '?'}:${s.name || '?'}=${s.count}`).join(', ');
     console.log(`fetch-visitors: ${code} regions [${raw}]`);
     return (data.stats ?? [])
-      .filter((s) => typeof s.id === 'string' && /^[A-Za-z]{2}-[A-Za-z0-9]{1,4}$/.test(s.id) && s.count > 0)
-      .map((s) => ({ code: s.id.toUpperCase(), name: s.name, count: s.count }));
+      .filter((s) => typeof s.name === 'string' && s.name.trim() && s.count > 0)
+      .map((s) => ({ code: /^[A-Za-z]{2}-[A-Za-z0-9]{1,4}$/.test(s.id ?? '') ? s.id.toUpperCase() : '', name: s.name.trim(), count: s.count }));
   } catch (err) {
     console.warn(`fetch-visitors: no regions for ${code}:`, err.message);
     return [];

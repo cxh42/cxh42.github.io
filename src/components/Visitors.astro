@@ -7,15 +7,24 @@ import regionCentroids from '../data/regions.json';
 type Place = { code: string; name: string; count: number };
 type Country = Place & { regions?: Place[] };
 const cents = centroids as Record<string, [number, number]>;
-const regionCents = regionCentroids as Record<string, [number, number]>;
+const regionCents = regionCentroids as Record<string, Record<string, [number, number]>>;
+// Mirrors norm() in scripts/make-region-centroids.py: "Île-de-France" -> "iledefrance", "Henan Province" -> "henan".
+const DROP = new Set(['province', 'prefecture', 'region', 'state', 'municipality', 'oblast', 'governorate', 'autonomous',
+  'special', 'administrative', 'of', 'the', 'city', 'metropolitan', 'district', 'territory', 'capital']);
+const norm = (name: string) => {
+  const words = name.normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase().replace(/&/g, ' and ').split(/[^a-z0-9]+/).filter(Boolean);
+  const kept = words.filter((w) => !DROP.has(w));
+  return (kept.length ? kept : words).join('');
+};
+const locate = (cc: string, r: Place) => regionCents[cc]?.[r.code] ?? regionCents[cc]?.[norm(r.name)];
 const countries = (visitors.countries as Country[])
   .filter((c) => c.count > 0)
   .sort((a, b) => b.count - a.count);
 // One mark per state or province where GoatCounter knows it; a country only falls back to a single mark at
 // its centre when none of its visits could be placed more closely.
 const marks = countries.flatMap((c) => {
-  const placed = (c.regions ?? []).filter((r) => r.count > 0 && regionCents[r.code]);
-  if (placed.length) return placed.map((r) => ({ lat: regionCents[r.code][0], lon: regionCents[r.code][1], n: r.count }));
+  const placed = (c.regions ?? []).map((r) => ({ at: locate(c.code, r), n: r.count })).filter((r) => r.at && r.n > 0);
+  if (placed.length) return placed.map((r) => ({ lat: r.at![0], lon: r.at![1], n: r.n }));
   return cents[c.code] ? [{ lat: cents[c.code][0], lon: cents[c.code][1], n: c.count }] : [];
 });
 const regionsNamed = (c: Country) =>
@@ -23,7 +32,6 @@ const regionsNamed = (c: Country) =>
     .filter((r) => r.count > 0 && r.name)
     .sort((a, b) => b.count - a.count)
     .map((r) => r.name);
-const regionCount = countries.reduce((k, c) => k + regionsNamed(c).length, 0);
 const total: number = visitors.total ?? 0;
 const top = countries.slice(0, 8);
 const updated = visitors.updated
@@ -49,9 +57,6 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
           <>
             <p class="stats-lede">
               <span class="figure">{fmt(total)}</span> {total === 1 ? 'visit' : 'visits'} from
-              {regionCount > 0 && (
-                <><span class="figure">{regionCount}</span> {regionCount === 1 ? 'region' : 'regions'} in </>
-              )}
               <span class="figure">{countries.length}</span> {countries.length === 1 ? 'country' : 'countries'}.
             </p>
             <ol class="country-list">
