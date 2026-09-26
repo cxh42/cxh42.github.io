@@ -24,10 +24,10 @@ const FALLBACK: Row[] = [
   { method: 'Kling Video 3.0 Omni', kind: 'editor', temporal_comparable: true, SeqAcc: 0, Warp_crop: 2.90209, DreamSim_loc: 0.06078 },
 ];
 
-const AX: { key: Key; name: string; metric: [string, string, string]; up: boolean; log: boolean; floor?: number }[] = [
-  { key: 'SeqAcc', name: 'Correctness', metric: ['SeqAcc', '', ' ↑'], up: true, log: false },
-  { key: 'Warp_crop', name: 'Temporal', metric: ['Warp', 'c', ' ↓'], up: false, log: true, floor: 0.001 },
-  { key: 'DreamSim_loc', name: 'Locality', metric: ['DreamSim', 'loc', ' ↓'], up: false, log: true, floor: 0.001 },
+const AX: { key: Key; name: string; up: boolean; log: boolean; floor?: number }[] = [
+  { key: 'SeqAcc', name: 'Correctness', up: true, log: false },
+  { key: 'Warp_crop', name: 'Temporal', up: false, log: true, floor: 0.001 },
+  { key: 'DreamSim_loc', name: 'Locality', up: false, log: true, floor: 0.001 },
 ];
 
 type V3 = [number, number, number];
@@ -136,8 +136,8 @@ export function initPareto() {
 
   function projector() {
     const small = W < 420;
-    const R = Math.min(W * (small ? 0.25 : 0.28), (H * 0.5 - (small ? 64 : 40)) / 1.42);
-    const cx = W * 0.5, cy = H * 0.5 + 6;
+    const R = Math.min(W * (small ? 0.25 : 0.28), (H * 0.5 - (small ? 40 : 30)) / 1.42);
+    const cx = W * 0.5, cy = H * 0.5 + 2;
     const cyw = Math.cos(cam.yaw), syw = Math.sin(cam.yaw), cp = Math.cos(cam.pitch), sp = Math.sin(cam.pitch);
     return (p: V3) => {
       const x1 = p[0] * cyw + p[2] * syw, z1 = -p[0] * syw + p[2] * cyw;
@@ -158,17 +158,6 @@ export function initPareto() {
   }
   const hit = (b: Box, list: Box[]) => list.some((o) => b.x < o.x + o.w && o.x < b.x + b.w && b.y < o.y + o.h && o.y < b.y + b.h);
 
-  function metric(parts: [string, string, string], x: number, y: number, size: number, color: string, align: string) {
-    ctx.font = `400 ${size}px ${SANS}`; const wb = ctx.measureText(parts[0] + parts[2]).width;
-    ctx.font = `400 ${size * 0.74}px ${SANS}`; const ws = parts[1] ? ctx.measureText(parts[1]).width + 1 : 0;
-    let x0 = align === 'left' ? x : align === 'right' ? x - wb - ws : x - (wb + ws) / 2;
-    ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillStyle = color;
-    ctx.font = `400 ${size}px ${SANS}`; ctx.fillText(parts[0], x0, y); x0 += ctx.measureText(parts[0]).width;
-    if (parts[1]) { ctx.font = `400 ${size * 0.74}px ${SANS}`; ctx.fillText(parts[1], x0 + 0.5, y + size * 0.3); x0 += ws; }
-    ctx.font = `400 ${size}px ${SANS}`; ctx.fillText(parts[2], x0, y);
-    return wb + ws;
-  }
-
   function draw() {
     if (!W || !stars.length) return;
     const P = projector(), ink = C.ink, acc = C.acc;
@@ -182,13 +171,15 @@ export function initPareto() {
     ([[[-1, 1, -1], [1, 1, -1]], [[1, -1, -1], [1, 1, -1]], [[1, -1, -1], [1, -1, 1]], [[-1, 1, -1], [-1, 1, 1]], [[-1, -1, 1], [-1, 1, 1]], [[-1, -1, 1], [1, -1, 1]],
       [[1, 1, -1], [1, 1, 1]], [[-1, 1, 1], [1, 1, 1]], [[1, -1, 1], [1, 1, 1]]] as V3[][]).forEach((e) => line(P, e[0], e[1], box));
 
-    // Axes along the outermost parallel edge, with ticks and names clear of the volume.
+    // Axes along the outermost parallel edge. Each carries one short name, pushed straight out from the
+    // cube's centre past its arrow so it never sits on the volume; names that would touch step further out.
+    // Tick values are left off: the key under the figure names each metric and its direction.
     const small = W < 420, placed: Box[] = [], O = P([0, 0, 0]);
-    const tickCol = rgba(C.graphite, 1);
+    const nf = `500 ${small ? 11.5 : 12.5}px ${SANS}`;
     AX.forEach((a, i) => {
       const j = (i + 1) % 3, k2 = (i + 2) % 3;
       const o: V3 = [0, 0, 0], e: V3 = [0, 0, 0]; o[i] = -1; e[i] = 1.12;
-      const so = P(o), se = P(e), len = Math.hypot(se.x - so.x, se.y - so.y);
+      const so = P(o), se = P(e), len = Math.hypot(se.x - so.x, se.y - so.y) || 1;
       const ux = (se.x - so.x) / len, uy = (se.y - so.y) / len;
       let nx = -uy, ny = ux; if (-nx + ny < 0) { nx = -nx; ny = -ny; }
       let best: number[] = [-1, -1], bs = -Infinity;
@@ -203,29 +194,18 @@ export function initPareto() {
       ctx.beginPath(); ctx.moveTo(tip.x, tip.y);
       ctx.lineTo(tip.x - ux * 7 - uy * 3.5, tip.y - uy * 7 + ux * 3.5); ctx.lineTo(tip.x - ux * 7 + uy * 3.5, tip.y - uy * 7 - ux * 3.5);
       ctx.closePath(); ctx.fillStyle = edge; ctx.fill();
-      const tf = `400 ${small ? 10.5 : 11}px ${SANS}`; ctx.font = tf;
-      ticks[i].forEach((k) => {
-        const p = P(at(k.t)), s = String(k.v), tw = ctx.measureText(s).width;
-        const b = { x: p.x + nx * 16 - tw / 2 - 3, y: p.y + ny * 16 - 8, w: tw + 6, h: 16 };
-        if (hit(b, placed)) return;
-        text(s, p.x + nx * 16, p.y + ny * 16, tf, tickCol, 'center'); ctx.font = tf; placed.push(b);
-      });
-      const nf = `500 ${small ? 11.5 : 12.5}px ${SANS}`; ctx.font = nf;
-      const tw = Math.max(ctx.measureText(a.name).width, 70);
-      let lx = 0, ly = 0, align: CanvasTextAlign = 'left', b: Box, tries = 0;
-      do {
-        const push = tries * 14;
-        if (Math.abs(uy) < 0.3) { lx = tip.x; ly = tip.y + ny * (38 + push); align = 'right'; }
-        else if (Math.abs(ux) < 0.3) { lx = tip.x; ly = tip.y - 34 - push; align = 'center'; }
-        else { lx = tip.x + ux * (16 + push) + nx * 12; ly = tip.y + uy * (16 + push) + ny * 12 - (uy < 0 ? 18 : 0); align = ux > 0 ? 'left' : 'right'; }
-        let left = align === 'left' ? lx : align === 'right' ? lx - tw : lx - tw / 2;
-        if (left < 4) { lx += 4 - left; left = 4; } else if (left + tw > W - 4) { lx -= left + tw - (W - 4); left = W - 4 - tw; }
-        ly = Math.max(12, Math.min(H - 26, ly));
-        b = { x: left - 7, y: ly - 10, w: tw + 14, h: 34 };
-        tries++;
-      } while (hit(b, placed) && tries < 5);
-      text(a.name, lx, ly, nf, rgba(ink, 0.9), align);
-      metric(a.metric, lx, ly + 15, small ? 10.5 : 11, tickCol, align);
+      ctx.font = nf;
+      const tw = ctx.measureText(a.name).width, th = 16;
+      let rx = tip.x - O.x, ry = tip.y - O.y; const rl = Math.hypot(rx, ry) || 1; rx /= rl; ry /= rl;
+      let b: Box = { x: 0, y: 0, w: 0, h: 0 }, cx = 0, cy = 0;
+      for (let d = 14; d <= 74; d += 10) {
+        // the label's centre sits on the ray, offset by half its size along that ray
+        cx = tip.x + rx * (d + Math.abs(rx) * tw / 2); cy = tip.y + ry * (d + Math.abs(ry) * th / 2);
+        cx = Math.max(4 + tw / 2, Math.min(W - 4 - tw / 2, cx)); cy = Math.max(4 + th / 2, Math.min(H - 4 - th / 2, cy));
+        b = { x: cx - tw / 2 - 4, y: cy - th / 2 - 2, w: tw + 8, h: th + 4 };
+        if (!hit(b, placed)) break;
+      }
+      text(a.name, cx, cy, nf, rgba(ink, 0.88), 'center', true);
       placed.push(b);
     });
 
