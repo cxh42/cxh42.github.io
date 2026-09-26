@@ -79,8 +79,13 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
                       <p class="pareto-status meta" data-pareto-status>Loading…</p>
                     </div>
                     <figcaption class="meta">
-                      <span class="pareto-key"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" class="k-ring" /><circle cx="8" cy="8" r="3.3" class="k-fill" /></svg>Pareto front</span>
-                      No single score: each method is a point on the three primary metrics, and the front is the set no other editor beats on all three. Live from the <a href={pub.leaderboard}>leaderboard</a>; drag to rotate.
+                      <ul class="pareto-keys">
+                        <li class="k-front"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" class="k-ring" /><circle cx="8" cy="8" r="3.3" class="k-fill" /></svg>Pareto front</li>
+                        <li><b>Correctness</b><span>SeqAcc ↑</span></li>
+                        <li><b>Temporal</b><span>Warp<sub>c</sub> ↓</span></li>
+                        <li><b>Locality</b><span>DreamSim<sub>loc</sub> ↓</span></li>
+                      </ul>
+                      <p>No single score: each method is a point on the three primary metrics, and the front is the set no other editor beats on all three. Live from the <a href={pub.leaderboard}>leaderboard</a>; drag to rotate.</p>
                     </figcaption>
                   </figure>
                 )}
@@ -156,8 +161,6 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     gap: 16px 24px;
     flex-wrap: wrap;
     margin-top: 20px;
-    padding-block: 14px;
-    border-block: 1px solid var(--rule);
   }
   .scene-list { display: flex; flex-wrap: wrap; gap: 6px 22px; }
   .scene-list button {
@@ -201,7 +204,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     transition: color 200ms steps(5);
   }
   .num.live { color: var(--accent); }
-  .caption { margin-top: 14px; max-width: 60ch; }
+  .caption { margin-top: 8px; max-width: 60ch; }
 
   /* The title leads each paper; the venue sits right under it as a badge, prominent but second. */
   .pub-head { margin-bottom: clamp(22px, 2.6vw, 34px); }
@@ -241,21 +244,24 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
     gap: 28px clamp(28px, 4vw, 52px);
-    margin-top: clamp(32px, 4vw, 48px);
-    padding-top: clamp(24px, 3vw, 36px);
-    border-top: 1px solid var(--rule);
+    margin-top: clamp(24px, 3vw, 36px);
     align-items: start;
   }
   .pareto { margin: 0; }
-  .pareto-stage { position: relative; aspect-ratio: 1 / 0.9; margin-top: -8px; }
+  .pareto-stage { position: relative; aspect-ratio: 1 / 0.84; margin-top: -12px; }
   .pareto-stage canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
   .pareto-stage canvas:global(.is-dragging) { cursor: grabbing; }
   .pareto-stage canvas:global(.is-hover) { cursor: pointer; }
   .pareto-status { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; }
   .pareto-status[hidden] { display: none; }
   .pareto figcaption { margin-top: 10px; max-width: 52ch; }
-  .pareto-key { display: inline-flex; align-items: center; gap: 6px; margin-right: 10px; color: var(--ink); }
-  .pareto-key svg { width: 13px; height: 13px; }
+  .pareto-keys { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; }
+  .pareto-keys li { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .pareto-keys b { font-weight: 500; color: var(--ink); }
+  .pareto-keys sub { font-size: 0.72em; line-height: 0; }
+  .k-front { color: var(--ink); }
+  .k-front svg { width: 13px; height: 13px; }
+  .pareto figcaption p { margin: 0; }
   .k-ring { fill: none; stroke: var(--accent); stroke-width: 1.2; }
   .k-fill { fill: var(--accent); }
   .pub-detail { padding-top: 4px; }
@@ -274,7 +280,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     .pub-text { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
-    .pareto-stage { aspect-ratio: 1 / 1.18; }
+    .pareto-stage { aspect-ratio: 1 / 0.98; }
     .stage { aspect-ratio: 426 / 488; }
     .stage video { object-fit: contain; }
     .stage-labels { grid-template-columns: 1fr; gap: 2px; }
