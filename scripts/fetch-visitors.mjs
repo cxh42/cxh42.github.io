@@ -30,6 +30,8 @@ const get = async (path, retry = 2) => {
 const regionsOf = async (code, start) => {
   try {
     const data = await get(`/stats/locations/${code}?start=${start}&limit=100`);
+    const raw = (data.stats ?? []).map((s) => `${s.id || '?'}:${s.name || '?'}=${s.count}`).join(', ');
+    console.log(`fetch-visitors: ${code} regions [${raw}]`);
     return (data.stats ?? [])
       .filter((s) => typeof s.id === 'string' && /^[A-Za-z]{2}-[A-Za-z0-9]{1,4}$/.test(s.id) && s.count > 0)
       .map((s) => ({ code: s.id.toUpperCase(), name: s.name, count: s.count }));
