@@ -66,9 +66,9 @@ export const publications = [
     authors: ['Xinghao Chen', 'Xiangbo Gao', 'Jiongze Yu', 'Yuheng Wu', 'Zhengzhong Tu'],
     venue: 'NeurIPS 2026',
     track: 'Evaluations & Datasets Track',
-    // Paraphrased from the paper's abstract (revision of 2026-09-26).
+    // Paraphrased from the paper's abstract (revision of 2026-09-27).
     summary:
-      'Video scene text editing must replace the characters on signs, boards and labels while the rest of the scene and its motion stay intact. ViTeX-Bench pairs ViTeX-Dataset (387 real-world 720p videos: 230 with reviewed paired edits for training, 157 frozen for evaluation) with 13 metrics over text correctness, visual and temporal quality, and edit locality, compared through one primary metric per axis and a Pareto front instead of a single score. Across eight baselines from four editing families, accurate text, temporal stability and scene preservation remain hard to get together. The open reference editor ViTeX-Edit-14B reaches the highest CharAcc among video-native editors (0.688).',
+      'Video generation keeps getting better, but precise local edits that must keep the original scene dynamics are still hard. Video scene text editing is one such edit: replace the characters on signs, boards and labels while the rest of the scene and its motion stay intact. ViTeX-Bench pairs ViTeX-Dataset (387 real-world 720p videos: 230 with reviewed paired edits for training, 157 frozen for evaluation) with 13 metrics over text correctness, visual and temporal quality, and edit locality, compared through one primary metric per axis and a Pareto front instead of a single score. Across eight baselines from four editing families, accurate text, temporal stability and scene preservation remain hard to get together. The open reference editor ViTeX-Edit-14B reaches the highest CharAcc among video-native editors (0.688) and the lowest comparable text-crop Warp among raw editor outputs.',
     pareto: true,
     leaderboard: 'https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/',
     links: [
