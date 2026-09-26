@@ -4,8 +4,9 @@ on:
   push:
     branches: [master]
   schedule:
-    # Daily rebuild so the visitor globe picks up new countries.
-    - cron: '17 6 * * *'
+    # Hourly rebuild so the visitor globe picks up new places. The site is static and the GoatCounter
+    # token must stay secret, so location stats can only be read here, at build time, not in the browser.
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:
