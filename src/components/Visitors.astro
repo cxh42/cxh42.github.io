@@ -27,7 +27,7 @@ const regionCount = countries.reduce((k, c) => k + regionsNamed(c).length, 0);
 const total: number = visitors.total ?? 0;
 const top = countries.slice(0, 8);
 const updated = visitors.updated
-  ? new Date(visitors.updated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })
+  ? new Date(visitors.updated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'UTC' }) + ' UTC'
   : null;
 const fmt = (n: number) => n.toLocaleString('en-US');
 const tLabel = katex.renderToString('t=', { throwOnError: false });
@@ -80,7 +80,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
           </>
         )}
         <p class="meta source">
-          Counted without cookies by GoatCounter{updated ? `, updated ${updated}` : ', updated daily'}.
+          Counted without cookies by GoatCounter{updated ? `, updated ${updated}` : ', updated hourly'}.
         </p>
       </div>
     </div>
