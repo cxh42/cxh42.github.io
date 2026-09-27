@@ -56,9 +56,10 @@ export const projects = [
   },
 ];
 
-// Selected publications, own first author first, then newest. Each one shows a real before/after pair from the
-// paper or its project page, played through the sampler: a replacement (from → to), an insertion (+) or a removal (−).
-export type Scene = { id: string; op: 'replace' | 'insert' | 'remove'; from?: string; to: string; alt: string };
+// Selected publications: the first-author paper leads as the featured entry, then the rest, newest first. Each one
+// shows real before/after pairs from the paper or its project page, played through the sampler; the scene row
+// names the edit once (Replace, Insert, Remove) and then lists the examples.
+export type Scene = { id: string; from?: string; to: string; alt: string };
 
 export const publications = [
   {
@@ -69,24 +70,33 @@ export const publications = [
     authors: ['Xinghao Chen', 'Xiangbo Gao', 'Jiongze Yu', 'Yuheng Wu', 'Zhengzhong Tu'],
     venue: 'NeurIPS 2026',
     track: 'Evaluations & Datasets Track',
+    featured: true,
+    role: 'First author',
+    // From the paper's abstract (revision of 2026-09-27).
     summary:
-      'Replacing the text in real videos, on signs, boards and labels, while the rest of the scene and its motion stay intact. The benchmark pairs 387 real-world 720p videos with 13 metrics and an open 14B reference editor.',
+      'Video scene text editing replaces the words on signs, boards and labels in a real video while the rest of the scene and its motion stay intact. ViTeX-Bench pairs ViTeX-Dataset, 387 real-world 720p videos, with 13 metrics over text correctness, visual and temporal quality, and edit locality, and releases ViTeX-Edit-14B as an open reference editor.',
+    pareto: {
+      note: 'There is no single score. Each editor is a point on one primary metric per axis, and the front is the set no other editor beats on all three: across eight baselines from four editing families, accurate text, temporal stability and scene preservation remain hard to get together.',
+      leaderboard: 'https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/',
+    },
     links: [
       { label: 'Project page', href: 'https://vitex-bench.github.io/' },
       { label: 'Code', href: 'https://github.com/ViTeX-Bench/ViTeX-Bench' },
       { label: 'Dataset', href: 'https://huggingface.co/datasets/ViTeX-Bench/ViTeX-Dataset' },
       { label: 'Model', href: 'https://huggingface.co/ViTeX-Bench/ViTeX-Edit-14B' },
+      { label: 'Leaderboard', href: 'https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/' },
     ],
     // Source (with its text mask) and ViTeX-Edit-14B output, side by side, from the project page showcase.
     stage: {
       base: '/media/vitex',
       kind: 'video',
+      verb: 'Replace',
       labels: ['Source, text mask in red', 'ViTeX-Edit-14B'],
       scenes: [
-        { id: 'first-last', op: 'replace', from: 'First', to: 'Last', alt: 'ViTeX-Edit-14B replacing “First” with “Last” on a chalkboard sign.' },
-        { id: 'soc-coc', op: 'replace', from: 'SOC', to: 'COC', alt: 'ViTeX-Edit-14B replacing “SOC” with “COC”.' },
-        { id: 'only-stop', op: 'replace', from: 'ONLY', to: 'STOP', alt: 'ViTeX-Edit-14B replacing “ONLY” with “STOP”.' },
-        { id: 'collier-washing', op: 'replace', from: 'COLLIER', to: 'WASHING', alt: 'ViTeX-Edit-14B replacing “COLLIER” with “WASHING”.' },
+        { id: 'first-last', from: 'First', to: 'Last', alt: 'ViTeX-Edit-14B replacing “First” with “Last” on a chalkboard sign.' },
+        { id: 'soc-coc', from: 'SOC', to: 'COC', alt: 'ViTeX-Edit-14B replacing “SOC” with “COC”.' },
+        { id: 'only-stop', from: 'ONLY', to: 'STOP', alt: 'ViTeX-Edit-14B replacing “ONLY” with “STOP”.' },
+        { id: 'collier-washing', from: 'COLLIER', to: 'WASHING', alt: 'ViTeX-Edit-14B replacing “COLLIER” with “WASHING”.' },
       ] as Scene[],
     },
   },
@@ -98,6 +108,9 @@ export const publications = [
     authors: ['Xiangbo Gao', 'Renjie Li', 'Xinghao Chen', 'Yuheng Wu', 'Suofei Feng', 'Jie Yang', 'Qing Yin', 'Zhengzhong Tu'],
     venue: 'NeurIPS 2026',
     track: 'Main Track',
+    featured: false,
+    role: '',
+    pareto: null,
     summary:
       'Inserting an object into an existing video from a few keyframes at any timestamps. PISCO carries its appearance, motion, shadows and reflections through the clip while the original scene and its dynamics stay intact.',
     links: [
@@ -110,11 +123,12 @@ export const publications = [
     stage: {
       base: '/media/pisco',
       kind: 'video',
+      verb: 'Insert',
       labels: ['Original', 'PISCO'],
       scenes: [
-        { id: 'lamp', op: 'insert', to: 'Desk lamp', alt: 'PISCO inserting a lit desk lamp beside a marble bust.' },
-        { id: 'rowboat', op: 'insert', to: 'Rowboat', alt: 'PISCO inserting a toy in a small rowboat on a lake with swans, reflected in the water.' },
-        { id: 'bear', op: 'insert', to: 'Bear', alt: 'PISCO inserting a large teddy bear riding on a moving motorboat.' },
+        { id: 'lamp', to: 'Desk lamp', alt: 'PISCO inserting a lit desk lamp beside a marble bust.' },
+        { id: 'rowboat', to: 'Rowboat', alt: 'PISCO inserting a toy in a small rowboat on a lake with swans, reflected in the water.' },
+        { id: 'bear', to: 'Bear', alt: 'PISCO inserting a large teddy bear riding on a moving motorboat.' },
       ] as Scene[],
     },
   },
@@ -126,18 +140,22 @@ export const publications = [
     authors: ['Zirui Li', 'Xinghao Chen', 'Lingyu Jiang', 'Xiangbo Gao', 'Dengzhe Hou', 'Kazunori Yamada', 'Fangzhou Lin', 'Zhengzhong Tu'],
     venue: 'CVPR 2026 Workshop',
     track: '',
+    featured: false,
+    role: '',
+    pareto: null,
     summary:
-      'Removing an object from a video together with its physical side effects, such as shadows and reflections. The benchmark pairs 95 videos, split into Simple and Hard, with instance masks, removal prompts and a human evaluation of instruction following, rendering quality and edit exclusivity.',
+      'Removing an object from a video along with the shadows, reflections and other physical effects it leaves behind. It holds 95 real videos with instance masks and removal prompts, split into Simple and Hard and rated by people on instruction following, rendering quality and edit exclusivity.',
     links: [{ label: 'Paper', href: 'https://arxiv.org/abs/2604.05898' }],
     // A benchmark frame and PISCO-Removal's result, from the paper's qualitative comparison (Fig. 1).
     stage: {
       base: '/media/pvir',
       kind: 'image',
+      verb: 'Remove',
       labels: ['Source', 'PISCO-Removal'],
       scenes: [
-        { id: 'duck', op: 'remove', to: 'Duck', alt: 'A duck on a riverbank, and the same frame with the duck removed by PISCO-Removal.' },
-        { id: 'kart', op: 'remove', to: 'Go-kart', alt: 'A go-kart with two riders on a street, and the same frame with it removed by PISCO-Removal.' },
-        { id: 'dancer', op: 'remove', to: 'Dancer', alt: 'A dancer in front of an audience, and the same frame with her removed by PISCO-Removal.' },
+        { id: 'duck', to: 'Duck', alt: 'A duck on a riverbank, and the same frame with the duck removed by PISCO-Removal.' },
+        { id: 'kart', to: 'Go-kart', alt: 'A go-kart with two riders on a street, and the same frame with it removed by PISCO-Removal.' },
+        { id: 'dancer', to: 'Dancer', alt: 'A dancer in front of an audience, and the same frame with her removed by PISCO-Removal.' },
       ] as Scene[],
     },
   },
@@ -193,7 +211,13 @@ export const news = [
     date: 'Sep 24, 2026',
     iso: '2026-09-24',
     upcoming: false,
-    text: 'ViTeX-Bench accepted to NeurIPS 2026, Evaluations & Datasets Track.',
+    text: '[ViTeX-Bench](https://vitex-bench.github.io/), the project I led as first author, was accepted to the NeurIPS 2026 Evaluations & Datasets Track.',
+  },
+  {
+    date: 'Sep 2026',
+    iso: '2026-09',
+    upcoming: false,
+    text: '[PISCO](https://xiangbogaobarry.github.io/PISCO/), led by [Xiangbo Gao](https://www.xiangbogao.com/) with me as a co-author, was accepted to the NeurIPS 2026 main track. Congratulations, Xiangbo!',
   },
   {
     date: 'Dec 2025',

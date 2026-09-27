@@ -4,6 +4,11 @@ import Arrow from './Arrow.astro';
 import { person, publications } from '../data/site';
 
 const tLabel = katex.renderToString('t=', { throwOnError: false });
+type Pub = (typeof publications)[number];
+
+// Text split so hyphenated compounds (High-Fidelity, ViTeX-Edit-14B) can be kept whole on one line.
+const hy = (text: string) => text.split(/(\S+-\S+)/);
+const titleParts = (pub: Pub) => hy(pub.title.slice(pub.short.length + 2));
 ---
 
 <section class="section" id="publications" aria-labelledby="publications-title">
@@ -16,84 +21,123 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
       {publications.map((pub) => {
         const st = pub.stage;
         const first = st.scenes[0];
-        return (
-          <li class="paper">
-            <article aria-labelledby={`pub-${pub.id}`}>
-              <header class="pub-head">
-                <h3 class="pub-title" id={`pub-${pub.id}`}>
-                  <span class="pub-name">{pub.short}:</span> {pub.title.slice(pub.short.length + 2).split(/(\S+-\S+)/).map((w) => (/-/.test(w) ? <span class="nw">{w}</span> : w))}
-                </h3>
-                <p class="authors">
-                  {pub.authors.map((a, i) => (<>{a === person.name ? <strong>{a}</strong> : <span>{a}</span>}{i < pub.authors.length - 1 ? ', ' : ''}</>))}
-                </p>
-                <p class="venue">
-                  <span class="venue-badge">{pub.venue}</span>
-                  {pub.track && <span class="venue-track">{pub.track}</span>}
-                </p>
-              </header>
 
-              <figure class="stage-fig" data-stage data-base={st.base}>
-                <div class="stage">
-                  {st.kind === 'video' ? (
-                    <video
-                      data-stage-media
-                      muted
-                      playsinline
-                      loop
-                      preload="none"
-                      poster={`${st.base}/${first.id}.jpg`}
-                      src={`${st.base}/${first.id}.mp4`}
-                      aria-label={first.alt}
-                    ></video>
-                  ) : (
-                    <img data-stage-media src={`${st.base}/${first.id}.jpg`} alt={first.alt} width="1280" height="360" loading="lazy" decoding="async" />
-                  )}
-                  <canvas data-stage-canvas aria-hidden="true"></canvas>
-                </div>
+        const head = (
+          <header class="pub-head">
+            <h3 class="pub-title" id={`pub-${pub.id}`}>
+              <span class="pub-name">{pub.short}:</span> {titleParts(pub).map((w) => (/-/.test(w) ? <span class="nw">{w}</span> : w))}
+            </h3>
+            <p class="authors">
+              {pub.authors.map((a, i) => (<>{a === person.name ? <strong>{a}</strong> : <span>{a}</span>}{i < pub.authors.length - 1 ? ', ' : ''}</>))}
+            </p>
+            <p class="venue">
+              <span class="venue-badge">{pub.venue}</span>
+              {pub.track && <span class="venue-track">{pub.track}</span>}
+              {pub.role && <span class="venue-role">{pub.role}</span>}
+            </p>
+          </header>
+        );
 
-                <figcaption class="stage-labels meta">
-                  <span><span class="lbl-narrow">Top: </span>{st.labels[0]}</span>
-                  <span><span class="lbl-narrow">Bottom: </span>{st.labels[1]}</span>
-                </figcaption>
+        const links = (
+          <ul class="pub-links">
+            {pub.links.map((l) => (
+              <li>
+                <a class="arrow-link" href={l.href}>
+                  {l.label}
+                  <Arrow />
+                </a>
+              </li>
+            ))}
+          </ul>
+        );
 
-                <div class="scenes">
-                  <div class="scene-list" role="group" aria-label={`${pub.short} examples`}>
-                    {st.scenes.map((sc, i) => (
-                      <button type="button" data-scene={sc.id} data-alt={sc.alt} aria-pressed={i === 0 ? 'true' : 'false'}>
-                        {sc.op === 'replace' ? (
-                          <>
-                            <span>{sc.from}</span>
-                            <svg class="op op-arrow" viewBox="0 0 14 8" role="img" aria-label="to"><path d="M0 4h12.5M9.5 1l3 3-3 3" /></svg>
-                            <span>{sc.to}</span>
-                          </>
-                        ) : (
-                          <>
-                            <svg class="op" viewBox="0 0 9 9" role="img" aria-label={sc.op === 'insert' ? 'Insert' : 'Remove'}>
-                              <path d={sc.op === 'insert' ? 'M0 4.5h9M4.5 0v9' : 'M0 4.5h9'} />
-                            </svg>
-                            <span>{sc.to}</span>
-                          </>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                  <p class="scene-t t-read" aria-hidden="true"><span set:html={tLabel} /><span class="num" data-stage-t>0</span></p>
-                </div>
-              </figure>
+        const stage = (
+          <figure class="stage-fig" data-stage data-base={st.base}>
+            <div class="stage">
+              {st.kind === 'video' ? (
+                <video
+                  data-stage-media
+                  muted
+                  playsinline
+                  loop
+                  preload="none"
+                  poster={`${st.base}/${first.id}.jpg`}
+                  src={`${st.base}/${first.id}.mp4`}
+                  aria-label={first.alt}
+                ></video>
+              ) : (
+                <img data-stage-media src={`${st.base}/${first.id}.jpg`} alt={first.alt} width="1280" height="360" loading="lazy" decoding="async" />
+              )}
+              <canvas data-stage-canvas aria-hidden="true"></canvas>
+            </div>
 
-              <div class="pub-foot">
-                <p class="summary">{pub.summary}</p>
-                <ul class="pub-links">
-                  {pub.links.map((l) => (
-                    <li>
-                      <a class="arrow-link" href={l.href}>
-                        {l.label}
-                        <Arrow />
-                      </a>
-                    </li>
+            <figcaption class="stage-labels meta">
+              <span><span class="lbl-stacked">Top: </span>{st.labels[0]}</span>
+              <span><span class="lbl-stacked">Bottom: </span>{st.labels[1]}</span>
+            </figcaption>
+
+            <div class="scenes">
+              <div class="scene-list" role="group" aria-labelledby={`verb-${pub.id}`}>
+                <span class="scene-verb" id={`verb-${pub.id}`}>{st.verb}</span>
+                  {st.scenes.map((sc, i) => (
+                    <button type="button" data-scene={sc.id} data-alt={sc.alt} aria-pressed={i === 0 ? 'true' : 'false'}>
+                      {sc.from ? (
+                        <>
+                          <span>{sc.from}</span>
+                          <svg viewBox="0 0 14 8" role="img" aria-label="with"><path d="M0 4h12.5M9.5 1l3 3-3 3" /></svg>
+                          <span>{sc.to}</span>
+                        </>
+                      ) : (
+                        <span>{sc.to}</span>
+                      )}
+                    </button>
                   ))}
-                </ul>
               </div>
+              <p class="scene-t t-read" aria-hidden="true"><span set:html={tLabel} /><span class="num" data-stage-t>0</span></p>
+            </div>
+          </figure>
+        );
+
+        return pub.featured ? (
+          <li class="paper featured">
+            <article aria-labelledby={`pub-${pub.id}`}>
+              {head}
+              {stage}
+              <div class="pub-lower">
+                {pub.pareto && (
+                  <figure class="pareto">
+                    <div class="pareto-stage">
+                      <canvas data-pareto role="img" aria-label="Three-dimensional chart of the methods evaluated on ViTeX-Bench, on SeqAcc, Warp_c and DreamSim_loc. The Pareto front is FLUX-Text, TextCtrl, RS-STE, ViTeX-Edit-14B and Wan2.1-VACE-14B."></canvas>
+                      <p class="pareto-status meta" data-pareto-status>Loading…</p>
+                    </div>
+                    <figcaption class="meta">
+                      <ul class="pareto-keys">
+                        <li class="k-front"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" class="k-ring" /><circle cx="8" cy="8" r="3.3" class="k-fill" /></svg>Pareto front</li>
+                        <li><b>Correctness</b><span>SeqAcc ↑</span></li>
+                        <li><b>Temporal</b><span>Warp<sub>c</sub> ↓</span></li>
+                        <li><b>Locality</b><span>DreamSim<sub>loc</sub> ↓</span></li>
+                      </ul>
+                      <p>Every editor on the <a href={pub.pareto.leaderboard}>leaderboard</a>, live.</p>
+                    </figcaption>
+                  </figure>
+                )}
+                <div class="pub-detail">
+                  <p class="summary">{hy(pub.summary).map((w) => (/-/.test(w) ? <span class="nw">{w}</span> : w))}</p>
+                  {pub.pareto && <p class="summary pareto-note">{hy(pub.pareto.note).map((w) => (/-/.test(w) ? <span class="nw">{w}</span> : w))}</p>}
+                  {links}
+                </div>
+              </div>
+            </article>
+          </li>
+        ) : (
+          <li class="paper compact">
+            <article aria-labelledby={`pub-${pub.id}`}>
+              <div class="pub-text">
+                {head}
+                <p class="summary">{hy(pub.summary).map((w) => (/-/.test(w) ? <span class="nw">{w}</span> : w))}</p>
+                {links}
+              </div>
+              {stage}
             </article>
           </li>
         );
@@ -105,7 +149,8 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
 <style>
   .pubs-title h2 { font: inherit; letter-spacing: inherit; }
 
-  /* Each paper is its own unit: a tinted plate with room around it, so the next one reads as a new project. */
+  /* Each paper is its own unit: a tinted plate with room around it, so the next one reads as a new project.
+     The first-author paper leads at full size; the others are compact, text beside their example. */
   .papers {
     list-style: none;
     margin: 0;
@@ -150,7 +195,17 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     letter-spacing: -0.005em;
     line-height: 1.2;
   }
-  .venue-track { color: var(--ink-2); font-size: var(--step-0); letter-spacing: -0.005em; }
+  .venue-track,
+  .venue-role { font-size: var(--step-0); letter-spacing: -0.005em; }
+  .venue-track { color: var(--ink-2); }
+  /* Set off from the track by a hairline where they share a line; on phones the row always wraps, so no rule. */
+  .venue-role {
+    color: var(--ink);
+    font-weight: 500;
+    padding-left: 14px;
+    border-left: 1px solid var(--rule-strong);
+    line-height: 1;
+  }
 
   /* Before and after: one 16:9 pair per example, sampled in through the page's noise. */
   .stage-fig { margin: 0; }
@@ -180,8 +235,9 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     gap: 8px;
     margin-top: 10px;
   }
-  .lbl-narrow { display: none; }
+  .lbl-stacked { display: none; }
 
+  /* The scene row names the edit once, then lists the examples as plain text toggles. */
   .scenes {
     display: flex;
     align-items: center;
@@ -190,7 +246,17 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     flex-wrap: wrap;
     margin-top: 14px;
   }
-  .scene-list { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+  .scene-verb {
+    font-size: 0.9375rem;
+    letter-spacing: 0.005em;
+    color: var(--ink-2);
+    font-weight: 450;
+    padding-right: 18px;
+    border-right: 1px solid var(--rule-strong);
+    line-height: 1;
+    margin-right: -2px;
+  }
+  .scene-list { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; }
   .scene-list button {
     display: inline-flex;
     align-items: center;
@@ -205,9 +271,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     position: relative;
     transition: color 200ms var(--ease-out);
   }
-  .op { flex: none; fill: none; stroke: currentColor; stroke-width: 1.2; }
-  .op-arrow { width: 14px; height: 8px; }
-  .op:not(.op-arrow) { width: 9px; height: 9px; }
+  .scene-list svg { width: 14px; height: 8px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.2; }
   .scene-list button:hover { color: var(--ink); }
   .scene-list button[aria-pressed='true'] { color: var(--ink); }
   .scene-list button[aria-pressed='true']::after {
@@ -235,37 +299,77 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
   }
   .num.live { color: var(--accent); }
 
-  /* What it is, in a sentence or two, and where to go next. */
-  .pub-foot {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 16px clamp(28px, 4vw, 56px);
-    align-items: start;
-    margin-top: clamp(22px, 2.6vw, 30px);
-  }
   .summary { color: var(--ink-2); max-width: 60ch; }
-  /* A short column beside the summary, so the sentence keeps its measure however many links a paper has. */
   .pub-links {
     list-style: none;
-    margin: 0;
+    margin: 20px 0 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-    min-width: 11ch;
+    flex-wrap: wrap;
+    gap: 8px 22px;
   }
   .pub-links a { text-decoration-color: var(--rule-strong); }
 
+  /* Featured: the chart of every editor beside what the benchmark is and finds. */
+  .pub-lower {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 28px clamp(28px, 4vw, 52px);
+    margin-top: clamp(26px, 3vw, 38px);
+    align-items: start;
+  }
+  .pub-detail { padding-top: 4px; }
+  .pareto-note { margin-top: 14px; }
+  .pareto { margin: 0; }
+  .pareto-stage { position: relative; aspect-ratio: 1 / 0.84; margin-top: -12px; }
+  .pareto-stage canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
+  .pareto-stage canvas:global(.is-dragging) { cursor: grabbing; }
+  .pareto-stage canvas:global(.is-hover) { cursor: pointer; }
+  .pareto-status { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; }
+  .pareto-status[hidden] { display: none; }
+  .pareto figcaption { margin-top: 10px; max-width: 52ch; }
+  .pareto-keys { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; }
+  .pareto-keys li { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .pareto-keys b { font-weight: 500; color: var(--ink); }
+  .pareto-keys sub { font-size: 0.72em; line-height: 0; }
+  .k-front { color: var(--ink); }
+  .k-front svg { width: 13px; height: 13px; }
+  .pareto figcaption p { margin: 0; }
+  .k-ring { fill: none; stroke: var(--accent); stroke-width: 1.2; }
+  .k-fill { fill: var(--accent); }
+
+  /* Compact: title, venue, summary and links on the left; the example pair stacked on the right. */
+  .compact article {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 28px clamp(28px, 4vw, 52px);
+    align-items: start;
+  }
+  .compact .pub-title { font-size: clamp(1.45rem, 1.1rem + 1.2vw, 1.875rem); line-height: 1.15; letter-spacing: -0.02em; }
+  .compact .pub-head { margin-bottom: 20px; }
+  .compact .pub-links { margin-top: 16px; }
+  .compact .stage { aspect-ratio: 426 / 488; }
+  .compact .stage-labels { grid-template-columns: 1fr; gap: 2px; }
+  .compact .lbl-stacked { display: inline; }
+
   @media (max-width: 900px) {
-    .pub-foot { grid-template-columns: 1fr; }
-    .pub-links { flex-direction: row; flex-wrap: wrap; gap: 8px 22px; }
+    .pub-lower,
+    .compact article { grid-template-columns: 1fr; }
+    .pub-detail { order: -1; }
+    .compact .stage { aspect-ratio: 852 / 240; }
+    .compact .stage-labels { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .compact .lbl-stacked { display: none; }
   }
   @media (max-width: 640px) {
-    .stage { aspect-ratio: 426 / 488; }
+    .venue-role { padding-left: 0; border-left: 0; flex-basis: 100%; line-height: inherit; }
+    .pareto-stage { aspect-ratio: 1 / 0.98; }
+    .stage,
+    .compact .stage { aspect-ratio: 426 / 488; }
     .stage video,
     .stage img { object-fit: contain; }
-    .stage-labels { grid-template-columns: 1fr; gap: 2px; }
-    .lbl-narrow { display: inline; }
+    .stage-labels,
+    .compact .stage-labels { grid-template-columns: 1fr; gap: 2px; }
+    .lbl-stacked,
+    .compact .lbl-stacked { display: inline; }
   }
 </style>

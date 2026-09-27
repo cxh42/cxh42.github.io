@@ -1,5 +1,11 @@
 ---
 import { news } from '../data/site';
+
+// News text may carry inline links written as [label](href).
+const parts = (text: string) => text.split(/(\[[^\]]+\]\([^)]+\))/).map((seg) => {
+  const m = seg.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+  return m ? { label: m[1], href: m[2] } : seg;
+});
 ---
 
 <section class="section" id="news" aria-labelledby="news-title">
@@ -10,7 +16,7 @@ import { news } from '../data/site';
         <li class:list={['item', { upcoming: n.upcoming }]}>
           <time class="date" datetime={n.iso}>{n.date}</time>
           <p class="text">
-            {n.text}
+            {parts(n.text).map((x) => (typeof x === 'string' ? x : <a href={x.href}>{x.label}</a>))}
           </p>
         </li>
       ))}

@@ -2,7 +2,8 @@ import { QUAD_VS, NOISE_GLSL, compile, fullscreenQuad, getGL, isStill, onFrame, 
 
 // Each publication's before/after figure plays through the same sampler. It samples in once it is on screen;
 // switching scenes runs the forward process up to t = 720, swaps the media, then samples back to t = 0.
-// Media are 16:9 pairs laid side by side in one clip or still (source left, result right).
+// Media are 16:9 pairs laid side by side in one clip or still (source left, result right); a stage taller than it
+// is wide (compact papers, phones) stacks them instead.
 
 const FS = /* glsl */ `#version 300 es
 precision highp float;
@@ -43,8 +44,6 @@ void main() {
   vec3 xt = sqrt(ab) * x0 + nz * eps * 0.62;
   o = vec4(clamp(xt * 0.5 + 0.5, 0.0, 1.0), 1.0);
 }`;
-
-const stackMq = window.matchMedia('(max-width: 640px)');
 
 function initStage(fig: HTMLElement) {
   const media = fig.querySelector<HTMLVideoElement | HTMLImageElement>('[data-stage-media]');
@@ -130,7 +129,6 @@ function initStage(fig: HTMLElement) {
   }
   size();
   new ResizeObserver(size).observe(canvas);
-  stackMq.addEventListener('change', () => (dirty = true));
   if (!video) media.addEventListener('load', () => (stale = true));
 
   function upload() {
@@ -176,7 +174,7 @@ function initStage(fig: HTMLElement) {
     gl!.uniform1f(u('uLod'), 4.2);
     gl!.uniform2f(u('uSize'), W, H);
     gl!.uniform1f(u('uGap'), Math.round(8 * dpr));
-    gl!.uniform1f(u('uStack'), stackMq.matches ? 1 : 0);
+    gl!.uniform1f(u('uStack'), H > W * 0.8 ? 1 : 0);
     draw();
   }
   onFrame(tick);

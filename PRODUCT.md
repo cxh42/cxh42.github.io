@@ -47,7 +47,7 @@ The site belongs to a researcher who works on moving images (video generation an
 - Status: will join **Texas A&M University** as a PhD student in **January 2027**, in the **TACO group** (`https://taco-group.github.io/`), advised by **Dr. Zhengzhong Tu** (`https://vztu.github.io/`).
 
 **Publications (shown as "Selected Publications": own first-author paper first, then newest)**
-Each is shown with its title, authors (Xinghao bold), venue badge, one before/after example pair played through the sampler, a one- or two-sentence summary and at most four links. The user asked on 2026-09-28 for the entries to be concise: no long abstracts, charts or extra captions (the Pareto chart was removed then).
+Each is shown with its title, authors (Xinghao bold), venue badge, one before/after example pair played through the sampler, a one- or two-sentence summary and at most four links. The user asked on 2026-09-28 for the entries to be concise, then for ViTeX-Bench, their first-author paper, to be emphasised: it is the featured entry, marked "First author", with the live 3D Pareto chart and a short description of it; PISCO and PVIR-Bench are compact entries.
 - **ViTeX-Bench: Benchmarking High-Fidelity Video Scene Text Editing** (hyphenated, as in the paper). Authors: **Xinghao Chen**, Xiangbo Gao, Jiongze Yu, Yuheng Wu, Zhengzhong Tu (first author, no equal-contribution marking). **NeurIPS 2026, Evaluations & Datasets Track**, accepted 2026-09-24.
   - Links: project page `https://vitex-bench.github.io/`, code `https://github.com/ViTeX-Bench/ViTeX-Bench`, dataset `https://huggingface.co/datasets/ViTeX-Bench/ViTeX-Dataset`, model `https://huggingface.co/ViTeX-Bench/ViTeX-Edit-14B`. Leaderboard (reachable from the project page): `https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/`.
   - Facts (paper revision of 2026-09-26): 387 real-world 720p videos with masks and instructions (230 training, 157 frozen evaluation); 13 metrics over text correctness, visual and temporal quality, and edit locality, compared per axis and on a Pareto front with no single score; eight baselines from four editing families; ViTeX-Edit-14B reaches CharAcc 0.688, the highest among video-native editors.
@@ -88,7 +88,7 @@ Each is shown with its title, authors (Xinghao bold), venue badge, one before/af
 
 **Open decisions (don't invent these)**
 - ViTeX paper link: the user will publish an arXiv version later. Leave the paper link out for now; don't show a dead or placeholder link.
-- News items: the confirmed items are the ViTeX acceptance (2026-09-24), the UW graduation (12.2025) and the upcoming TAMU PhD start (Spring 2027). Add nothing else.
+- News items: the confirmed items are the ViTeX acceptance (2026-09-24, worded as the project the user led as first author), the PISCO acceptance (Sep 2026; exact date not given; worded as led by Xiangbo Gao with the user as co-author, with congratulations to Xiangbo, as the user asked on 2026-09-28), the UW graduation (12.2025) and the upcoming TAMU PhD start (Spring 2027). Add nothing else.
 - Research statement wording beyond the facts above hasn't been provided; don't add claims about specific VLM work.
 
 ## Brand Commitments
