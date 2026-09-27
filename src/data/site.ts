@@ -214,8 +214,8 @@ export const news = [
     text: '[ViTeX-Bench](https://vitex-bench.github.io/), the project I led as first author, was accepted to the NeurIPS 2026 Evaluations & Datasets Track.',
   },
   {
-    date: 'Sep 2026',
-    iso: '2026-09',
+    date: 'Sep 24, 2026',
+    iso: '2026-09-24',
     upcoming: false,
     text: '[PISCO](https://xiangbogaobarry.github.io/PISCO/), led by [Xiangbo Gao](https://www.xiangbogao.com/) with me as a co-author, was accepted to the NeurIPS 2026 main track. Congratulations, Xiangbo!',
   },

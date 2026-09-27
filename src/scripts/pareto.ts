@@ -24,10 +24,11 @@ const FALLBACK: Row[] = [
   { method: 'Kling Video 3.0 Omni', kind: 'editor', temporal_comparable: true, SeqAcc: 0, Warp_crop: 2.90209, DreamSim_loc: 0.06078 },
 ];
 
-const AX: { key: Key; name: string; up: boolean; log: boolean; floor?: number }[] = [
-  { key: 'SeqAcc', name: 'Correctness', up: true, log: false },
-  { key: 'Warp_crop', name: 'Temporal', up: false, log: true, floor: 0.001 },
-  { key: 'DreamSim_loc', name: 'Locality', up: false, log: true, floor: 0.001 },
+// Each axis is labelled with its name and, beneath it, the metric it plots: [base, subscript, direction].
+const AX: { key: Key; name: string; metric: [string, string, string]; up: boolean; log: boolean; floor?: number }[] = [
+  { key: 'SeqAcc', name: 'Correctness', metric: ['SeqAcc', '', '↑'], up: true, log: false },
+  { key: 'Warp_crop', name: 'Temporal', metric: ['Warp', 'c', '↓'], up: false, log: true, floor: 0.001 },
+  { key: 'DreamSim_loc', name: 'Locality', metric: ['DreamSim', 'loc', '↓'], up: false, log: true, floor: 0.001 },
 ];
 
 type V3 = [number, number, number];
@@ -171,11 +172,13 @@ export function initPareto() {
     ([[[-1, 1, -1], [1, 1, -1]], [[1, -1, -1], [1, 1, -1]], [[1, -1, -1], [1, -1, 1]], [[-1, 1, -1], [-1, 1, 1]], [[-1, -1, 1], [-1, 1, 1]], [[-1, -1, 1], [1, -1, 1]],
       [[1, 1, -1], [1, 1, 1]], [[-1, 1, 1], [1, 1, 1]], [[1, -1, 1], [1, 1, 1]]] as V3[][]).forEach((e) => line(P, e[0], e[1], box));
 
-    // Axes along the outermost parallel edge. Each carries one short name, pushed straight out from the
-    // cube's centre past its arrow so it never sits on the volume; names that would touch step further out.
-    // Tick values are left off: the key under the figure names each metric and its direction.
+    // Axes along the outermost parallel edge. Each carries its name and, in a smaller graphite line beneath,
+    // the metric and its direction; the pair is pushed straight out from the cube's centre past the arrow so it
+    // never sits on the volume, and steps further out if it would touch another label. No tick values.
     const small = W < 420, placed: Box[] = [], O = P([0, 0, 0]);
     const nf = `500 ${small ? 11.5 : 12.5}px ${SANS}`;
+    const mf = `400 ${small ? 10.5 : 11.5}px ${SANS}`, sf = `400 ${small ? 8 : 8.5}px ${SANS}`;
+    const lh = small ? 13 : 14;
     AX.forEach((a, i) => {
       const j = (i + 1) % 3, k2 = (i + 2) % 3;
       const o: V3 = [0, 0, 0], e: V3 = [0, 0, 0]; o[i] = -1; e[i] = 1.12;
@@ -195,7 +198,11 @@ export function initPareto() {
       ctx.lineTo(tip.x - ux * 7 - uy * 3.5, tip.y - uy * 7 + ux * 3.5); ctx.lineTo(tip.x - ux * 7 + uy * 3.5, tip.y - uy * 7 - ux * 3.5);
       ctx.closePath(); ctx.fillStyle = edge; ctx.fill();
       ctx.font = nf;
-      const tw = ctx.measureText(a.name).width, th = 16;
+      const nw = ctx.measureText(a.name).width;
+      const [mb, ms, md] = a.metric;
+      ctx.font = mf; const wb = ctx.measureText(mb).width, wd = ctx.measureText(' ' + md).width;
+      ctx.font = sf; const ws = ms ? ctx.measureText(ms).width + 1 : 0;
+      const mw = wb + ws + wd, tw = Math.max(nw, mw), th = 16 + lh;
       let rx = tip.x - O.x, ry = tip.y - O.y; const rl = Math.hypot(rx, ry) || 1; rx /= rl; ry /= rl;
       let b: Box = { x: 0, y: 0, w: 0, h: 0 }, cx = 0, cy = 0;
       for (let d = 14; d <= 74; d += 10) {
@@ -205,7 +212,12 @@ export function initPareto() {
         b = { x: cx - tw / 2 - 4, y: cy - th / 2 - 2, w: tw + 8, h: th + 4 };
         if (!hit(b, placed)) break;
       }
-      text(a.name, cx, cy, nf, rgba(ink, 0.88), 'center', true);
+      const y1 = cy - lh / 2, y2 = cy + 8;
+      text(a.name, cx, y1, nf, rgba(ink, 0.88), 'center', true);
+      let mx = cx - mw / 2;
+      text(mb, mx, y2, mf, rgba(ink, 0.56), 'left', true); mx += wb;
+      if (ms) { text(ms, mx + 0.5, y2 + 3.5, sf, rgba(ink, 0.56), 'left', true); mx += ws; }
+      text(' ' + md, mx, y2, mf, rgba(ink, 0.56), 'left', true);
       placed.push(b);
     });
 

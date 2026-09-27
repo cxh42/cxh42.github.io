@@ -111,13 +111,8 @@ const titleParts = (pub: Pub) => hy(pub.title.slice(pub.short.length + 2));
                       <p class="pareto-status meta" data-pareto-status>Loading…</p>
                     </div>
                     <figcaption class="meta">
-                      <ul class="pareto-keys">
-                        <li class="k-front"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" class="k-ring" /><circle cx="8" cy="8" r="3.3" class="k-fill" /></svg>Pareto front</li>
-                        <li><b>Correctness</b><span>SeqAcc ↑</span></li>
-                        <li><b>Temporal</b><span>Warp<sub>c</sub> ↓</span></li>
-                        <li><b>Locality</b><span>DreamSim<sub>loc</sub> ↓</span></li>
-                      </ul>
-                      <p>Every editor on the <a href={pub.pareto.leaderboard}>leaderboard</a>, live.</p>
+                      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" class="k-ring" /><circle cx="8" cy="8" r="3.3" class="k-fill" /></svg>
+                      <span><span class="k-front">Pareto front</span>, live from the <a href={pub.pareto.leaderboard}>leaderboard</a></span>
                     </figcaption>
                   </figure>
                 )}
@@ -327,14 +322,10 @@ const titleParts = (pub: Pub) => hy(pub.title.slice(pub.short.length + 2));
   .pareto-stage canvas:global(.is-hover) { cursor: pointer; }
   .pareto-status { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; }
   .pareto-status[hidden] { display: none; }
-  .pareto figcaption { margin-top: 10px; max-width: 52ch; }
-  .pareto-keys { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; }
-  .pareto-keys li { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
-  .pareto-keys b { font-weight: 500; color: var(--ink); }
-  .pareto-keys sub { font-size: 0.72em; line-height: 0; }
+  /* One quiet line: the axes carry their own metrics, so the caption only keys the front and its source. */
+  .pareto figcaption { display: flex; align-items: center; gap: 7px; margin-top: 6px; }
+  .pareto figcaption svg { width: 13px; height: 13px; flex: none; }
   .k-front { color: var(--ink); }
-  .k-front svg { width: 13px; height: 13px; }
-  .pareto figcaption p { margin: 0; }
   .k-ring { fill: none; stroke: var(--accent); stroke-width: 1.2; }
   .k-fill { fill: var(--accent); }
 

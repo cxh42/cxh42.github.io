@@ -88,7 +88,7 @@ Each is shown with its title, authors (Xinghao bold), venue badge, one before/af
 
 **Open decisions (don't invent these)**
 - ViTeX paper link: the user will publish an arXiv version later. Leave the paper link out for now; don't show a dead or placeholder link.
-- News items: the confirmed items are the ViTeX acceptance (2026-09-24, worded as the project the user led as first author), the PISCO acceptance (Sep 2026; exact date not given; worded as led by Xiangbo Gao with the user as co-author, with congratulations to Xiangbo, as the user asked on 2026-09-28), the UW graduation (12.2025) and the upcoming TAMU PhD start (Spring 2027). Add nothing else.
+- News items: the confirmed items are the ViTeX acceptance (2026-09-24, worded as the project the user led as first author), the PISCO acceptance (2026-09-24, the same day as ViTeX; worded as led by Xiangbo Gao with the user as co-author, with congratulations to Xiangbo, as the user asked on 2026-09-28), the UW graduation (12.2025) and the upcoming TAMU PhD start (Spring 2027). Add nothing else.
 - Research statement wording beyond the facts above hasn't been provided; don't add claims about specific VLM work.
 
 ## Brand Commitments
