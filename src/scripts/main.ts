@@ -3,8 +3,7 @@ import { initChrome } from './chrome';
 import { initHero } from './hero';
 import { initPortrait } from './portrait';
 import { initTyping } from './typing';
-import { initVitex } from './vitex';
-import { initPareto } from './pareto';
+import { initStages } from './stage';
 import { initCampus } from './campus';
 import { initGlobe } from './globe';
 
@@ -13,7 +12,6 @@ initChrome();
 initHero();
 initPortrait();
 initTyping();
-initVitex();
-initPareto();
+initStages();
 initCampus();
 initGlobe();

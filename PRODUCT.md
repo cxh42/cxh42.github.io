@@ -30,7 +30,7 @@ The site belongs to a researcher who works on moving images (video generation an
 
 - It's a personal site on GitHub Pages at `https://cxh42.github.io`, repo `cxh42/cxh42.github.io`, main branch `master`.
 - The content is in English (inferred from the previous site). The Chinese name is shown as a secondary element.
-- The site will grow slowly: more publications and news items over time, starting with exactly one paper.
+- The site will grow slowly: more publications and news items over time. It started with one paper; three are shown since 2026-09-28.
 - Visitor analytics use GoatCounter (site code `cxh42`, dashboard `https://cxh42.goatcounter.com`). Tracking is cookie-free.
 
 ## Capabilities and Constraints
@@ -46,21 +46,17 @@ The site belongs to a researcher who works on moving images (video generation an
 - VR project (2025, UW course "Developing Immersive Experiences for AR/VR"): photographed UW landmark buildings and sculptures with a phone, reconstructed them as 3D Gaussian splats, and built a virtual campus tour for **Meta Quest**. The 3DGS reconstruction detail comes from the old site's news item; the user described the phone capture and the Quest tour.
 - Status: will join **Texas A&M University** as a PhD student in **January 2027**, in the **TACO group** (`https://taco-group.github.io/`), advised by **Dr. Zhengzhong Tu** (`https://vztu.github.io/`).
 
-**Publication (the only one to show for now)**
-- Title: *ViTeX-Bench: Benchmarking High-Fidelity Video Scene Text Editing* (hyphenated, as in the paper).
-- Authors, in order: **Xinghao Chen**, Xiangbo Gao, Jiongze Yu, Yuheng Wu, Zhengzhong Tu. Xinghao is first author, with no equal-contribution marking.
-- Venue: **NeurIPS 2026, Evaluations & Datasets Track, accepted on 2026-09-24.** The project page is deanonymized and shows the acceptance.
-- Links:
-  - Project page: `https://vitex-bench.github.io/`
-  - Dataset: `https://huggingface.co/datasets/ViTeX-Bench/ViTeX-Dataset`
-  - Benchmark code: `https://github.com/ViTeX-Bench/ViTeX-Bench`
-  - Model and inference code: `https://huggingface.co/ViTeX-Bench/ViTeX-Edit-14B`
-  - Leaderboard: `https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/` (its `data/submissions.jsonl` feeds the Pareto figure)
-- Facts from the paper (revision of 2026-09-26):
-  - ViTeX-Dataset has 387 real-world 720p videos with masks and instructions: 230 with reviewed paired edits for training and 157 frozen for evaluation.
-  - The protocol has 13 metrics over text correctness, visual and temporal quality, and edit locality. It compares methods through one primary metric per axis (SeqAcc, Warp_c, DreamSim_loc) and a Pareto front, with no single score.
-  - Across eight baselines from four editing families, accurate text, temporal stability and scene preservation remain hard to achieve together.
-  - ViTeX-Edit-14B reaches CharAcc 0.688, the highest among video-native editors.
+**Publications (shown as "Selected Publications": own first-author paper first, then newest)**
+Each is shown with its title, authors (Xinghao bold), venue badge, one before/after example pair played through the sampler, a one- or two-sentence summary and at most four links. The user asked on 2026-09-28 for the entries to be concise: no long abstracts, charts or extra captions (the Pareto chart was removed then).
+- **ViTeX-Bench: Benchmarking High-Fidelity Video Scene Text Editing** (hyphenated, as in the paper). Authors: **Xinghao Chen**, Xiangbo Gao, Jiongze Yu, Yuheng Wu, Zhengzhong Tu (first author, no equal-contribution marking). **NeurIPS 2026, Evaluations & Datasets Track**, accepted 2026-09-24.
+  - Links: project page `https://vitex-bench.github.io/`, code `https://github.com/ViTeX-Bench/ViTeX-Bench`, dataset `https://huggingface.co/datasets/ViTeX-Bench/ViTeX-Dataset`, model `https://huggingface.co/ViTeX-Bench/ViTeX-Edit-14B`. Leaderboard (reachable from the project page): `https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/`.
+  - Facts (paper revision of 2026-09-26): 387 real-world 720p videos with masks and instructions (230 training, 157 frozen evaluation); 13 metrics over text correctness, visual and temporal quality, and edit locality, compared per axis and on a Pareto front with no single score; eight baselines from four editing families; ViTeX-Edit-14B reaches CharAcc 0.688, the highest among video-native editors.
+- **PISCO: Precise Video Instance Insertion with Sparse Control.** Authors (user's list, 2026-09-28; the project page omits Jie Yang): Xiangbo Gao, Renjie Li, **Xinghao Chen**, Yuheng Wu, Suofei Feng, Jie Yang, Qing Yin, Zhengzhong Tu. **NeurIPS 2026, main track** (user, 2026-09-28).
+  - Links: paper `https://arxiv.org/abs/2602.08277`, project page `https://xiangbogaobarry.github.io/PISCO/`, code `https://github.com/taco-group/PISCO`, model `https://huggingface.co/xiangbog/PISCO-14B`.
+  - Facts (paper): a video diffusion model that inserts an instance from a single keyframe, start and end keyframes, or sparse keyframes at arbitrary timestamps, propagating appearance, motion and interaction (shadows, reflections) while preserving the original dynamics; Variable-Information Guidance and Distribution-Preserving Temporal Masking; PISCO-Bench built from BURST.
+- **PVIR-Bench: A Physics-Aware Benchmark for Video Instance Removal.** Authors (user's order; arXiv lists them differently): Zirui Li, **Xinghao Chen**, Lingyu Jiang, Xiangbo Gao, Dengzhe Hou, Kazunori Yamada, Fangzhou Lin, Zhengzhong Tu. **CVPR 2026 Workshop** (user, 2026-09-28; the workshop's name is not on hand, so it isn't shown). The arXiv version is titled "Physics-Aware Video Instance Removal Benchmark".
+  - Link: paper `https://arxiv.org/abs/2604.05898`.
+  - Facts (paper): 95 videos (57 Simple, 38 Hard, 81 frames each, from Inter4k and DAVIS 2016) with instance masks and removal prompts; a decoupled 1–4 human evaluation of instruction following, rendering quality and edit exclusivity; PISCO-Removal, UniVideo, DiffuEraser and CoCoCo evaluated.
 
 **Education**
 - Texas A&M University: Ph.D. in Computer Science (CSCE), starting Spring 2027 (January 2027), TACO group, advisor Zhengzhong Tu.
@@ -125,6 +121,7 @@ These visual constraints came from the user and are binding. They're recorded wi
 ## Evidence on Hand
 
 - ViTeX-Bench project page assets (the user's own work): `https://vitex-bench.github.io/static/images/teaser.png`, `pipeline.png`, `arch.png`.
+- Publication example media (`public/media/`): `vitex/` clips cropped from the ViTeX-Bench project page showcase; `pisco/` original-and-result pairs re-encoded (1280×360, 24 fps) from the PISCO project page's comparisons (desk lamp = `light`, rowboat = `boat_labubu`, bear = `save_lotos`); `pvir/` source-and-PISCO-Removal pairs taken from the PVIR-Bench paper's Fig. 1 (rows a, c and d). Credited in the footer.
 - School logos from the old site are in git history at `HEAD~1:images/uwlogo.png` and `HEAD~1:images/henulogo.png`. No TAMU logo is on hand.
 - Campus photographs (in `src/assets/campus/`):
   - Texas A&M: Academic Building at dusk by Alexey Sergeev (asergeev.com), chosen by the user. It's © the photographer, credited in the footer; no open license was found.

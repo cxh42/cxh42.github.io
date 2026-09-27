@@ -56,7 +56,10 @@ export const projects = [
   },
 ];
 
-// Selected publications, newest first. The ViTeX figure plays real edits from its project page.
+// Selected publications, own first author first, then newest. Each one shows a real before/after pair from the
+// paper or its project page, played through the sampler: a replacement (from → to), an insertion (+) or a removal (−).
+export type Scene = { id: string; op: 'replace' | 'insert' | 'remove'; from?: string; to: string; alt: string };
+
 export const publications = [
   {
     id: 'vitex',
@@ -66,25 +69,77 @@ export const publications = [
     authors: ['Xinghao Chen', 'Xiangbo Gao', 'Jiongze Yu', 'Yuheng Wu', 'Zhengzhong Tu'],
     venue: 'NeurIPS 2026',
     track: 'Evaluations & Datasets Track',
-    // Paraphrased from the paper's abstract (revision of 2026-09-27).
     summary:
-      'Video generation keeps getting better, but precise local edits that must keep the original scene dynamics are still hard. Video scene text editing is one such edit: replace the characters on signs, boards and labels while the rest of the scene and its motion stay intact. ViTeX-Bench pairs ViTeX-Dataset (387 real-world 720p videos: 230 with reviewed paired edits for training, 157 frozen for evaluation) with 13 metrics over text correctness, visual and temporal quality, and edit locality, compared through one primary metric per axis and a Pareto front instead of a single score. Across eight baselines from four editing families, accurate text, temporal stability and scene preservation remain hard to get together. The open reference editor ViTeX-Edit-14B reaches the highest CharAcc among video-native editors (0.688) and the lowest comparable text-crop Warp among raw editor outputs.',
-    pareto: true,
-    leaderboard: 'https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/',
+      'Replacing the text in real videos, on signs, boards and labels, while the rest of the scene and its motion stay intact. The benchmark pairs 387 real-world 720p videos with 13 metrics and an open 14B reference editor.',
     links: [
       { label: 'Project page', href: 'https://vitex-bench.github.io/' },
+      { label: 'Code', href: 'https://github.com/ViTeX-Bench/ViTeX-Bench' },
       { label: 'Dataset', href: 'https://huggingface.co/datasets/ViTeX-Bench/ViTeX-Dataset' },
-      { label: 'Benchmark code', href: 'https://github.com/ViTeX-Bench/ViTeX-Bench' },
       { label: 'Model', href: 'https://huggingface.co/ViTeX-Bench/ViTeX-Edit-14B' },
-      { label: 'Leaderboard', href: 'https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/' },
     ],
-    // Source (with text mask) and ViTeX-Edit-14B output, cropped side by side from the project page showcase.
-    scenes: [
-      { id: 'first-last', from: 'First', to: 'Last' },
-      { id: 'soc-coc', from: 'SOC', to: 'COC' },
-      { id: 'only-stop', from: 'ONLY', to: 'STOP' },
-      { id: 'collier-washing', from: 'COLLIER', to: 'WASHING' },
+    // Source (with its text mask) and ViTeX-Edit-14B output, side by side, from the project page showcase.
+    stage: {
+      base: '/media/vitex',
+      kind: 'video',
+      labels: ['Source, text mask in red', 'ViTeX-Edit-14B'],
+      scenes: [
+        { id: 'first-last', op: 'replace', from: 'First', to: 'Last', alt: 'ViTeX-Edit-14B replacing “First” with “Last” on a chalkboard sign.' },
+        { id: 'soc-coc', op: 'replace', from: 'SOC', to: 'COC', alt: 'ViTeX-Edit-14B replacing “SOC” with “COC”.' },
+        { id: 'only-stop', op: 'replace', from: 'ONLY', to: 'STOP', alt: 'ViTeX-Edit-14B replacing “ONLY” with “STOP”.' },
+        { id: 'collier-washing', op: 'replace', from: 'COLLIER', to: 'WASHING', alt: 'ViTeX-Edit-14B replacing “COLLIER” with “WASHING”.' },
+      ] as Scene[],
+    },
+  },
+  {
+    id: 'pisco',
+    year: '2026',
+    title: 'PISCO: Precise Video Instance Insertion with Sparse Control',
+    short: 'PISCO',
+    authors: ['Xiangbo Gao', 'Renjie Li', 'Xinghao Chen', 'Yuheng Wu', 'Suofei Feng', 'Jie Yang', 'Qing Yin', 'Zhengzhong Tu'],
+    venue: 'NeurIPS 2026',
+    track: 'Main Track',
+    summary:
+      'Inserting an object into an existing video from a few keyframes at any timestamps. PISCO carries its appearance, motion, shadows and reflections through the clip while the original scene and its dynamics stay intact.',
+    links: [
+      { label: 'Paper', href: 'https://arxiv.org/abs/2602.08277' },
+      { label: 'Project page', href: 'https://xiangbogaobarry.github.io/PISCO/' },
+      { label: 'Code', href: 'https://github.com/taco-group/PISCO' },
+      { label: 'Model', href: 'https://huggingface.co/xiangbog/PISCO-14B' },
     ],
+    // Original footage and PISCO's insertion, side by side, from the project page's comparisons.
+    stage: {
+      base: '/media/pisco',
+      kind: 'video',
+      labels: ['Original', 'PISCO'],
+      scenes: [
+        { id: 'lamp', op: 'insert', to: 'Desk lamp', alt: 'PISCO inserting a lit desk lamp beside a marble bust.' },
+        { id: 'rowboat', op: 'insert', to: 'Rowboat', alt: 'PISCO inserting a toy in a small rowboat on a lake with swans, reflected in the water.' },
+        { id: 'bear', op: 'insert', to: 'Bear', alt: 'PISCO inserting a large teddy bear riding on a moving motorboat.' },
+      ] as Scene[],
+    },
+  },
+  {
+    id: 'pvir',
+    year: '2026',
+    title: 'PVIR-Bench: A Physics-Aware Benchmark for Video Instance Removal',
+    short: 'PVIR-Bench',
+    authors: ['Zirui Li', 'Xinghao Chen', 'Lingyu Jiang', 'Xiangbo Gao', 'Dengzhe Hou', 'Kazunori Yamada', 'Fangzhou Lin', 'Zhengzhong Tu'],
+    venue: 'CVPR 2026 Workshop',
+    track: '',
+    summary:
+      'Removing an object from a video together with its physical side effects, such as shadows and reflections. The benchmark pairs 95 videos, split into Simple and Hard, with instance masks, removal prompts and a human evaluation of instruction following, rendering quality and edit exclusivity.',
+    links: [{ label: 'Paper', href: 'https://arxiv.org/abs/2604.05898' }],
+    // A benchmark frame and PISCO-Removal's result, from the paper's qualitative comparison (Fig. 1).
+    stage: {
+      base: '/media/pvir',
+      kind: 'image',
+      labels: ['Source', 'PISCO-Removal'],
+      scenes: [
+        { id: 'duck', op: 'remove', to: 'Duck', alt: 'A duck on a riverbank, and the same frame with the duck removed by PISCO-Removal.' },
+        { id: 'kart', op: 'remove', to: 'Go-kart', alt: 'A go-kart with two riders on a street, and the same frame with it removed by PISCO-Removal.' },
+        { id: 'dancer', op: 'remove', to: 'Dancer', alt: 'A dancer in front of an audience, and the same frame with her removed by PISCO-Removal.' },
+      ] as Scene[],
+    },
   },
 ];
 

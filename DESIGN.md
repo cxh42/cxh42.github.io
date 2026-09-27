@@ -334,9 +334,9 @@ A near-monochrome instrument palette, off-white plate and cool ink, with one cob
 - **Title** (380–400, step-2, 1.15–1.25, -0.012 to -0.018em): the role line, paper and project titles, school name, visitor lede.
 - **Lead** (350–400, 1.3125rem, 1.4): news entries, menu links, profile links, research area names (400, -0.01em).
 - **Body** (350, 1.0625rem, 1.6, tabular numerals): prose, capped at 66ch (measure); panel prose at 60ch.
-- **Small** (350, 0.9375rem, 0.005em): secondary UI and list text: ViTeX scene buttons, area notes, country rows, school index names, the wordmark (there at 450, -0.01em).
+- **Small** (350, 0.9375rem, 0.005em): secondary UI and list text: publication scene buttons, area notes, country rows, school index names, the wordmark (there at 450, -0.01em).
 - **Label** (350, 0.8125rem, 0.01–0.02em, graphite): meta, dates, statuses, tags, team, image captions, credits, bar controls, rail labels (current at 500). Sentence case, never uppercase.
-- **Readout** (KaTeX_Main, 0.95rem): t / ᾱ_t lines that are instruments (the ViTeX stage); numerals are Notation (1.08em of it).
+- **Readout** (KaTeX_Main, 0.95rem): t / ᾱ_t lines that are instruments (the publication stages); numerals are Notation (1.08em of it).
 - **Equation and Small Readout** (KaTeX_Main, 0.8125rem formula, 0.75rem readout): the hero equation, which is ornament, and the school-index t. The only steps below Label.
 - **Colophon Mark** (KaTeX_Main, 1.6rem, line-height 1, ink): the x₀ that signs the footer.
 
@@ -378,17 +378,16 @@ Square everywhere: no radius on media, panels, rows, buttons or the menu. The on
 ### Links
 Quiet and editorial. Inherit colour; 1px underline at 0.22em offset in rule-strong, turning to currentColor on hover over 160ms. Outbound profile, paper and project links carry a 0.72em inline SVG arrow. Bar links (Email) show no underline until hover.
 
-### Text Toggles (theme switch, ViTeX scene list)
+### Text Toggles (theme switch, publication scene lists)
 - **Shape:** bare text, no box, 6px vertical padding.
 - **Rest:** graphite. **Hover:** ink (200ms colour). **Pressed:** ink with a 1px currentColor underline drawn under the label.
-- Theme toggles are Label size; scene buttons are Small and read "source → target" with a 14×8 SVG arrow.
+- Theme toggles are Label size; scene buttons are Small and name the edit with a drawn operator at 1.2px stroke: a replacement reads "source → target" (14×8 arrow), an insertion "+ object" and a removal "− object" (9×9 plus or minus).
 
 ### Plate Panels
 - **Corner Style:** square (0).
 - **Background:** plate-2 (void-2 in dark). No border, no shadow.
 - **Internal Padding:** clamp(16px, 2.6vw, 36px).
-- **Publication panel:** opens with the paper title, then the authors and the venue badge with its track, then the ViTeX stage, scene row and caption. Below it sits a two-column row: the Pareto figure on the left (1.25fr) and the summary with links on the right. It stacks at 900px. The panel draws no internal hairlines; spacing alone separates the stage, the scene row and the lower row.
-- **Pareto figure:** a 2-D canvas projection of the benchmark's three primary metrics (SeqAcc, Warp_c, DreamSim_loc) in a unit cube, read live from the ViTeX-Bench leaderboard's `submissions.jsonl`, with the paper's numbers as a fallback. Walls and ticks are ink at 8–24%. The Pareto front is a Delaunay surface in the accent (fill 10–13%, edges 60–70%), with accent ring-and-core stars and front names always shown. Other editors are small ink points and references are hollow rings. The ideal corner (1, 1, 1) is an ink star with diffraction spikes, glowing in dark only. It drifts slowly (not under `still`), rotates on drag, and names a star on hover or tap. Axes carry one short name each (Correctness, Temporal, Locality), pushed radially out from the cube past the arrow and stepped further out on any collision. There are no tick values; a key under the figure maps each name to its metric and direction (SeqAcc ↑, Warp<sub>c</sub> ↓, DreamSim<sub>loc</sub> ↓). Aspect is 1 : 0.84, or 1 : 0.98 below 640px.
+- **Publication panel:** opens with the paper title, then the authors and the venue badge with its track (omitted when a venue has none), then the example stage: a 16:9 before/after pair (side by side; stacked at ≤640px), a Label caption row naming each side, and the scene row with its t readout. It closes on a two-column foot: the summary (one or two sentences, Body, ink-2, 60ch) and a narrow column of arrow links, which wraps into a row at ≤900px. No charts, abstracts or extra captions (user, 2026-09-28: keep each entry concise). The panel draws no internal hairlines; spacing alone separates its parts.
 - **Project panel:** optional full-width 16:9 image pair, then two columns: title (Title, 400), subtitle (Body, ink-2) and meta (Label) on the left; body (60ch, ink-2), team, tags (Label, joined with " · ") and arrow links on the right.
 - It is the only container in the system; everything else is hairlines.
 
@@ -410,7 +409,7 @@ A KaTeX label (t=, ᾱ_t=) followed by a numeral in Notation type. Accent (on-sc
 WebGL2 canvases sharing gl.ts noise and schedule, ticking on the one 24 fps clock:
 - **Hero name:** never animated, hidden or redrawn; it is plain text from the first paint. The equation readout counts t from 1 to 0 over 40 steps (about 1.7s) alongside the portrait's sampling, then 陈星昊 fades in (opacity, 625ms in 15 steps) and its typing loop starts.
 - **Particle portrait:** the site owner's own silhouette, sampled from the outline and heavily blurred tonal masses of a headshot (no facial features; about 11k points, 1.7 CSS px). Ink points at alpha 0.5 on light and 0.62 on dark, drawn straight through 陈星昊 with no mask, sampled over 44 steps alongside the name. On scroll (s = scrollY / 0.9 viewport heights) it is re-noised to t = 0.9·s^1.2, rises by 0.14 of its height and fades out between s = 0.12 and 0.55 (smoothstep). It stops drawing once past the hero. Reduced motion draws it once at rest.
-- **ViTeX stage:** first view samples in over 30 frames; a scene switch noises forward over 9 frames, holds at the peak until the next clip has a frame, then samples back over 15.
+- **Publication stages** (`stage.ts`, one per paper, videos or stills): each samples in over 30 frames when it first comes on screen; a scene switch noises forward over 9 frames, holds at the peak until the next media has loaded, then samples back over 15. A still stage only redraws while t moves.
 - **Campus band:** the band arrives at t = 0.72 and samples the first campus clean over 22 frames. Each school owns one 70svh step of the pinned range; one mouse-wheel gesture moves exactly one school (inertia is swallowed until the gesture ends, and past either end the wheel scrolls the page), while touch and keyboard follow the nearest step. Changing school starts a timed 24-frame hand-over: forward to the peak over the first 40%, the next campus takes over under the noise, then back to t = 0; the school tint and exposure gain crossfade with it. Noise is scaled grain over a mip-blurred photo, toned dark, so it never passes through white. Every school settles at t = 0. Degree text switches by opacity (375ms, 9 steps).
 - **Visitor globe:** points diffuse onto the sphere over 36 frames; the globe yaws slowly on the clock and can be dragged.
 
@@ -432,7 +431,7 @@ A hairline-topped footer: the x₀ Colophon Mark in ink at left, Label-size meta
 - **Text reveals:** opacity only. No blur or other filter on text.
 - **Theme switch:** a view transition revealed through a 12-frame grain threshold mask (500ms, step-end), a 128px field of 40% low-frequency and 60% white noise tiled at 256px. Falls back to an instant swap without View Transitions.
 - **Reduced motion (`html.still`):** samplers render once at t = 0, no clock loop, the Chinese name stands still, instant theme swap, no smooth scroll; the page is complete and still.
-- **No WebGL (`html.no-gl`):** text renders immediately, no portrait, the ViTeX video plays in place, the band shows the static tinted plates, the globe is hidden.
+- **No WebGL (`html.no-gl`):** text renders immediately, no portrait, each publication example shows its video or still in place, the band shows the static tinted plates, the globe is hidden.
 
 ## Do's and Don'ts
 
