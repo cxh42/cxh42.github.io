@@ -130,7 +130,7 @@ These visual constraints came from the user and are binding. They're recorded wi
   - Texas A&M: Academic Building at dusk by Alexey Sergeev (asergeev.com), chosen by the user. It's © the photographer, credited in the footer; no open license was found.
   - UW: a photo the user chose from a UW site (cdn.uconnectlabs.com). All rights stay with the university; it's credited in the footer.
   - Henan University: "河南大学礼堂2020" by ScareCriterion12, CC BY-SA 4.0 via Wikimedia Commons.
-- Particle portrait: the user's own silhouette, from the outline and heavily blurred masses of the old headshot (`HEAD~1:images/bio-photo.jpg`); no facial features and the photo is never shipped. The user tried an authored figure and asked on 2026-09-26 to go back to this one.
+- Particle portrait: the user's own silhouette, from the outline and heavily blurred masses of their headshot; no facial features. The photo is never shipped or committed (the old ones were purged from git history on 2026-09-27). Since 2026-09-27 it comes from the studio headshot the user supplied that day (navy suit, plain blue-grey backdrop), kept outside the repo; regenerate with `scripts/make-portrait-particles.py <photo>`. The user tried an authored figure and asked on 2026-09-26 to go back to a photo silhouette.
 - There are no personal photos, testimonials, talks, teaching entries, awards or citation counts. Don't fabricate any of these.
 
 ## Product Principles
