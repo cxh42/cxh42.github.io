@@ -34,9 +34,6 @@ const regionsNamed = (c: Country) =>
     .map((r) => r.name);
 const total: number = visitors.total ?? 0;
 const top = countries.slice(0, 8);
-const updated = visitors.updated
-  ? new Date(visitors.updated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'UTC' }) + ' UTC'
-  : null;
 const fmt = (n: number) => n.toLocaleString('en-US');
 const tLabel = katex.renderToString('t=', { throwOnError: false });
 ---
@@ -49,7 +46,6 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
       <div class="globe-wrap">
         <canvas class="globe" data-globe data-marks={JSON.stringify(marks)} aria-hidden="true"></canvas>
         <p class="globe-t t-read" aria-hidden="true"><span set:html={tLabel} /><span class="num" data-globe-t>0</span></p>
-        <p class="globe-hint meta" aria-hidden="true">Drag to turn</p>
       </div>
 
       <div class="stats">
@@ -84,9 +80,6 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
             </p>
           </>
         )}
-        <p class="meta source">
-          Counted without cookies by GoatCounter{updated ? `, updated ${updated}` : ', updated hourly'}.
-        </p>
       </div>
     </div>
   </div>
@@ -118,10 +111,8 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     color: var(--graphite);
     font-size: 0.95rem;
   }
-  .globe-hint { position: absolute; right: 0; bottom: 2px; }
   :global(html.no-gl) .globe-wrap { display: none; }
   :global(html:not(.globe-gl)) .globe-t,
-  :global(html:not(.globe-gl)) .globe-hint { display: none; }
   .num {
     font-family: KaTeX_Main, 'Times New Roman', serif;
     font-size: 1.08em;
@@ -161,7 +152,6 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     color: var(--graphite);
   }
   .c-count { color: var(--graphite); font-variant-numeric: tabular-nums; }
-  .source { margin-top: 20px; }
 
   @media (max-width: 900px) {
     .visitors { grid-template-columns: 1fr; }
