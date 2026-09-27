@@ -2,9 +2,12 @@
 // into src/data/visitors.json before each build. GoatCounter has no city-level data; regions are recorded
 // only for the countries listed under "collect regions" in the site settings (empty = all countries).
 // Needs GOATCOUNTER_TOKEN (a GitHub Actions secret). Without it, the committed file is left as is.
+// If GoatCounter fails, the stats the live site was last built from (/data/visitors.json) are kept instead,
+// so a bad hour never resets the globe to the empty committed file.
 import { writeFile } from 'node:fs/promises';
 
 const SITE = 'https://cxh42.goatcounter.com';
+const LIVE = 'https://cxh42.github.io/data/visitors.json';
 const token = process.env.GOATCOUNTER_TOKEN;
 const out = new URL('../src/data/visitors.json', import.meta.url);
 
@@ -18,8 +21,8 @@ const get = async (path, retry = 2) => {
   const res = await fetch(`${SITE}/api/v0${path}`, {
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
   });
-  if (res.status === 429 && retry > 0) {
-    await sleep(1000 * (Number(res.headers.get('X-Rate-Limit-Reset')) || 5));
+  if (!res.ok && retry > 0) {
+    await sleep(res.status === 429 ? 1000 * (Number(res.headers.get('X-Rate-Limit-Reset')) || 5) : 3000);
     return get(path, retry - 1);
   }
   if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
@@ -67,5 +70,14 @@ try {
   console.log(`fetch-visitors: ${total} visits from ${countries.length} countries, ${nr} regions.`);
 } catch (err) {
   // Stats are a nicety: never fail the deploy over them.
-  console.warn('fetch-visitors: keeping existing data:', err.message);
+  console.warn('fetch-visitors: GoatCounter failed:', err.message);
+  try {
+    const res = await fetch(LIVE);
+    const live = res.ok ? await res.json() : null;
+    if (!live?.total) throw new Error(`live copy ${res.status}, total ${live?.total}`);
+    await writeFile(out, JSON.stringify(live, null, 2) + '\n');
+    console.log(`fetch-visitors: kept the live site's ${live.total} visits from ${live.updated}.`);
+  } catch (e) {
+    console.warn('fetch-visitors: keeping committed data:', e.message);
+  }
 }
