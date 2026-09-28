@@ -81,7 +81,7 @@ export const publications = [
     },
     links: [
       { label: 'Project page', href: 'https://vitex-bench.github.io/' },
-      { label: 'Code', href: 'https://github.com/ViTeX-Bench/ViTeX-Bench' },
+      { label: 'Code', href: 'https://github.com/taco-group/ViTeX-Bench' },
       { label: 'Dataset', href: 'https://huggingface.co/datasets/ViTeX-Bench/ViTeX-Dataset' },
       { label: 'Model', href: 'https://huggingface.co/ViTeX-Bench/ViTeX-Edit-14B' },
       { label: 'Leaderboard', href: 'https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/' },
