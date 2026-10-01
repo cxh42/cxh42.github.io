@@ -30,5 +30,4 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 His particle silhouette condensing out of noise behind a name that never moves, with the equation's t ticking to 0 beside it.
 
 ## Unresolved
-- The ViTeX paper link waits for the arXiv version, so no Paper button is shown until it exists.
 - The visitor globe shows the empty state until GoatCounter data exists and the Actions secret is set.
