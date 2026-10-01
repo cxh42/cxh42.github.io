@@ -80,6 +80,7 @@ export const publications = [
       leaderboard: 'https://vitex-bench.github.io/ViTeX-Bench-Leaderboard/',
     },
     links: [
+      { label: 'Paper', href: 'https://arxiv.org/abs/2609.40356' },
       { label: 'Project page', href: 'https://vitex-bench.github.io/' },
       { label: 'Code', href: 'https://github.com/taco-group/ViTeX-Bench' },
       { label: 'Dataset', href: 'https://huggingface.co/datasets/ViTeX-Bench/ViTeX-Dataset' },
