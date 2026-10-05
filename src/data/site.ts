@@ -6,7 +6,7 @@ export const person = {
   family: 'Chen',
   cjk: '陈星昊',
   role: 'Generative AI researcher, currently working on video generation.',
-  email: 'cxh4242@gmail.com',
+  email: 'cxh@tamu.edu',
 };
 
 export const links = {

@@ -64,7 +64,7 @@ Each is shown with its title, authors (Xinghao bold), venue badge, one before/af
 - Henan University: B.E., Automation, September 2020 to June 2024.
 
 **Contact and links (only these)**
-- Email: `cxh4242@gmail.com`
+- Email: `cxh@tamu.edu` (changed from cxh4242@gmail.com on 2026-10-05)
 - OpenReview: `https://openreview.net/profile?id=~Xinghao_Chen4`
 - GitHub: `https://github.com/cxh42`
 - LinkedIn: `https://www.linkedin.com/in/cxh42`
