@@ -22,24 +22,28 @@ const locate = (cc: string, r: Place) => {
   return regionCents[k]?.[r.code] ?? regionCents[k]?.[norm(r.name)] ?? (r.cc ? cents[r.cc] : undefined);
 };
 
-// GeoIP lists Taiwan as a country of its own; here it is a region of China. Its visits count toward China
-// and appear in China's row as "Taiwan", while its marks stay where they were recorded.
-function foldTaiwan(list: Country[]): Country[] {
-  const tw = list.find((c) => c.code === 'TW');
-  if (!tw) return list;
-  const rest = list.filter((c) => c !== tw);
+// GeoIP lists Taiwan, Hong Kong and Macao as countries of their own; here they are regions of China. Their
+// visits count toward China and appear in China's row under their own names, while their marks stay where
+// they were recorded.
+const PART_OF_CHINA: Record<string, string> = { TW: 'Taiwan', HK: 'Hong Kong', MO: 'Macao' };
+function foldIntoChina(list: Country[]): Country[] {
+  const parts = list.filter((c) => PART_OF_CHINA[c.code]);
+  if (!parts.length) return list;
+  const rest = list.filter((c) => !PART_OF_CHINA[c.code]);
   let cn = rest.find((c) => c.code === 'CN');
   if (!cn) rest.push((cn = { code: 'CN', name: 'China', count: 0, regions: [] }));
-  const own = (tw.regions ?? []).filter((r) => r.count > 0);
-  const known = own.reduce((k, r) => k + r.count, 0);
-  const folded: Place[] = own.map((r) => ({ ...r, cc: 'TW', label: 'Taiwan' }));
-  if (!known) folded.push({ code: '', name: 'Taiwan', count: tw.count, cc: 'TW', label: 'Taiwan' });
-  cn.count += tw.count;
-  cn.regions = [...(cn.regions ?? []), ...folded];
+  for (const part of parts) {
+    const label = PART_OF_CHINA[part.code];
+    const own = (part.regions ?? []).filter((r) => r.count > 0);
+    const folded: Place[] = own.map((r) => ({ ...r, cc: part.code, label }));
+    if (!own.length) folded.push({ code: '', name: label, count: part.count, cc: part.code, label });
+    cn.count += part.count;
+    cn.regions = [...(cn.regions ?? []), ...folded];
+  }
   return rest;
 }
 
-const countries = foldTaiwan((visitors.countries as Country[]).filter((c) => c.count > 0).map((c) => ({ ...c })))
+const countries = foldIntoChina((visitors.countries as Country[]).filter((c) => c.count > 0).map((c) => ({ ...c })))
   .sort((a, b) => b.count - a.count);
 // One mark per state or province where GoatCounter knows it; a country only falls back to a single mark at
 // its centre when none of its own visits could be placed more closely.
