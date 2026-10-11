@@ -13,9 +13,9 @@ type Key = 'SeqAcc' | 'Warp_crop' | 'DreamSim_loc';
 const FALLBACK: Row[] = [
   { method: 'TextCtrl', kind: 'editor', temporal_comparable: true, SeqAcc: 0.47475, Warp_crop: 2.08761, DreamSim_loc: 0.00429 },
   { method: 'ViTeX-Edit-14B (Composite)', kind: 'postprocessed', temporal_comparable: true, SeqAcc: 0.36121, Warp_crop: 1.61465, DreamSim_loc: 0.00271 },
-  { method: 'ViTeX-Edit-14B (w/o glyph, Composite)', kind: 'postprocessed', temporal_comparable: true, SeqAcc: 0.34711, Warp_crop: 1.55904, DreamSim_loc: 0.00275 },
+  { method: 'ViTeX-Edit-14B (text-only, Composite)', kind: 'postprocessed', temporal_comparable: true, SeqAcc: 0.34711, Warp_crop: 1.55904, DreamSim_loc: 0.00275 },
   { method: 'ViTeX-Edit-14B', kind: 'editor', temporal_comparable: true, SeqAcc: 0.3631, Warp_crop: 1.61653, DreamSim_loc: 0.01954 },
-  { method: 'ViTeX-Edit-14B (w/o glyph)', kind: 'editor', temporal_comparable: true, SeqAcc: 0.33938, Warp_crop: 1.54632, DreamSim_loc: 0.02298 },
+  { method: 'ViTeX-Edit-14B (text-only)', kind: 'editor', temporal_comparable: true, SeqAcc: 0.33938, Warp_crop: 1.54632, DreamSim_loc: 0.02298 },
   { method: 'VideoPainter', kind: 'editor', temporal_comparable: false, SeqAcc: 0.3645, Warp_crop: 3.34526, DreamSim_loc: 0.02391 },
   { method: 'FLUX-Text', kind: 'editor', temporal_comparable: true, SeqAcc: 0.52837, Warp_crop: 13.00985, DreamSim_loc: 0.01204 },
   { method: 'RS-STE', kind: 'editor', temporal_comparable: true, SeqAcc: 0.35397, Warp_crop: 1.81479, DreamSim_loc: 0.00732 },
