@@ -114,7 +114,7 @@ These visual constraints came from the user and are binding. They're recorded wi
   - A particle silhouette of the user sits in the hero and changes as the page scrolls.
   - The section navigator shows every section at all times and highlights the current one.
   - Each publication reads as its own distinct unit, and the list is marked as a selection.
-  - The ViTeX "PROF → ENGR" example comes first.
+  - The ViTeX "First → Last" example comes first.
   - Campus hand-overs must be smooth, with no grey or white gap, and cheap to render.
 
 ## Evidence on Hand

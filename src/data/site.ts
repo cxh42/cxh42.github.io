@@ -94,7 +94,7 @@ export const publications = [
       verb: 'Replace',
       labels: ['Source, text mask in red', 'ViTeX-Edit-14B'],
       scenes: [
-        { id: 'prof-engr', from: 'PROF', to: 'ENGR', alt: 'ViTeX-Edit-14B replacing “PROF” with “ENGR” on a chalkboard.' },
+        { id: 'first-last', from: 'First', to: 'Last', alt: 'ViTeX-Edit-14B replacing “First” with “Last” on a chalkboard sign.' },
         { id: 'soc-coc', from: 'SOC', to: 'COC', alt: 'ViTeX-Edit-14B replacing “SOC” with “COC”.' },
         { id: 'only-stop', from: 'ONLY', to: 'STOP', alt: 'ViTeX-Edit-14B replacing “ONLY” with “STOP”.' },
         { id: 'collier-washing', from: 'COLLIER', to: 'WASHING', alt: 'ViTeX-Edit-14B replacing “COLLIER” with “WASHING”.' },
