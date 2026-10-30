@@ -22,7 +22,7 @@ export const links = {
 // "HTML tag" method and paste the content="..." value of the <meta> tag it gives you here. Empty values
 // render nothing. These codes are public by design (they end up in the page source).
 export const verification = {
-  google: '',
+  google: 'zrBLTYB_WxR1AeaN5fID6UVe2GYqVNM0mJORqbUlxFY',
   bing: '',
 };
 
