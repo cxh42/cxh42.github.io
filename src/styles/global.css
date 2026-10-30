@@ -6,6 +6,18 @@
 @font-face { font-family: 'CJK WenKai'; src: url('/fonts/cjk/LXGWWenKaiTC.woff2') format('woff2'); font-display: block; unicode-range: U+660A, U+661F, U+9648; }
 @font-face { font-family: 'CJK XingKai'; src: url('/fonts/cjk/LongCang.woff2') format('woff2'); font-display: block; unicode-range: U+660A, U+661F, U+9648; }
 
+/* Stand-in for Geologica while it loads: a local Arial-metric face scaled to Geologica's width (×1.071 at
+   the body weight, 350) with Geologica's vertical metrics (ascent 0.975, descent 0.275, no line gap; the
+   overrides are divided by the scale), so swapping in the real face moves no line and no box. */
+@font-face {
+  font-family: 'Geologica Fallback';
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('Helvetica Neue'), local('Helvetica'), local('Roboto');
+  size-adjust: 107.1%;
+  ascent-override: 91.04%;
+  descent-override: 25.68%;
+  line-gap-override: 0%;
+}
+
 /* ---------- Tokens ---------- */
 :root {
   color-scheme: light;
@@ -24,7 +36,7 @@
   --select: rgb(47 75 216 / 0.22);
   --hero-ground: radial-gradient(120% 95% at 68% 28%, #ffffff 0%, #f0f0ed 62%, #e9e9e5 100%);
 
-  --font-sans: 'Geologica Variable', 'Geologica', system-ui, sans-serif;
+  --font-sans: 'Geologica Variable', 'Geologica Fallback', system-ui, sans-serif;
   --font-cjk: 'CJK Kai', 'Kaiti SC', 'STKaiti', 'KaiTi', serif;
 
   --gutter: clamp(20px, 5vw, 72px);

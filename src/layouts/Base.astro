@@ -54,7 +54,7 @@ const isProd = import.meta.env.PROD;
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <slot name="head" />
-    {/* The name is set in Geologica: fetch it with the page, so the hero never repaints from a fallback face. */}
+    {/* The name is set in Geologica: fetch it with the page. Until it lands, the metric-matched stand-in holds its place. */}
     <link rel="preload" href={geologicaLatin} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/cjk/MaShanZheng.woff2" as="font" type="font/woff2" crossorigin />
     <script is:inline>
