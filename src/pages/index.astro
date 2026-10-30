@@ -10,14 +10,78 @@ import Education from '../components/Education.astro';
 import News from '../components/News.astro';
 import Visitors from '../components/Visitors.astro';
 import Contact from '../components/Contact.astro';
-import { person } from '../data/site';
+import { person, links, publications, education } from '../data/site';
+import { lastModified } from '../data/build';
 
-const title = `${person.name} (${person.cjk})`;
+// Name first, then what sets this Xinghao Chen apart from the others: the field and the university.
+const title = `${person.name} (${person.cjk}) · Generative AI Researcher · Texas A&M University`;
 const description =
-  'Xinghao Chen is a generative AI researcher focused on video generation. First author of ViTeX-Bench (NeurIPS 2026) and incoming Ph.D. student in Computer Science at Texas A&M University.';
+  'Xinghao Chen (陈星昊) is a generative AI researcher working on video generation and an incoming Ph.D. student in Computer Science at Texas A&M University. First author of ViTeX-Bench (NeurIPS 2026).';
+
+// Structured data: tells search engines this page is the profile of one person, links that person to the
+// same person on GitHub, LinkedIn and OpenReview, and lists the papers with them as an author.
+const home = new URL('/', Astro.site).href;
+const me = `${home}#person`;
+const paperUrl = (p: (typeof publications)[number]) => p.links.find((l) => l.label === 'Paper')?.href ?? p.links[0]?.href;
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfilePage',
+      '@id': `${home}#page`,
+      url: home,
+      name: title,
+      description,
+      inLanguage: 'en',
+      dateModified: lastModified,
+      mainEntity: { '@id': me },
+    },
+    {
+      '@type': 'Person',
+      '@id': me,
+      name: person.name,
+      givenName: person.given,
+      familyName: person.family,
+      alternateName: [person.cjk, `${person.family} ${person.given}`],
+      description: person.role,
+      jobTitle: 'Generative AI Researcher',
+      url: home,
+      email: `mailto:${person.email}`,
+      affiliation: { '@type': 'CollegeOrUniversity', name: 'Texas A&M University', url: links.tamu },
+      memberOf: { '@type': 'ResearchOrganization', name: 'TACO Group', url: links.taco },
+      alumniOf: education
+        .filter((e) => !e.incoming)
+        .map((e) => ({ '@type': 'CollegeOrUniversity', name: e.school })),
+      knowsAbout: [
+        'Generative AI',
+        'Video generation',
+        'Video editing',
+        'Diffusion models',
+        'Large language models',
+        'Vision-language models',
+        '3D Gaussian Splatting',
+      ],
+      sameAs: [links.github, links.linkedin, links.openreview],
+    },
+    ...publications.map((p) => ({
+      '@type': 'ScholarlyArticle',
+      '@id': `${home}#${p.id}`,
+      headline: p.title,
+      name: p.title,
+      url: paperUrl(p),
+      sameAs: p.links.map((l) => l.href).filter((h) => h !== paperUrl(p)),
+      datePublished: p.year,
+      author: p.authors.map((a) => (a === person.name ? { '@id': me } : { '@type': 'Person', name: a })),
+      publication: { '@type': 'PublicationEvent', name: [p.venue, p.track].filter(Boolean).join(', ') },
+    })),
+  ],
+};
+// Escape "<" so no string in the data can close the script element.
+const ldJson = JSON.stringify(ld).replace(/</g, '\\u003c');
 ---
 
 <Base title={title} description={description}>
+  <script is:inline type="application/ld+json" slot="head" set:html={ldJson} />
   <Header />
   <Rail />
   <main>

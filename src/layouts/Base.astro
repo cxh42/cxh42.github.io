@@ -2,6 +2,8 @@
 import '@fontsource-variable/geologica';
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
+import geologicaLatin from '@fontsource-variable/geologica/files/geologica-latin-wght-normal.woff2?url';
+import { person, verification } from '../data/site';
 
 interface Props {
   title: string;
@@ -10,6 +12,9 @@ interface Props {
 
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// The link-preview card, rendered by scripts/make-og.mjs.
+const ogImage = new URL('/og.png', Astro.site);
+const ogAlt = `${person.name} (${person.cjk}): ${person.role}`;
 const isProd = import.meta.env.PROD;
 ---
 
@@ -21,15 +26,36 @@ const isProd = import.meta.env.PROD;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <meta name="author" content={person.name} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    {verification.google && <meta name="google-site-verification" content={verification.google} />}
+    {verification.bing && <meta name="msvalidate.01" content={verification.bing} />}
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={person.name} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
+    <meta property="profile:first_name" content={person.given} />
+    <meta property="profile:last_name" content={person.family} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogAlt} />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <slot name="head" />
+    {/* The name is set in Geologica: fetch it with the page, so the hero never repaints from a fallback face. */}
+    <link rel="preload" href={geologicaLatin} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/cjk/MaShanZheng.woff2" as="font" type="font/woff2" crossorigin />
     <script is:inline>
       (function () {

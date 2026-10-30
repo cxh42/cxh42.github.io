@@ -1,0 +1,31 @@
+---
+// Addresses from the previous version of this site (an academicpages theme), which search engines and old
+// links may still point to. Each becomes an instant redirect to the matching part of the homepage; Google
+// treats an instant meta refresh like a permanent redirect, so whatever those URLs earned carries over.
+export function getStaticPaths() {
+  const moved: Record<string, string> = {
+    about: '/',
+    cv: '/',
+    publications: '/#publications',
+    'publication/2025-06-24-AirV2X': '/#publications',
+    portfolio: '/#projects',
+  };
+  return Object.entries(moved).map(([moved, to]) => ({ params: { moved }, props: { to } }));
+}
+const { to } = Astro.props;
+const canonical = new URL('/', Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Xinghao Chen</title>
+    <meta http-equiv="refresh" content={`0; url=${to}`} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <p>This page has moved to <a href={to}>{canonical.href}</a>.</p>
+  </body>
+</html>

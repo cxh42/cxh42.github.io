@@ -18,6 +18,14 @@ export const links = {
   advisor: 'https://vztu.github.io/',
 };
 
+// Search engines. To verify the site in Google Search Console or Bing Webmaster Tools, choose the
+// "HTML tag" method and paste the content="..." value of the <meta> tag it gives you here. Empty values
+// render nothing. These codes are public by design (they end up in the page source).
+export const verification = {
+  google: '',
+  bing: '',
+};
+
 // Research interests, in the order they appear on the page.
 export const interests = [
   { name: 'Video generation', note: 'Current work' },

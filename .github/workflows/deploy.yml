@@ -46,3 +46,18 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Tell Bing and the other IndexNow engines (Yandex, Naver, Seznam) that the page changed, so they can
+  # recrawl it promptly. Pushes only: the hourly rebuild changes nothing but the visitor counts. The key is
+  # public by design; it is read back from the deployed site, retrying while the new deploy propagates.
+  indexnow:
+    if: github.event_name == 'push'
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping IndexNow
+        continue-on-error: true
+        run: |
+          for i in 1 2 3 4 5 6; do key=$(curl -fsS https://cxh42.github.io/indexnow-key.txt) && break; sleep 10; done
+          curl -sS -o /dev/null -w 'IndexNow: HTTP %{http_code}\n' \
+            "https://api.indexnow.org/indexnow?url=https://cxh42.github.io/&key=${key}&keyLocation=https://cxh42.github.io/indexnow-key.txt"

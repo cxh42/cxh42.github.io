@@ -32,6 +32,7 @@ The site belongs to a researcher who works on moving images (video generation an
 - The content is in English (inferred from the previous site). The Chinese name is shown as a secondary element.
 - The site will grow slowly: more publications and news items over time. It started with one paper; three are shown since 2026-09-28.
 - Visitor analytics use GoatCounter (site code `cxh42`, dashboard `https://cxh42.goatcounter.com`). Tracking is cookie-free.
+- Search (set up 2026-10-30; the user wants to rank first when people search their name): title and description lead with the name, 陈星昊 and Texas A&M; JSON-LD `ProfilePage` + `Person` (sameAs GitHub, LinkedIn, OpenReview) + one `ScholarlyArticle` per paper, built from `src/data/site.ts`; `robots.txt` and `sitemap.xml` (lastmod = last commit); the link-preview card `public/og.png` and raster icons, rendered by `scripts/make-og.mjs` (rerun it when the name, role or portrait changes); instant redirects from the old academicpages URLs (`/about/`, `/cv/`, `/publications/`, `/publication/2025-06-24-AirV2X/`, `/portfolio/`) to the matching section; a 404 page that returns to the homepage; an IndexNow ping (key in `public/indexnow-key.txt`) after each push. Google/Bing verification codes go in `verification` in `src/data/site.ts`.
 
 ## Capabilities and Constraints
 
