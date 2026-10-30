@@ -315,8 +315,9 @@ A near-monochrome instrument palette, off-white plate and cool ink, with one cob
 
 ## Typography
 
-**Display Font:** Geologica Variable (with Geologica, system-ui)
+**Display Font:** Geologica Variable (with Geologica Fallback, system-ui)
 **Body Font:** Geologica Variable at weight 350
+**Load Stand-in:** Geologica Fallback, not a typeface of its own: a local Arial-metric face (Arial, Liberation Sans, Helvetica, Roboto) scaled to Geologica's width (size-adjust 107.1%) with Geologica's vertical metrics, shown only until the web font arrives, so the swap moves nothing (CLS 0.104 → 0.002, 2026-10-30)
 **Notation Font:** KaTeX Computer Modern (KaTeX_Main, Times New Roman) for equations, every numeric t readout and the colophon x₀
 **CJK:** six self-hosted faces subset to 陈星昊 only (U+9648, U+661F, U+660A): CJK Kai (Ma Shan Zheng, 楷书), CJK Xing (Zhi Mang Xing, 行书), CJK Song (Noto Serif SC, 宋体), CJK Cao (Liu Jian Mao Cao, 草书), CJK WenKai (LXGW WenKai TC, 楷体), CJK XingKai (Long Cang, 行楷). --font-cjk defaults to CJK Kai, falling back to Kaiti SC, STKaiti, KaiTi, serif. Each is a single regular weight; font-display: block so a fallback hand never flashes.
 

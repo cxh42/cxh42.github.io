@@ -38,6 +38,12 @@
         "value": "#ffffff",
         "createdAt": "2026-09-25T19:28:57.940Z",
         "reason": "Centre stop of the hero-ground radial light; documented in DESIGN.md layout prose; the user asked for a hero ground distinct from the page (2026-09-26)"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "geologica fallback",
+        "createdAt": "2026-10-30T12:15:00.997Z",
+        "reason": "Agent: metric-matched load stand-in for Geologica (local Arial-metric face, size-adjust + metric overrides), shown only until the web font arrives; fixes the font-swap layout shift (CLS 0.104 -> 0.002); documented in DESIGN.md typography (2026-10-30)"
       }
     ]
   }
