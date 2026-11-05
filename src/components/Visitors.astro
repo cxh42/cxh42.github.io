@@ -6,7 +6,8 @@ import regionCentroids from '../data/regions.json';
 
 // cc: where a folded-in region is looked up (Taiwan's own subdivisions); label: how the list names it.
 type Place = { code: string; name: string; count: number; cc?: string; label?: string };
-type Country = Place & { regions?: Place[] };
+// parts: how China's row breaks down in the list (Mainland, Hong Kong, Macao, Taiwan), counted in full.
+type Country = Place & { regions?: Place[]; parts?: { name: string; count: number }[]; own?: number };
 const cents = centroids as Record<string, [number, number]>;
 const regionCents = regionCentroids as Record<string, Record<string, [number, number]>>;
 // Mirrors norm() in scripts/make-region-centroids.py: "Île-de-France" -> "iledefrance", "Henan Province" -> "henan".
@@ -23,8 +24,8 @@ const locate = (cc: string, r: Place) => {
 };
 
 // GeoIP lists Taiwan, Hong Kong and Macao as countries of their own; here they are regions of China. Their
-// visits count toward China and appear in China's row under their own names, while their marks stay where
-// they were recorded.
+// visits count toward China, whose row then reads Mainland / Hong Kong / Macao / Taiwan with full counts
+// (mainland provinces are often unknown), while every mark stays where it was recorded.
 const PART_OF_CHINA: Record<string, string> = { TW: 'Taiwan', HK: 'Hong Kong', MO: 'Macao' };
 function foldIntoChina(list: Country[]): Country[] {
   const parts = list.filter((c) => PART_OF_CHINA[c.code]);
@@ -32,6 +33,10 @@ function foldIntoChina(list: Country[]): Country[] {
   const rest = list.filter((c) => !PART_OF_CHINA[c.code]);
   let cn = rest.find((c) => c.code === 'CN');
   if (!cn) rest.push((cn = { code: 'CN', name: 'China', count: 0, regions: [] }));
+  cn.own = cn.count;
+  cn.parts = [{ name: 'Mainland', count: cn.count }, ...parts.map((p) => ({ name: PART_OF_CHINA[p.code], count: p.count }))]
+    .filter((p) => p.count > 0)
+    .sort((a, b) => b.count - a.count);
   for (const part of parts) {
     const label = PART_OF_CHINA[part.code];
     const own = (part.regions ?? []).filter((r) => r.count > 0);
@@ -51,11 +56,12 @@ const marks = countries.flatMap((c) => {
   const regions = (c.regions ?? []).filter((r) => r.count > 0);
   const placed = regions.map((r) => ({ own: !r.cc, at: locate(c.code, r), n: r.count })).filter((r) => r.at);
   const out = placed.map((r) => ({ lat: r.at![0], lon: r.at![1], n: r.n }));
-  const ownCount = c.count - regions.filter((r) => r.cc).reduce((k, r) => k + r.count, 0);
+  const ownCount = c.own ?? c.count;
   if (!placed.some((r) => r.own) && ownCount > 0 && cents[c.code]) out.push({ lat: cents[c.code][0], lon: cents[c.code][1], n: ownCount });
   return out;
 });
 const regionsNamed = (c: Country) => {
+  if (c.parts) return c.parts.map((p) => p.name);
   const by = new Map<string, number>();
   for (const r of c.regions ?? []) {
     const name = r.label ?? r.name;
@@ -94,7 +100,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
                     <span class="c-name">
                       {c.name}
                       {names.length > 0 && (
-                        <span class="c-regions">{names.slice(0, 3).join(', ')}{names.length > 3 ? ` and ${names.length - 3} more` : ''}</span>
+                        <span class="c-regions">{c.parts ? names.join(', ') : `${names.slice(0, 3).join(', ')}${names.length > 3 ? ` and ${names.length - 3} more` : ''}`}</span>
                       )}
                     </span>
                     <span class="c-count">{fmt(c.count)}</span>
