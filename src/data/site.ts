@@ -10,6 +10,7 @@ export const person = {
 };
 
 export const links = {
+  scholar: 'https://scholar.google.com/citations?user=BJ1AP3IAAAAJ',
   openreview: 'https://openreview.net/profile?id=~Xinghao_Chen4',
   github: 'https://github.com/cxh42',
   linkedin: 'https://www.linkedin.com/in/cxh42',

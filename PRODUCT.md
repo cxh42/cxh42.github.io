@@ -32,7 +32,7 @@ The site belongs to a researcher who works on moving images (video generation an
 - The content is in English (inferred from the previous site). The Chinese name is shown as a secondary element.
 - The site will grow slowly: more publications and news items over time. It started with one paper; three are shown since 2026-09-28.
 - Visitor analytics use GoatCounter (site code `cxh42`, dashboard `https://cxh42.goatcounter.com`). Tracking is cookie-free.
-- Search (set up 2026-10-30; the user wants to rank first when people search their name): title and description lead with the name, 陈星昊 and Texas A&M; JSON-LD `ProfilePage` + `Person` (sameAs GitHub, LinkedIn, OpenReview) + one `ScholarlyArticle` per paper, built from `src/data/site.ts`; `robots.txt` and `sitemap.xml` (lastmod = last commit); the link-preview card `public/og.png` and raster icons, rendered by `scripts/make-og.mjs` (rerun it when the name, role or portrait changes); instant redirects from the old academicpages URLs (`/about/`, `/cv/`, `/publications/`, `/publication/2025-06-24-AirV2X/`, `/portfolio/`) to the matching section; a 404 page that returns to the homepage; an IndexNow ping (key in `public/indexnow-key.txt`) after each push. Google/Bing verification codes go in `verification` in `src/data/site.ts`.
+- Search (set up 2026-10-30; the user wants to rank first when people search their name): title and description lead with the name, 陈星昊 and Texas A&M; JSON-LD `ProfilePage` + `Person` (sameAs Google Scholar, OpenReview, GitHub, LinkedIn) + one `ScholarlyArticle` per paper, built from `src/data/site.ts`; `robots.txt` and `sitemap.xml` (lastmod = last commit); the link-preview card `public/og.png` and raster icons, rendered by `scripts/make-og.mjs` (rerun it when the name, role or portrait changes); instant redirects from the old academicpages URLs (`/about/`, `/cv/`, `/publications/`, `/publication/2025-06-24-AirV2X/`, `/portfolio/`) to the matching section; a 404 page that returns to the homepage; an IndexNow ping (key in `public/indexnow-key.txt`) after each push. Google/Bing verification codes go in `verification` in `src/data/site.ts`.
 
 ## Capabilities and Constraints
 
@@ -66,6 +66,7 @@ Each is shown with its title, authors (Xinghao bold), venue badge, one before/af
 
 **Contact and links (only these)**
 - Email: `cxh@tamu.edu` (changed from cxh4242@gmail.com on 2026-10-05)
+- Google Scholar: `https://scholar.google.com/citations?user=BJ1AP3IAAAAJ` (added 2026-11-05; the profile links back to the homepage)
 - OpenReview: `https://openreview.net/profile?id=~Xinghao_Chen4`
 - GitHub: `https://github.com/cxh42`
 - LinkedIn: `https://www.linkedin.com/in/cxh42`
@@ -83,7 +84,7 @@ Each is shown with its title, authors (Xinghao bold), venue badge, one before/af
 - 3DGS may now appear, but only as earlier research and the VR project (the user reversed the earlier exclusion on 2026-09-26).
 - No "looking for PhD positions" message.
 - No Research Assistant role at TACO (the user chose not to show it).
-- No Kaggle, Google Scholar or WeChat.
+- No Kaggle or WeChat. (Google Scholar was excluded until the user created a profile and asked for it on 2026-11-05.)
 - No other emails (old `xhc42@outlook.com` and `cxh42@uw.edu` are retired from the site).
 - No old news items (UW courses, the AR/VR course, the APL coastal-erosion project).
 
