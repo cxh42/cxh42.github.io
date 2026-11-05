@@ -51,15 +51,27 @@ function foldIntoChina(list: Country[]): Country[] {
 const countries = foldIntoChina((visitors.countries as Country[]).filter((c) => c.count > 0).map((c) => ({ ...c })))
   .sort((a, b) => b.count - a.count);
 // One mark per state or province where GoatCounter knows it; a country only falls back to a single mark at
-// its centre when none of its own visits could be placed more closely.
+// its centre when none of its own visits could be placed more closely. Each mark carries its place name for
+// the globe's hover readout ("Texas, United States"; Taiwan, Hong Kong and Macao read as part of China).
+const placeName = (c: Country, r: Place) =>
+  r.cc ? (r.name === r.label ? `${r.label}, China` : `${r.name}, ${r.label}`) : `${r.name}, ${c.name}`;
 const marks = countries.flatMap((c) => {
   const regions = (c.regions ?? []).filter((r) => r.count > 0);
-  const placed = regions.map((r) => ({ own: !r.cc, at: locate(c.code, r), n: r.count })).filter((r) => r.at);
-  const out = placed.map((r) => ({ lat: r.at![0], lon: r.at![1], n: r.n }));
+  const placed = regions.map((r) => ({ own: !r.cc, at: locate(c.code, r), n: r.count, label: placeName(c, r) })).filter((r) => r.at);
+  const out = placed.map((r) => ({ lat: r.at![0], lon: r.at![1], n: r.n, label: r.label }));
   const ownCount = c.own ?? c.count;
-  if (!placed.some((r) => r.own) && ownCount > 0 && cents[c.code]) out.push({ lat: cents[c.code][0], lon: cents[c.code][1], n: ownCount });
+  if (!placed.some((r) => r.own) && ownCount > 0 && cents[c.code])
+    out.push({ lat: cents[c.code][0], lon: cents[c.code][1], n: ownCount, label: c.parts ? 'Mainland China' : c.name });
   return out;
 });
+// Size key: one visit, a round middle value and the busiest place, when there is a range to show.
+const nMax = marks.reduce((m, k) => Math.max(m, k.n), 0);
+const nice = (v: number) => {
+  const p = 10 ** Math.floor(Math.log10(v));
+  return [1, 2, 5, 10].map((m) => m * p).reduce((a, b) => (Math.abs(b - v) < Math.abs(a - v) ? b : a));
+};
+const mid = nMax >= 6 ? nice(nMax / 4) : 0;
+const keyValues = nMax >= 3 ? [1, ...(mid > 1 && mid < nMax ? [mid] : []), nMax] : [];
 const regionsNamed = (c: Country) => {
   if (c.parts) return c.parts.map((p) => p.name);
   const by = new Map<string, number>();
@@ -83,6 +95,15 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
       <div class="globe-wrap">
         <canvas class="globe" data-globe data-marks={JSON.stringify(marks)} aria-hidden="true"></canvas>
         <p class="globe-t t-read" aria-hidden="true"><span set:html={tLabel} /><span class="num" data-globe-t>0</span></p>
+        {keyValues.length > 0 && (
+          <p class="globe-key" aria-hidden="true" data-globe-key>
+            {keyValues.map((n) => (
+              <span class="k"><i data-n={n}></i>{n}</span>
+            ))}
+            <span class="k-unit">visits</span>
+          </p>
+        )}
+        <p class="globe-tip" aria-hidden="true" data-globe-tip hidden><strong data-tip-n></strong><span data-tip-place></span></p>
       </div>
 
       <div class="stats">
@@ -136,6 +157,7 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     max-width: 620px;
     touch-action: pan-y;
     cursor: grab;
+    -webkit-tap-highlight-color: transparent;
   }
   .globe:active { cursor: grabbing; }
   .globe-t {
@@ -148,6 +170,38 @@ const tLabel = katex.renderToString('t=', { throwOnError: false });
     color: var(--graphite);
     font-size: 0.95rem;
   }
+  /* Size key, bottom right: dots drawn by globe.ts at the globe's own scale and ramp. */
+  .globe-key {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: var(--step--1);
+    color: var(--graphite);
+    font-variant-numeric: tabular-nums;
+  }
+  .k { display: inline-flex; align-items: center; gap: 6px; }
+  .k i { display: block; border-radius: 50%; }
+  /* Hover readout: the value leads, the place follows. Plate tint, no shadow, like every container here. */
+  .globe-tip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    margin: 0;
+    padding: 7px 10px 8px;
+    background: var(--plate-2);
+    font-size: var(--step--1);
+    line-height: 1.35;
+    white-space: nowrap;
+    pointer-events: none;
+    transform: translate(-50%, calc(-100% - 12px));
+  }
+  .globe-tip[hidden] { display: none; }
+  .globe-tip strong { display: block; color: var(--ink); font-weight: 500; }
+  .globe-tip span { display: block; color: var(--graphite); }
   :global(html.no-gl) .globe-wrap { display: none; }
   :global(html:not(.globe-gl)) .globe-t,
   .num {
