@@ -9,10 +9,9 @@ on:
     - cron: '17 * * * *'
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# Nothing by default; each job asks for only what it needs. The build job runs third-party npm code with the
+# GoatCounter token in its environment, so it gets read access and nothing that could publish the site.
+permissions: {}
 
 concurrency:
   group: pages
@@ -21,6 +20,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -40,6 +42,10 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -54,6 +60,8 @@ jobs:
     if: github.event_name == 'push'
     needs: deploy
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
     steps:
       - name: Ping IndexNow
         continue-on-error: true
